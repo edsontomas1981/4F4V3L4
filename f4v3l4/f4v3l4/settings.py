@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
-    # Meus Apps
+    # Apps Locais
     'usuario',
     'autenticacao',
 
@@ -141,3 +142,13 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+# Mensagens Django
+
+MESSAGE_TAGS = {
+    constants.DEBUG:'alert-primary',
+    constants.ERROR:'alert-danger',
+    constants.SUCCESS:'alert-success',
+    constants.INFO:'alert-info',
+    constants.WARNING:'alert-warning'
+}

@@ -43,6 +43,13 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crie aqui a sua conta !</h1>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {{message.tags}}">
+                                            {{message}}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <form action="{% url 'cadastro' %}" method="POST" class="user"> {% csrf_token %}
                                 <div class="form-group row">
