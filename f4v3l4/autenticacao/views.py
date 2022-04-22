@@ -16,35 +16,38 @@ def cadastro(request):
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
-          if 'cadastro' in request.POST :
-               username = request.POST.get('nome')
-               email = request.POST.get('email')
-               senha = request.POST.get('senha')
-               conf_senha = request.POST.get('conf_senha')
+     
+          username = request.POST.get('nome')
+          email = request.POST.get('email')
+          senha = request.POST.get('senha')
+          conf_senha = request.POST.get('conf_senha')
+          
+          if len(username.strip())==0 or len(senha.strip())==0 or len(conf_senha.strip())==0:
+               messages.add_message(request,constants.ERROR,'Preencha todos os campos')
+               return redirect('/auth/cadastro/')
+          if senha != conf_senha : 
+               messages.add_message(request,constants.ERROR,'Senhas e confirmação de senha não conferem')
+               return redirect('/auth/cadastro/')
                
-               if len(username.strip())==0 or len(senha.strip())==0:
-                    messages.add_message(request,constants.ERROR,'Preencha todos os campos')
-                    return redirect('/auth/cadastro/')
+          user = Usuarios.objects.filter(username=username)#username = username é uma comparação e nao uma atribuição
+          
+          if user.exists():
+               messages.add_message(request,constants.ERROR,'Usuário já cadastrado')
+               return redirect('/auth/cadastro/')
+          else:
+               try:
+                    user = Usuarios.objects.create_user(username=username,
+                                   email=email,
+                                   password=senha)
+                    user.save()
+                    messages.add_message(request,constants.SUCCESS,'Usuário cadastrado com sucesso !')
+                    return redirect('/auth/login')
+               except:
+                    messages.add_message(request,constants.ERROR,'Erro interno')
+                    redirect('/auth/cadastro/')
                
-               user = Usuarios.objects.filter(username=username)#username = username é uma comparação e nao uma atribuição
-               
-               if user.exists():
-                    messages.add_message(request,constants.ERROR,'Usuário já cadastrado')
-                    return redirect('/auth/cadastro/')
-               else:
-                    try:
-                         user = Usuarios.objects.create_user(username=username,
-                                        email=email,
-                                        password=senha)
-                         user.save()
-                         messages.add_message(request,constants.SUCCESS,'Usuário cadastrado com sucesso !')
-                         return redirect('/auth/login')
-                    except:
-                         messages.add_message(request,constants.ERROR,'Erro interno')
-                         redirect('/auth/cadastro/')
-                  
-          # elif 'teste' in request.POST :
-          #      return HttpResponse('teste')
+     # elif 'teste' in request.POST :
+     #      return HttpResponse('teste')
           
 
 def login(request):
