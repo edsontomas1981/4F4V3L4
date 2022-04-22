@@ -12,7 +12,7 @@ def sair(request):
 def cadastro(request):
      if request.method == "GET" :
           if request.user.is_authenticated:
-               return HttpResponse('usuario ja logado')
+               return render(request,'./base.html')
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
@@ -53,7 +53,7 @@ def cadastro(request):
 def login(request):
      if request.method == "GET" : 
           if request.user.is_authenticated:
-               return HttpResponse('usuario ja logado')
+               return render(request,'./home.html')
           else:
                return render(request,'./logar.html')
      elif request.method == 'POST':
@@ -63,16 +63,16 @@ def login(request):
           usuario = auth.authenticate(username=username,password=senha)
           
           print(usuario)
-          
+         
           if not usuario:
                messages.add_message(request,constants.ERROR,'Usuário ou senha inválidos')
                return render(request,'./logar.html')
           else:
                auth.login(request, usuario)
-               return HttpResponse('logado')
+               return render(request,'./home.html')
 
 def recup_senha(request):
      if request.user.is_authenticated:
-          return HttpResponse('usuario ja logado')
+          return render(request,'./home.html')
      else:
           return render(request,'./recuperarSenha.html')
