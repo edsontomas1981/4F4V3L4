@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    # Apps de terceiros
+    'bootstrapform',
     # Apps Locais
     'usuario',
     'autenticacao',
@@ -143,6 +145,11 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+#Credenciais Google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='846833514720-roo3m42olbh21vn30lm4m9l18ioeur5r.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
 
 # Mensagens Django
 

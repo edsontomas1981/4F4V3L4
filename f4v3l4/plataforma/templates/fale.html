@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block 'blankPage' %}
+
+    {% load static %}
+    <form method="POST" >
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    {{ form|bootstrap }}
+                    <input type="submit" name="" id="" value="testyare">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock 'blankPage' %}
+

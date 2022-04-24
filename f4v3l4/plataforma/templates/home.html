@@ -4,3 +4,69 @@
 <span>{{ user }}</span>
 {% endblock 'usuario' %}
 
+{% block 'blankPage' %}
+
+{% load static %}
+
+<ul class="nav-pills nav">
+    <li class="nav-item">
+        <a href="#ped_disp" data-toggle="tab" class="active nav-link">Pedidos disponíveis</a>
+    </li>
+    <li class="nav-item">
+        <a href="#meus_ped" data-toggle="tab" class="nav-link">Meus pedidos</a>
+    </li>
+        <li class="nav-item">
+        <a href="#ped_que_sol" data-toggle="tab" class="nav-link">Pedidos que solicitei</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="row">
+        <div class="col-sm-12"><hr></div>
+    </div>
+    <!-- 1 Card -->
+        <div id="ped_disp" class="tab-pane active container" >
+            <div class="card" style="width: 18rem;">
+              <img src="{% static '/img/Terreno_baldio.JPG' %}"class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Limpeza do lote</h5>
+                <p class="card-text">Descrição do serviço a ser efetuado.</p>
+                <a href="#" class="btn btn-primary">Enviar proposta</a>
+              </div>
+            </div>
+        <!-- 2 Card -->
+        <div class="col-sm-12"><hr></div>
+            <div class="card" style="width: 18rem;">
+              <img src="{% static '/img/3.jpg' %}"class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletrica residencial</h5>
+                <p class="card-text">Descrição do serviço a ser efetuado.</p>
+                <a href="#" class="btn btn-primary">Enviar proposta</a>
+              </div>
+            </div>
+        <!-- 3 Card -->
+        <div class="col-sm-12"><hr></div>
+            <div class="card" style="width: 18rem;">
+              <img src="{% static '/img/2.jpg' %}"class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Aplicação de gesso</h5>
+                <p class="card-text">Descrição do serviço a ser efetuado.</p>
+                <a href="#" class="btn btn-primary">Enviar proposta</a>
+              </div>
+            </div>
+        <!-- 4 Card -->
+        <div class="col-sm-12"><hr></div>
+            <div class="card" style="width: 18rem;">
+              <img src="{% static '/img/1.jpg' %}"class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Pintura residencial</h5>
+                <p class="card-text">Descrição do serviço a ser efetuado.</p>
+                <a href="#" class="btn btn-primary">Enviar proposta</a>
+              </div>    
+            </div>
+        </div>
+    <div id="meus_ped" class="tab-pane container">Meus pedidos</div>
+    <div id="ped_que_sol" class="tab-pane container">Pedidos que solicitei</div>
+</div>
+
+{% endblock 'blankPage' %}
+
