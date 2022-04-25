@@ -19,6 +19,13 @@ def enviarProposta(request):
     elif request.method == "POST" :
         return render(request,'./enviaProposta.html')
 
+@login_required(login_url='/auth/login/')
+def cadPedido(request):
+    if request.method == "GET" : 
+        return render(request,'./cadastropedidos.html')
+    elif request.method == "POST" :
+        return render(request,'./cadastropedidos.html')
+
 
 class ViewFaleConosco(FormView):
     template_name = 'fale.html'

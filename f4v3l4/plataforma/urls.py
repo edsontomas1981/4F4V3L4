@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('',views.home,name='home'),
-    path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
     path('enviarProposta/', views.enviarProposta, name='enviarProposta'),
-    path('cadastropedidos/',views.ViewCadPed.as_view(),name='cadastro_pedidos'),
+    path('cadastropedidos/',views.cadPedido,name='cadastro_pedidos'),
+    path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
+
     # path('faleconosco1/',TemplateView.as_view(template_name='fale.html'),name='fale')
 ]
 

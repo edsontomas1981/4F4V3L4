@@ -1,15 +1,74 @@
 {% extends 'base.html' %}
 
 {% load bootstrap %}
+
+{% block 'js' %}
+     {% endblock 'js' %}
+
 {% block 'blankPage' %}
     {% load static %}
     <form method="POST" >
         {% csrf_token %}
         <div class="container">
-            <div class="row">
-                <div class="col-sm-7">
-                    {{ form|bootstrap }}
-                    <input type="submit" name="" id="" value="testyare">
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <form class="form-group" method="POST">
+                      <div class="form-group row">
+                            <div class="col-sm-8 form-group">
+                                <label for="titulo">Título</label>
+                                <input type="text" name="titulo" id="titulo" class="form-control form-control-user">
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="imagem">Imagem</label>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                    <label class="custom-file-label" for="inputGroupFile04">Escolher imagem</label>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <label for="descricao   ">Descrição</label>
+                                <textarea name="descricao" class="form-control form-control-user">
+                                </textarea>
+                            </div>                            
+                        <div class="col-sm-3 form-group">
+                                <label for="cep">Cep</label>
+                                <input type="text" name="cep" class="form-control form-control-user" id="cep"
+                                onblur="pesquisacep(this.value);" placeholder="CEP">
+                            </div>
+                            <div class="col-sm-9 form-group">
+                                <label for="rua">Rua</label>
+                                <input type="text" name="rua" id="rua" class="form-control form-control-user" 
+                                    placeholder="Endereço">
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label for="numero">Nº</label>
+                                <input type="text" name="numero" id="numero" class="form-control form-control-user" 
+                                    placeholder="Nº">
+                            </div>
+                            <div class="col-sm-9 form-group">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" name="complemento" id="complemento" class="form-control form-control-user" 
+                                    placeholder="Complemento">
+                            </div>
+                            <div class="col-sm-5 form-group">
+                                <label for="rua">Bairro</label>
+                                <input type="text" name="bairro" id="bairro" class="form-control form-control-user" 
+                                    placeholder="Bairro">
+                            </div>
+                            <div class="col-sm-5 form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" name="cidade" class="form-control form-control-user" id="cidade"
+                                    placeholder="Cidade">
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <label for="uf">UF</label>
+                                <input type="text" name="uf" class="form-control form-control-user" id="uf"
+                                    placeholder="UF">
+                        </div>
+                        <input type="submit" class="btn btn-primary col-sm-12 " name="" values="Ennviar">
+                    </form>
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@
     <title>4 F4V3L4 3 N015</title>
 
     <!-- Custom fonts for this template-->
+
     <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -57,13 +58,12 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <span>Cadastrar</span>
+                    <span>Solicitar</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="buttons.html">Profissional</a>
-                        <a class="collapse-item" href="cards.html">Trabalho</a>
+                        <a class="collapse-item" href="{% url 'cadastro_pedidos' %}">Pedidos</a>
                     </div>
                 </div>
             </li>
@@ -80,6 +80,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="login.html">Pedidos disponíveis</a>
                         <a class="collapse-item" href="register.html">Meus pedidos</a>
+                        <a class="collapse-item" href="register.html">Pedidos que solicitei</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>
@@ -288,8 +289,7 @@
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
     <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/endereco.js' %}"></script>
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
-
 </body>
-
 </html>
