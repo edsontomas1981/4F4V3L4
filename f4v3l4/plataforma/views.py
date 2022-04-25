@@ -26,6 +26,11 @@ def cadPedido(request):
     elif request.method == "POST" :
         return render(request,'./cadastropedidos.html')
 
+def teste(request):
+    print(request.POST.get)
+    return HttpResponse()
+    
+
 
 class ViewFaleConosco(FormView):
     template_name = 'fale.html'

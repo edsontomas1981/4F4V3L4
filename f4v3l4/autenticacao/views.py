@@ -16,7 +16,6 @@ def cadastro(request):
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
-     
           username = request.POST.get('nome')
           email = request.POST.get('email')
           senha = request.POST.get('senha')
