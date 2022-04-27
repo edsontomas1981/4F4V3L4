@@ -38,6 +38,7 @@ def cadastro(request):
                     user = Usuarios.objects.create_user(username=username,
                                    email=email,
                                    password=senha)
+                                  
                     user.save()
                     messages.add_message(request,constants.SUCCESS,'Usuário cadastrado com sucesso !')
                     return redirect('/auth/login')

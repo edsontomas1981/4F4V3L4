@@ -9,38 +9,48 @@
 {% load static %}
     <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Pedidos Disponíveis</a>
+        <a class="nav-link active" id="pills-pedidos-tab" data-toggle="pill" href="#pills-pedidos" role="tab" aria-controls="pills-pedidos" aria-selected="true">Pedidos Disponíveis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Meus Pedidos</a>
+        <a class="nav-link" id="pills-meusPedidos-tab" data-toggle="pill" href="#pills-meusPedidos" role="tab" aria-controls="pills-meusPedidos" aria-selected="false">Meus Pedidos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Pedidos que eu solicitei</a>
+        <a class="nav-link" id="pills-pedSolicitados-tab" data-toggle="pill" href="#pills-pedSolicitados" role="tab" aria-controls="pills-pedSolicitados" aria-selected="false">Pedidos que eu solicitei</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profissionais-tab" data-toggle="pill" href="#pills-profissionais" role="tab" aria-controls="pills-profissionais" aria-selected="false">Profissionais</a>
+      </li>      
     </ul>
     <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="tab-pane fade show active" id="pills-pedidos" role="tabpanel" aria-labelledby="pills-pedidos-tab">
         <div>
+
             <div class="card w-40" style="width: 27rem;">
-              <img class="card-img-top" src="{% static '/img/Terreno_baldio.JPG' %}" alt="Imagem de capa do card">
+              <form method="POST" action="{% url 'enviarProposta' %}">
+              <img class="card-img-top" src="{% static '/img/2.jpg' %}" alt="Imagem de capa do card">
               <div class="card-body">
                 <h5 class="card-title">Título do card</h5>
                 <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
                 <a href="{% url 'enviarProposta' %}" class="btn btn-primary">Enviar Proposta</a>
               </div>
+              </form>
             </div>
+
             <div class="card w-40" style="width: 27rem;">
-              <img class="card-img-top" src="{% static '/img/3.jpg' %}" alt="Imagem de capa do card">
+              <form method="POST" action="{% url 'enviarProposta' %}">
+              <img class="card-img-top" src="{% static '/img/1.jpg' %}" alt="Imagem de capa do card">
               <div class="card-body">
                 <h5 class="card-title">Título do card</h5>
                 <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
                 <a href="{% url 'enviarProposta' %}" class="btn btn-primary">Enviar Proposta</a>
               </div>
-            </div>                         
+            </div> 
+
         </div>
       </div>
-      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+      <div class="tab-pane fade" id="pills-meusPedidos" role="tabpanel" aria-labelledby="pills-meusPedidos-tab">Meus Pedidos</div>
+      <div class="tab-pane fade" id="pills-pedSolicitados" role="tabpanel" aria-labelledby="pills-pedSolicitados-tab">Pedidos solicitados</div>
+      <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">Profissionais</div>
     </div>
 {% endblock 'blankPage' %}
 
