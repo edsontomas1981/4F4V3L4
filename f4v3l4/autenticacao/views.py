@@ -4,6 +4,7 @@ from usuario.models import Usuarios
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib import auth
+from plataforma.models import Enderecos
 
 def sair(request):
      auth.logout(request)
@@ -20,6 +21,12 @@ def cadastro(request):
           email = request.POST.get('email')
           senha = request.POST.get('senha')
           conf_senha = request.POST.get('conf_senha')
+          cep = request.POST.get('cep')
+          rua = request.POST.get('rua')
+          numero = request.POST.get('numero')
+          bairro = request.POST.get('bairro')
+          cidade = request.POST.get('cidade')
+          uf = request.POST.get('uf')
           
           if len(username.strip())==0 or len(senha.strip())==0 or len(conf_senha.strip())==0:
                messages.add_message(request,constants.ERROR,'Preencha todos os campos')
@@ -35,20 +42,25 @@ def cadastro(request):
                return redirect('/auth/cadastro/')
           else:
                try:
+                    # endereco = Enderecos()
+                    # endereco.cep=cep
+                    # endereco.rua=rua
+                    # endereco.bairro=bairro
+                    # endereco.cidade=cidade
+                    # endereco.uf=uf
+                    # endereco.save()
+
                     user = Usuarios.objects.create_user(username=username,
                                    email=email,
-                                   password=senha)
-                                  
+                                   password=senha,
+                                   # idEndereco_id=endereco.id
+                                   )
                     user.save()
                     messages.add_message(request,constants.SUCCESS,'Usuário cadastrado com sucesso !')
                     return redirect('/auth/login')
                except:
                     messages.add_message(request,constants.ERROR,'Erro interno')
                     redirect('/auth/cadastro/')
-               
-     # elif 'teste' in request.POST :
-     #      return HttpResponse('teste')
-          
 
 def login(request):
      if request.method == "GET" : 
