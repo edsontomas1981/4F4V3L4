@@ -21,7 +21,10 @@ class Servicos (models.Model):
     idCategoria  = models.ForeignKey(Categorias, null=False, on_delete=models.CASCADE)
 
 class Trabalhos (models.Model):
+    titulo = models.CharField(max_length=20,null=True)
     descricao = models.CharField(max_length=30)
+    trabEndereco = models.ForeignKey(Enderecos,null=True,on_delete=models.CASCADE)
+    
 
 class Propostas (models.Model):
     prazo = models.IntegerField()
