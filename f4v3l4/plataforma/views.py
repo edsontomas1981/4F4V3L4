@@ -3,7 +3,9 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from f4v3l4 import forms
+from usuario.models import Usuarios
 from . import models
+from Classes.salvarPedidos import Pedido
 # Create your views here.
 
 @login_required(login_url='/auth/login/')
@@ -22,8 +24,9 @@ def enviarProposta(request):
 
 @login_required(login_url='/auth/login/')
 def pedidos(request):
+    categoria = models.Categorias.objects.all()
     if request.method == "GET" : 
-        return render(request,'./cadastropedidos.html')
+        return render(request,'./cadastropedidos.html',{'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
     elif request.method == "POST" :
         return render(request,'./cadastropedidos.html')
         
@@ -40,26 +43,22 @@ def cadastrarPedido(request):
 def cadPedidos(request):
     if request.method == "GET" :
             return render(request,'./cadastropedidos.html')
-        
     elif request.method == "POST" :
+        categ_escolhida= request.POST.get('categoria')
+        cep=request.POST.get('cep')
+        logradouro=request.POST.get('rua')
+        bairro=request.POST.get('bairro')
+        cidade=request.POST.get('cidade')
+        uf=request.POST.get('uf')
+        numero=request.POST.get('numero')
+        titulo=request.POST.get('titulo')
+        descricao=request.POST.get('descricao')
+        imagem=request.POST.get('imagem')
+        user = request.user
+        pedido=Pedido(categ_escolhida,cep,logradouro,bairro,cidade,uf,numero,titulo,descricao,user,imagem)
+        pedido.salvaPedidos()
         
-        pedido = models.Trabalhos()
-        endereco = models.Enderecos()
-        
-        endereco.cep=request.POST.get('cep')
-        endereco.rua=request.POST.get('rua')
-        endereco.bairro=request.POST.get('bairro')
-        endereco.cidade=request.POST.get('cidade')
-        endereco.uf=request.POST.get('uf')
-        endereco.numero = request.POST.get('numero')
-        endereco.save()
-
-        pedido.titulo = request.POST.get('titulo')
-        pedido.descricao = request.POST.get('descricao')
-        pedido.trabEndereco = endereco
-        pedido.save()
-        
-        return HttpResponse(pedido.trabEndereco,pedido.titulo)
+    return HttpResponse("deu certo")
    
 class ViewFaleConosco(FormView):
     template_name = 'fale.html'

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
+{% block 'usuario' %}
+<span>{{ user }}</span>
+{% endblock 'usuario' %}
+
 {% load bootstrap %}
 
 {% block 'js' %}
-     {% endblock 'js' %}
+{% endblock 'js' %}
 
 {% block 'blankPage' %}
     {% load static %}
@@ -13,19 +17,29 @@
             <div class="row form-group">
                 <div class="col-sm-12">
                       <div class="form-group row">
-                        <div class="col-sm-8 form-group">
+                        <div class="col-sm-7 form-group">
                             <label for="titulo">Título</label>
                             <input type="text" name="titulo" id="titulo" class="form-control form-control-user">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label for="categoria">Categoria</label>
+                            <select name="categoria" id="categoria" class="form-control">
+                                {% for categoria in categoria %}
+                                    <option>
+                                        {{ categoria.categoria }}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="col-sm-4">
                             <label for="imagem">Imagem</label>
                             <div class="input-group">
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" name="path_imagem">
-                                <label class="custom-file-label" for="inputGroupFile04">Escolher imagem</label>
+                                 <input type="file" name="imagem" class="btn btn-primary" multiple/>
                               </div>
                             </div>
-                        </div>
+                        </div>                         
+
                         <div class="col-sm-12 form-group">
                             <label for="descricao   ">Descrição</label>
                             <textarea name="descricao" class="form-control form-control-user">
