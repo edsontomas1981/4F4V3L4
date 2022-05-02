@@ -3,16 +3,17 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from f4v3l4 import forms
-from usuario.models import Usuarios
 from . import models
 from Classes.salvarPedidos import Pedido
 # Create your views here.
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    if request.method == "GET" : 
+    if request.method == "GET" :
+        Pedido.buscarPedidos(1)
         return render(request,'./home.html')
     elif request.method == "POST" :
+        Pedido.buscarPedidos(1)
         return render(request,'./home.html')
 
 @login_required(login_url='/auth/login/')
@@ -55,7 +56,9 @@ def cadPedidos(request):
         descricao=request.POST.get('descricao')
         imagem=request.POST.get('imagem')
         user = request.user
-        pedido=Pedido(categ_escolhida,cep,logradouro,bairro,cidade,uf,numero,titulo,descricao,user,imagem)
+        pedido=Pedido(categ_escolhida,cep,logradouro,
+                      bairro,cidade,uf,numero,titulo,
+                      descricao,user,imagem)
         pedido.salvaPedidos()
         
     return HttpResponse("deu certo")
