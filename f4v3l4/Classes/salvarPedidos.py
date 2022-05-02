@@ -40,8 +40,8 @@ class Pedido():
         pedido.save()
         pedido.imagem.add(imagem)
 
-    def buscarPedidos(pedNum):
-        pedido=Pedidos.object.all(id=pedNum)
+    def buscarPedidos(self):
+        pedido=Pedidos.object.all()
         print(pedido)
     
         
