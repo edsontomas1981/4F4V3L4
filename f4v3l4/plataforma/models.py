@@ -21,7 +21,7 @@ class Servicos (models.Model):
     idCategoria =models.ForeignKey(Categorias, null=False, on_delete=models.CASCADE)
 
 class Imagem(models.Model):
-    imagem=models.ImageField(upload_to='img', blank=True)
+    imagem=models.ImageField(upload_to='./media', blank=True)
 
 class Pedidos (models.Model):
     titulo=models.CharField(max_length=20,null=True)

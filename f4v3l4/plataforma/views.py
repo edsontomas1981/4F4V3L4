@@ -5,16 +5,15 @@ from django.views.generic.edit import FormView
 from f4v3l4 import forms
 from . import models
 from Classes.salvarPedidos import Pedido
-# Create your views here.
 
 @login_required(login_url='/auth/login/')
 def home(request):
+    pedido = models.Pedidos.objects.select_related('pedEndereco','pedCateg','pedUser')
+    print(pedido.values('imagem'))
     if request.method == "GET" :
-        Pedido.buscarPedidos(1)
-        return render(request,'./home.html')
+        return render(request,'./home.html',{'pedido' : pedido})
     elif request.method == "POST" :
-        Pedido.buscarPedidos(1)
-        return render(request,'./home.html')
+        return render(request,'./home.html',{'pedido' : pedido})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
