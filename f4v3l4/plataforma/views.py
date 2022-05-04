@@ -8,8 +8,8 @@ from Classes.salvarPedidos import Pedido
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedidos = models.Pedidos.objects.values()
-    print(pedidos)
+    pedidos = models.Pedidos.objects.prefetch_related().all()
+    print(pedidos[0].pedImagem.id)
     if request.method == "GET" :
         return render(request,'./home.html',{'pedidos' : pedidos })
     elif request.method == "POST" :

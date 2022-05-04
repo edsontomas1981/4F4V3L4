@@ -28,7 +28,8 @@
             <div class="card w-40" style="width: 27rem;">
               <form method="POST" action="{% url 'enviarProposta' %}">
                 {% for pedido in pedidos %}
-                {{pedido.pedImagem}}
+
+                {{ pedido.pedImagem.all }}
                   <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active">

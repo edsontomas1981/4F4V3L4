@@ -38,7 +38,7 @@ class Pedido():
         endereco.save()
         imagem.save()
         pedido.save()
-        pedido.imagem.add(imagem)
+        pedido.pedImagem.add(imagem)
 
     def buscarPedidos(self):
         pedido=Pedidos.object.all()
