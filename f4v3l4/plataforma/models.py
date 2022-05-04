@@ -26,7 +26,7 @@ class Imagem(models.Model):
 class Pedidos (models.Model):
     titulo=models.CharField(max_length=20,null=True)
     descricao=models.CharField(max_length=30)
-    imagem=models.ManyToManyField(Imagem, blank=True)
+    pedImagem=models.ManyToManyField(Imagem, blank=True)
     pedEndereco=models.ForeignKey(Enderecos,null=True,on_delete=models.CASCADE)
     pedCateg=models.ForeignKey(Categorias,null=True,on_delete=models.CASCADE)
     pedUser=models.ForeignKey(Usuarios,null=True,on_delete=models.CASCADE)

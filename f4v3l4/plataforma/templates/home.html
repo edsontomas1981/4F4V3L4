@@ -27,8 +27,8 @@
 
             <div class="card w-40" style="width: 27rem;">
               <form method="POST" action="{% url 'enviarProposta' %}">
-                {% for pedidos in pedido %}
-                  {{pedido.imagem.id}}
+                {% for pedido in pedidos %}
+                {{pedido.pedImagem}}
                   <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
@@ -42,11 +42,11 @@
                       </div>
                     </div>
                   </div>
-                  {% comment %} <img class="card-img-top" src="{% static '/img/2.jpg' %}" alt="Imagem de capa do card"> {% endcomment %}
+                  
                   <div class="card-body">
-                    <h5 class="card-title">{{pedidos.titulo}}</h5>
-                    <h6><span>{{pedidos.pedCateg.categoria}}</span></h6>
-                    <p class="card-text">{{pedidos.descricao}}</p>
+                    <h5 class="card-title">{{pedido.titulo}}</h5>
+                    <h6><span>{{pedido.pedCateg.categoria}}</span></h6>
+                    <p class="card-text">{{pedido.descricao}}</p>
                     <a href="{% url 'enviarProposta' %}" class="btn btn-primary">Enviar Proposta</a>
                   </div>  
                 {% endfor %}

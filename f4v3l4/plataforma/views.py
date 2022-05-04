@@ -8,12 +8,12 @@ from Classes.salvarPedidos import Pedido
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedido = models.Pedidos.objects.select_related('pedEndereco','pedCateg','pedUser')
-    print(pedido.values('imagem'))
+    pedidos = models.Pedidos.objects.values()
+    print(pedidos)
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedido' : pedido})
+        return render(request,'./home.html',{'pedidos' : pedidos })
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedido' : pedido})
+        return render(request,'./home.html',{'pedidos' : pedidos})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
