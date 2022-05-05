@@ -25,51 +25,38 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                              <div class="custom-file">
-                                {{ form.imagem|bootstrap }}                         
-                              </div>
+                              {{ form.imagem|bootstrap }}
                             </div>
-                        </div>                         
+                        </div>
 
                         <div class="col-sm-12 form-group">
                             <label for="descricao   ">Descrição</label>
                             <textarea name="descricao" class="form-control form-control-user">
                             </textarea>
-                        </div>                            
+                        </div>
                         <div class="col-sm-3 form-group">
-                            <label for="cep">Cep</label>
+                          {{ form.cep|bootstrap }}
+                            <!-- <label for="cep">Cep</label>
                             <input type="text" name="cep" class="form-control form-control-user" id="cep"
-                            onblur="pesquisacep(this.value);" placeholder="CEP">
+                            onblur="pesquisacep(this.value);" placeholder="CEP"> -->
                         </div>
                         <div class="col-sm-9 form-group">
-                            <label for="rua">Rua</label>
-                            <input type="text" name="rua" id="rua" class="form-control form-control-user" 
-                                placeholder="Endereço">
+                            {{ form.rua|bootstrap }}
                         </div>
                         <div class="col-sm-3 form-group">
-                            <label for="numero">Nº</label>
-                            <input type="text" name="numero" id="numero" class="form-control form-control-user" 
-                                placeholder="Nº">
+                          {{ form.numero|bootstrap }}
                         </div>
                         <div class="col-sm-9 form-group">
-                            <label for="complemento">Complemento</label>
-                            <input type="text" name="complemento" id="complemento" class="form-control form-control-user" 
-                                placeholder="Complemento">
+                          {{ form.complemento|bootstrap }}
                         </div>
                         <div class="col-sm-5 form-group">
-                            <label for="rua">Bairro</label>
-                            <input type="text" name="bairro" id="bairro" class="form-control form-control-user" 
-                                placeholder="Bairro">
+                            {{ form.bairro|bootstrap }}
                         </div>
                         <div class="col-sm-5 form-group">
-                            <label for="cidade">Cidade</label>
-                            <input type="text" name="cidade" class="form-control form-control-user" id="cidade"
-                                placeholder="Cidade">
+                            {{ form.cidade|bootstrap }}
                         </div>
                         <div class="col-sm-2 form-group">
-                            <label for="uf">UF</label>
-                            <input type="text" name="uf" class="form-control form-control-user" id="uf"
-                                placeholder="UF">
+                            {{ form.estado|bootstrap }}
                     </div>
                     <input type="submit" class="btn btn-primary col-sm-12 " name="enviar" values="Enviar">
                 </div>

@@ -16,7 +16,7 @@ def home(request):
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
-    if request.method == "GET" : 
+    if request.method == "GET" :
         return render(request,'./enviaProposta.html')
     elif request.method == "POST" :
         return render(request,'./enviaProposta.html')
@@ -24,11 +24,11 @@ def enviarProposta(request):
 @login_required(login_url='/auth/login/')
 def pedidos(request):
     categoria = models.Categorias.objects.all()
-    if request.method == "GET" : 
+    if request.method == "GET" :
         return render(request,'./cadastropedidos.html',{'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
     elif request.method == "POST" :
-        return render(request,'./cadastropedidos.html')
-        
+        return render(request,'./cadastropedidos.html',{'categoria' : categoria})
+
 @login_required(login_url='/auth/login/')
 def cadastrarPedido(request):
     if request.method == "GET" :
@@ -58,10 +58,9 @@ def cadPedidos(request):
                       bairro,cidade,uf,numero,titulo,
                       descricao,user,imagem)
         pedido.salvaPedidos()
-        print(type(imagem))
-        
+
     return HttpResponse("deu certo")
-   
+
 class ViewFaleConosco(FormView):
     template_name = 'fale.html'
     form_class = forms.FormFaleConosco
@@ -71,4 +70,3 @@ class ViewCadPed(FormView):
     template_name = 'cadastropedidos.html'
     form_class = forms.FormCadPed
     success_url = '/'
-    
