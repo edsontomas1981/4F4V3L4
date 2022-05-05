@@ -9,6 +9,8 @@ class FormFaleConosco(forms.Form):
 class FormCadPed(forms.Form):
     titulo = forms.CharField(required=True,label='Título')
     descricao = forms.CharField(required=True,label='Descrição')
+    categoria = forms.CharField(required=True,label='Categoria')
+    imagem = forms.ImageField(required=False)
     data_pedido = forms.DateField(required=True,label='Data pedido')
     data_entrega = forms.DateField(required=True,label='Data entrega')
     cep=forms.CharField(required=True,label='Cep')

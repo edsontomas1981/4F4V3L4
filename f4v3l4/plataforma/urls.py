@@ -10,7 +10,11 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('enviarProposta/', views.enviarProposta, name='enviarProposta'),
     path('pedido/',views.pedidos,name='pedido'),
-    path('cadPedido/',views.cadPedidos,name='cadPedido'),
+    path('cadPedido/',views.ViewCadPed.as_view(),name='cadPedido'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
 

@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # Apps de terceiros
     'bootstrapform',
-    
     # Apps Locais
     'usuario',
     'autenticacao',
