@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView
 from f4v3l4 import forms
 from . import models
 from Classes.salvarPedidos import Pedido
+from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):
@@ -34,12 +35,12 @@ def cadastrarPedido(request):
     if request.method == "GET" :
         return render(request,'./cadastropedidos.html')
     elif request.method == "POST" :
-        path_imagem = request.POST.get('path_imagem')
-        titulo = request.POST.get('titulo')
-        return HttpResponse(titulo)
+        formulario = FormCadPed(request.POST or None)
+        print(formulario)
+        return HttpResponse("deu certo")
 
 @login_required
-def cadPedidos(request):
+def cPedidos(request):
     if request.method == "GET" :
             return render(request,'./cadastropedidos.html')
     elif request.method == "POST" :
@@ -60,6 +61,10 @@ def cadPedidos(request):
         pedido.salvaPedidos()
 
     return HttpResponse("deu certo")
+
+def cadastrar_contato(request):
+    form = ContatoForm()
+    return render(request, "form.html", {'form':form})
 
 class ViewFaleConosco(FormView):
     template_name = 'fale.html'

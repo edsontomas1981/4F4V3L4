@@ -11,7 +11,7 @@
 
 {% block 'blankPage' %}
     {% load static %}
-    <form method="POST" action="{% url 'cadPedido' %}">
+    <form method="POST" action="{% url 'cPedidos' %}">
         {% csrf_token %}
         <div class="container">
             <div class="row form-group">
@@ -28,17 +28,11 @@
                               {{ form.imagem|bootstrap }}
                             </div>
                         </div>
-
                         <div class="col-sm-12 form-group">
-                            <label for="descricao   ">Descrição</label>
-                            <textarea name="descricao" class="form-control form-control-user">
-                            </textarea>
+                          {{ form.descricao|bootstrap }}
                         </div>
                         <div class="col-sm-3 form-group">
                           {{ form.cep|bootstrap }}
-                            <!-- <label for="cep">Cep</label>
-                            <input type="text" name="cep" class="form-control form-control-user" id="cep"
-                            onblur="pesquisacep(this.value);" placeholder="CEP"> -->
                         </div>
                         <div class="col-sm-9 form-group">
                             {{ form.rua|bootstrap }}

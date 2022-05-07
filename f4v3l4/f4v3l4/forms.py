@@ -1,4 +1,5 @@
 from django import forms
+from plataforma.models import Contatos,Categorias
 
 class FormFaleConosco(forms.Form):
     nome = forms.CharField(required=True)
@@ -7,9 +8,11 @@ class FormFaleConosco(forms.Form):
     teste = forms.CharField(required=True)
 
 class FormCadPed(forms.Form):
+    categ = Categorias.objects.all()
+    print(type(categ[0]))
+    categoria = forms.ModelMultipleChoiceField(categ)
     titulo = forms.CharField(required=True,label='Título')
     descricao = forms.CharField(required=True,label='Descrição')
-    categoria = forms.CharField(required=True,label='Categoria')
     imagem = forms.ImageField(widget=forms.FileInput(attrs={
     'class': 'btn btn-secondary'}))
     data_pedido = forms.DateField(required=True,label='Data pedido')
@@ -26,3 +29,8 @@ class FormCadPed(forms.Form):
     'name':'uf','id':"uf"}))
     numero=forms.CharField(required=True,label='Nº')
     complemento=forms.CharField(required=True,label='Complemento')
+
+class ContatoForm (forms.ModelForm):
+    class Meta:
+        model=Contatos
+        fields=['tipo','contato']

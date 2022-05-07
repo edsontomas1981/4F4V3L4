@@ -10,11 +10,11 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('enviarProposta/', views.enviarProposta, name='enviarProposta'),
     path('pedido/',views.pedidos,name='pedido'),
+    path('cadastrarPedido/',views.cadastrarPedido,name='cadastrarPedido'),
     path('cadPedido/',views.ViewCadPed.as_view(),name='cadPedido'),
+    path('cPedidos/',views.cPedidos,name='cPedidos'),
+    path('contato/',views.cadastrar_contato,name='contato'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
