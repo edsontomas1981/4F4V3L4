@@ -11,7 +11,7 @@
 
 {% block 'blankPage' %}
     {% load static %}
-    <form method="POST" action="{% url 'cPedidos' %}">
+    <form method="POST" action="{% url 'cadastrarPedido' %}">
         {% csrf_token %}
         <div class="container">
             <div class="row form-group">
@@ -21,7 +21,7 @@
                             {{ form.titulo|bootstrap }}
                         </div>
                         <div class="col-sm-8 form-group">
-                            {{ form.categoria|bootstrap }}
+                          {{ form.categoria|bootstrap }}
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">

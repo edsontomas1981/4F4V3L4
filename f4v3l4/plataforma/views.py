@@ -24,7 +24,7 @@ def enviarProposta(request):
 
 @login_required(login_url='/auth/login/')
 def pedidos(request):
-    categoria = models.Categorias.objects.all()
+    categoria = models.Categorias.objects.values('categoria')
     if request.method == "GET" :
         return render(request,'./cadastropedidos.html',{'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
     elif request.method == "POST" :
@@ -35,9 +35,8 @@ def cadastrarPedido(request):
     if request.method == "GET" :
         return render(request,'./cadastropedidos.html')
     elif request.method == "POST" :
-        formulario = FormCadPed(request.POST or None)
-        print(formulario)
-        return HttpResponse("deu certo")
+        formulario = FormCadPed(request.POST)
+        return HttpResponse(formulario)
 
 @login_required
 def cPedidos(request):

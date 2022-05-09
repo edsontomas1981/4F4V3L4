@@ -8,9 +8,8 @@ class FormFaleConosco(forms.Form):
     teste = forms.CharField(required=True)
 
 class FormCadPed(forms.Form):
-    categ = Categorias.objects.all()
-    print(type(categ[0]))
-    categoria = forms.ModelMultipleChoiceField(categ)
+    categ = Categorias.objects.values_list('categoria',flat=True)
+    categoria = forms.ModelMultipleChoiceField(categ,widget=forms.Select(attrs={}))
     titulo = forms.CharField(required=True,label='Título')
     descricao = forms.CharField(required=True,label='Descrição')
     imagem = forms.ImageField(widget=forms.FileInput(attrs={
