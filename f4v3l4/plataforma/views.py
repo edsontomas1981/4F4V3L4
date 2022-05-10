@@ -52,7 +52,7 @@ def cPedidos(request):
         numero=request.POST.get('numero')
         titulo=request.POST.get('titulo')
         descricao=request.POST.get('descricao')
-        imagem=request.POST.get('imagem')
+        imagem=request.FILES.get('imagem')
         user = request.user
         pedido=Pedido(categ_escolhida,cep,logradouro,
                       bairro,cidade,uf,numero,titulo,
