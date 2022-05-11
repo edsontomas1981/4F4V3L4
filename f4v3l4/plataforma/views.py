@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
+from django.contrib import messages
+from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from f4v3l4 import forms
@@ -26,9 +28,11 @@ def enviarProposta(request):
 def pedidos(request):
     categoria = models.Categorias.objects.values('categoria')
     if request.method == "GET" :
-        return render(request,'./cadastropedidos.html',{'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
+        return render(request,'./cadastropedidos.html',
+        {'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
     elif request.method == "POST" :
-        return render(request,'./cadastropedidos.html',{'categoria' : categoria})
+        return render(request,'./cadastropedidos.html',
+        {'categoria' : categoria})
 
 @login_required(login_url='/auth/login/')
 def cadastrarPedido(request):
@@ -58,8 +62,9 @@ def cPedidos(request):
                       bairro,cidade,uf,numero,titulo,
                       descricao,user,imagem)
         pedido.salvaPedidos()
-
-    return HttpResponse("deu certo")
+        messages.add_message(request,constants.SUCCESS,
+        'Pedido cadastrado com sucesso !')
+        return redirect('/cadPedido/')
 
 def cadastrar_contato(request):
     form = ContatoForm()

@@ -8,7 +8,7 @@ class Enderecos (models.Model):
     bairro=models.CharField(max_length=30)
     cidade=models.CharField(max_length=50)
     uf=models.CharField(max_length=2)
-    
+
 class Contatos (models.Model):
     tipo=models.CharField(max_length=15)
     contato=models.CharField(max_length=20)
@@ -35,11 +35,3 @@ class Propostas (models.Model):
     prazo=models.IntegerField()
     valor=models.DecimalField(max_digits=2, decimal_places=2)
     observacao=models.CharField(max_length=50)
-
-    
-    
-
-
-
-
-    
