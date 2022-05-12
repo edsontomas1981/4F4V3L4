@@ -20,14 +20,16 @@ class FormCadPed(forms.Form):
     'onblur':'pesquisacep(this.value);','name': 'cep'}))
     rua = forms.CharField(widget=forms.TextInput(attrs={
     'name':"rua", 'id':"rua"}))
+    numero=forms.CharField(required=True,label='Nº')
+    complemento=forms.CharField(label='Complemento')
     bairro = forms.CharField(widget=forms.TextInput(attrs={
     'name':'bairro','id':"bairro"}))
     cidade=forms.CharField(widget=forms.TextInput(attrs={
     'name':'cidade','id':"cidade"}))
     uf = forms.CharField(widget=forms.TextInput(attrs={
     'name':'uf','id':"uf"}))
-    numero=forms.CharField(required=True,label='Nº')
-    complemento=forms.CharField(label='Complemento')
+
+
 
 class ContatoForm (forms.ModelForm):
     class Meta:
