@@ -11,14 +11,12 @@ from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedidos = models.Pedidos.objects.all()
-    imagens = set()
-    for pedido in pedidos:
-        imagens.add(pedido.pedImagem.all())
+    pedidos=models.Pedidos.objects.all()
+    imagens=models.Imagem.objects.all()
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos' : pedidos,'imagens':imagens })
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedidos' : pedidos,'imagens':imagens})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
@@ -59,11 +57,11 @@ def cPedidos(request):
         numero=request.POST.get('numero')
         titulo=request.POST.get('titulo')
         descricao=request.POST.get('descricao')
-        imagem=request.FILES.get('imagem')
         user = request.user
+        imagens=request.FILES.getlist('imagem')
         pedido=Pedido(categ_escolhida,cep,logradouro,
                       bairro,cidade,uf,numero,titulo,
-                      descricao,user,imagem)
+                      descricao,user,imagens)
         pedido.salvaPedidos()
         messages.add_message(request,constants.SUCCESS,
         'Pedido cadastrado com sucesso !')

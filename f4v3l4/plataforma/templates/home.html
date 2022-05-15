@@ -28,6 +28,12 @@
             <div class="card w-40" style="width: 27rem;">
               <form method="POST" action="{% url 'enviarProposta' %}">
                 {% for pedido in pedidos %}
+                  {{pedido.id}}
+                  {% for imagem in imagens %}
+                    {%if imagem.pedido_fk == pedido%}
+                      {{imagem.imagem}}
+                    {%endif%}
+                  {% endfor %}  
                       <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item active">

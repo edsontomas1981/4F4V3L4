@@ -14,8 +14,8 @@ class FormCadPed(forms.Form):
     titulo = forms.CharField(required=True,label='Título')
     descricao = forms.CharField(required=True,label='Descrição',
     widget=forms.Textarea(attrs={'rows':2}))
-    imagem = forms.ImageField(widget=forms.FileInput(attrs={
-    'class': 'btn btn-secondary'}))
+    imagem = forms.ImageField(widget=forms.ClearableFileInput(attrs={
+    'class': 'btn btn-secondary','multiple':True }))
     cep=forms.CharField(widget=forms.TextInput(attrs={
     'onblur':'pesquisacep(this.value);','name': 'cep'}))
     rua = forms.CharField(widget=forms.TextInput(attrs={
@@ -28,8 +28,6 @@ class FormCadPed(forms.Form):
     'name':'cidade','id':"cidade"}))
     uf = forms.CharField(widget=forms.TextInput(attrs={
     'name':'uf','id':"uf"}))
-
-
 
 class ContatoForm (forms.ModelForm):
     class Meta:
