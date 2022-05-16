@@ -16,6 +16,7 @@ urlpatterns = [
     path('cPedidos/',views.cPedidos,name='cPedidos'),
     path('contato/',views.cadastrar_contato,name='contato'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
+    
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
