@@ -7,6 +7,7 @@
 {% block 'blankPage' %}
 
 {% load static %}
+{% load filtros_custom %}
     <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="pills-pedidos-tab" data-toggle="pill" href="#pills-pedidos" role="tab" aria-controls="pills-pedidos" aria-selected="true">Pedidos Disponíveis</a>
@@ -25,23 +26,25 @@
       <div class="tab-pane fade show active" id="pills-pedidos" role="tabpanel" aria-labelledby="pills-pedidos-tab">
         {% for pedido in pedidos %}
           <!-- Inicio do Card -->
-            <form method="POST" action="{% url 'enviarProposta' %}">
+          {{ nome|liga_active }}
+          <form method="POST" action="{% url 'enviarProposta' %}">
+            {% csrf_token %}
               <div class="card" style="width: 30rem;">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     {% for imagem in imagens %}
-                      {%if imagem.pedido_fk == pedido %}
-                          <div class="carousel-item {% if not forloop.last %} active {% endif %}">
-                              <img src={{ MEDIA_URL }}/{{imagem.imagem}} class="d-block w-100">
+                          <div class="carousel-item active">
+                            <img src={{ MEDIA_URL }}/{{imagem.imagem}} class="d-block w-100">
                           </div>
-                      {% endif %}
                     {% endfor %}
                   </div>
                 </div>
                   <div class="card-body">
+
+                    {{ nome }}
                     <h5 class="card-title">{{pedido.titulo}}</h5>
                     <p class="card-text">{{pedido.descricao}}</p>
-                    <a href="#" class="btn btn-primary">Enviar Proposta</a>
+                    <button href="#" class="btn btn-primary">Enviar Proposta</button>
                   </div>
               </div>
             </form>
