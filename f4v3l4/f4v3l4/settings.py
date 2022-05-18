@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # Apps de terceiros
     'bootstrapform',
+    'sslserver',
     # Apps Locais
     'usuario',
     'autenticacao',
@@ -145,11 +146,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'usuario.Usuarios'
 
 AUTHENTICATION_BACKENDS = [
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
 ]
 
+#Credenciais Facebook
+SOCIAL_AUTH_FACEBOOK_KEY='560576048655436'
+SOCIAL_AUTH_FACEBOOK_SECRET='11185381e83a1ae1bfa70044b81aa715'
 #Credenciais Google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='846833514720-roo3m42olbh21vn30lm4m9l18ioeur5r.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

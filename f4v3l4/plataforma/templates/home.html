@@ -26,22 +26,20 @@
       <div class="tab-pane fade show active" id="pills-pedidos" role="tabpanel" aria-labelledby="pills-pedidos-tab">
         {% for pedido in pedidos %}
           <!-- Inicio do Card -->
-          {{ nome|liga_active }}
+          {% for listas in lista  %}
+            {{listas}}
+          {% endfor %}
           <form method="POST" action="{% url 'enviarProposta' %}">
             {% csrf_token %}
               <div class="card" style="width: 30rem;">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
-                    {% for imagem in imagens %}
                           <div class="carousel-item active">
                             <img src={{ MEDIA_URL }}/{{imagem.imagem}} class="d-block w-100">
                           </div>
-                    {% endfor %}
                   </div>
                 </div>
                   <div class="card-body">
-
-                    {{ nome }}
                     <h5 class="card-title">{{pedido.titulo}}</h5>
                     <p class="card-text">{{pedido.descricao}}</p>
                     <button href="#" class="btn btn-primary">Enviar Proposta</button>

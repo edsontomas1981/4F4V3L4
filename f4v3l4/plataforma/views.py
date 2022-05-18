@@ -11,12 +11,13 @@ from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):
+    lista=[1,2,3,4,5,6,7,8,9,10]
     pedidos=models.Pedidos.objects.all()
     imagens=models.Imagem.objects.all()
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'lista':lista })
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'lista':lista })
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
