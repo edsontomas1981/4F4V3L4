@@ -25,6 +25,8 @@
 
     <!-- Custom styles for this template-->
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="static/css/estilo.css" rel="stylesheet">
+
 
 </head>
 
@@ -246,6 +248,7 @@
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
     <!--Meus JavaScript-->
+    {% block 'css' %} {% endblock  %}
     <script src="{% static 'js/endereco.js' %}"></script>
 </body>
 </html>

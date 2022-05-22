@@ -1,3 +1,4 @@
+from email.mime import image
 from plataforma.models import Categorias, Enderecos, Imagem, Pedidos
 from usuario.models import Usuarios
 
@@ -21,24 +22,25 @@ class Pedido():
         categoria=Categorias.objects.get(categoria=self.categ_escolhida)
         endereco=Enderecos()
         pedido=Pedidos()
-        imagem=Imagem()
         endereco.cep=self.cep
         endereco.logradouro  =self.logradouro
         endereco.numero=self.numero
         endereco.bairro=self.bairro
         endereco.cidade=self.cidade
         endereco.uf=self.uf
-        imagem.imagem=self.imagem
         pedido.titulo=self.titulo
         pedido.descricao=self.descricao
-        pedido.pedEndereco=endereco
-        pedido.pedCateg=categoria
-        pedido.pedUser=self.user
-        imagem.save()        
+        pedido.endereco_fk=endereco
+        pedido.categoria_fk=categoria
+        pedido.usuario_fk=self.user
         endereco.save()
-        imagem.save()
         pedido.save()
-        pedido.pedImagem.add(imagem)
+        imagens = self.imagem
+        for i in imagens:
+            imagem=Imagem()
+            imagem.imagem=i
+            imagem.pedido_fk=pedido 
+            imagem.save() 
 
     def buscarPedidos(self):
         pedido=Pedidos.object.all()

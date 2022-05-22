@@ -12,7 +12,7 @@ def sair(request):
 def cadastro(request):
      if request.method == "GET" :
           if request.user.is_authenticated:
-               return render(request,'./base.html')
+               return render(request,'./home.html')
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
@@ -28,7 +28,7 @@ def cadastro(request):
                messages.add_message(request,constants.ERROR,'Senhas e confirmação de senha não conferem')
                return redirect('/auth/cadastro/')
                         
-          user = Usuarios.objects.filter(username=username)#username = username é uma comparação e nao uma atribuição
+          user = Usuarios.objects.filter(username=username)
                     
           if user.exists():
                messages.add_message(request,constants.ERROR,'Usuário já cadastrado')

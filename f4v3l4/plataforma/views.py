@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
+from django.contrib import messages
+from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from f4v3l4 import forms
@@ -9,11 +11,12 @@ from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedidos = models.Pedidos.objects.prefetch_related().all()
+    pedidos=models.Pedidos.objects.all()
+    imagens=models.Imagem.objects.all()
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos' : pedidos })
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedidos' : pedidos})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
@@ -24,20 +27,21 @@ def enviarProposta(request):
 
 @login_required(login_url='/auth/login/')
 def pedidos(request):
-    categoria = models.Categorias.objects.all()
+    categoria = models.Categorias.objects.values('categoria')
     if request.method == "GET" :
-        return render(request,'./cadastropedidos.html',{'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
+        return render(request,'./cadastropedidos.html',
+        {'categoria' : categoria}) 
     elif request.method == "POST" :
-        return render(request,'./cadastropedidos.html',{'categoria' : categoria})
+        return render(request,'./cadastropedidos.html',
+        {'categoria' : categoria})
 
 @login_required(login_url='/auth/login/')
 def cadastrarPedido(request):
     if request.method == "GET" :
         return render(request,'./cadastropedidos.html')
     elif request.method == "POST" :
-        formulario = FormCadPed(request.POST or None)
-        print(formulario)
-        return HttpResponse("deu certo")
+        formulario = FormCadPed(request.POST)
+        return HttpResponse(formulario)
 
 @login_required
 def cPedidos(request):
@@ -53,14 +57,23 @@ def cPedidos(request):
         numero=request.POST.get('numero')
         titulo=request.POST.get('titulo')
         descricao=request.POST.get('descricao')
-        imagem=request.POST.get('imagem')
         user = request.user
+        imagens=request.FILES.getlist('imagem')
         pedido=Pedido(categ_escolhida,cep,logradouro,
                       bairro,cidade,uf,numero,titulo,
-                      descricao,user,imagem)
+                      descricao,user,imagens)
         pedido.salvaPedidos()
+        messages.add_message(request,constants.SUCCESS,
+        'Pedido cadastrado com sucesso !')
+        return redirect('/cadPedido/')
 
-    return HttpResponse("deu certo")
+@login_required
+def detalhesPedidos(request):
+    idPedido=request.POST.get('pedido')
+    pedidos=models.Pedidos.objects.filter(id=idPedido)
+    imagens=models.Imagem.objects.filter(pedido_fk=idPedido)
+    return render (request,'detalhesPedidos.html',{'pedidos':pedidos , 'imagens':imagens})
+
 
 def cadastrar_contato(request):
     form = ContatoForm()

@@ -11,9 +11,18 @@
 
 {% block 'blankPage' %}
     {% load static %}
-    <form method="POST" action="{% url 'cPedidos' %}">
+    <form method="POST" action="{% url 'cPedidos' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="container">
+          <div class="col-sm-5">
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert {{message.tags}}">
+                      {{message}}
+                  </div>
+              {% endfor %}
+          {% endif %}
+          </div>
             <div class="row form-group">
                 <div class="col-sm-12">
                       <div class="form-group row">
@@ -21,12 +30,10 @@
                             {{ form.titulo|bootstrap }}
                         </div>
                         <div class="col-sm-8 form-group">
-                            {{ form.categoria|bootstrap }}
+                          {{ form.categoria|bootstrap }}
                         </div>
                         <div class="col-sm-4">
-                            <div class="input-group">
-                              {{ form.imagem|bootstrap }}
-                            </div>
+                          {{ form.imagem|bootstrap }}
                         </div>
                         <div class="col-sm-12 form-group">
                           {{ form.descricao|bootstrap }}
@@ -50,14 +57,13 @@
                             {{ form.cidade|bootstrap }}
                         </div>
                         <div class="col-sm-2 form-group">
-                            {{ form.estado|bootstrap }}
-                    </div>
+                            {{ form.uf|bootstrap }}
+                        </div>
                     <input type="submit" class="btn btn-primary col-sm-12 " name="enviar" values="Enviar">
                 </div>
             </div>
         </div>
     </form>
-        <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
