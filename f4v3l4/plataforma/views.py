@@ -11,13 +11,12 @@ from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    lista=[1,2,3,4,5,6,7,8,9,10]
     pedidos=models.Pedidos.objects.all()
     imagens=models.Imagem.objects.all()
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'lista':lista })
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'lista':lista })
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
@@ -31,7 +30,7 @@ def pedidos(request):
     categoria = models.Categorias.objects.values('categoria')
     if request.method == "GET" :
         return render(request,'./cadastropedidos.html',
-        {'categoria' : categoria}) #categoria e a chave do dicionário que ira carregar todos os valores
+        {'categoria' : categoria}) 
     elif request.method == "POST" :
         return render(request,'./cadastropedidos.html',
         {'categoria' : categoria})
@@ -67,6 +66,14 @@ def cPedidos(request):
         messages.add_message(request,constants.SUCCESS,
         'Pedido cadastrado com sucesso !')
         return redirect('/cadPedido/')
+
+@login_required
+def detalhesPedidos(request):
+    idPedido=request.POST.get('pedido')
+    pedidos=models.Pedidos.objects.filter(id=idPedido)
+    imagens=models.Imagem.objects.filter(pedido_fk=idPedido)
+    return render (request,'detalhesPedidos.html',{'pedidos':pedidos , 'imagens':imagens})
+
 
 def cadastrar_contato(request):
     form = ContatoForm()

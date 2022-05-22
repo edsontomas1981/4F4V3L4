@@ -14,6 +14,7 @@ urlpatterns = [
     path('cadastrarPedido/',views.cadastrarPedido,name='cadastrarPedido'),
     path('cadPedido/',views.ViewCadPed.as_view(),name='cadPedido'),
     path('cPedidos/',views.cPedidos,name='cPedidos'),
+    path('detalhesPedidos/',views.detalhesPedidos,name='detalhesPedidos'),
     path('contato/',views.cadastrar_contato,name='contato'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
     
