@@ -26,6 +26,7 @@
       <div class="tab-pane fade show active" id="pills-pedidos" role="tabpanel" aria-labelledby="pills-pedidos-tab">
         <!-- inicio pedidos -->
         {% for pedido in pedidos %}
+<<<<<<< HEAD
           {% if pedido.categoria_fk.categoria in 'Automóveis' %}
             <div class="row ">
                     <div class="col-xl-6 col-lg-8 ">
@@ -93,10 +94,89 @@
                                   </div>
                               </div>
 
+||||||| 9ab9331
+          <!-- Inicio do Card -->
+          {% for listas in lista  %}
+            {{listas}}
+          {% endfor %}
+          <form method="POST" action="{% url 'enviarProposta' %}">
+            {% csrf_token %}
+              <div class="card" style="width: 30rem;">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src={{ MEDIA_URL }}/{{imagem.imagem}} class="d-block w-100">
+=======
+          {% if pedido.categoria_fk.categoria in 'Automóveis' %}
+            <div class="row ">
+                    <div class="col-xl-6 col-lg-8 ">
+                      <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
+                        <div class="card l-bg-blue-dark">
+                            <div class="card-statistic-3 p-4">
+                                <div class="card-icon card-icon-large"><i class="fas fa fa-car"></i></div>
+                                <div class="mb-3">
+                                  <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                    <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h4 class="d-flex align-items-center mb-0">
+                                            {{pedido.titulo}}
+                                        </h4>
+                                    </div>
+                                    <div class="col-8">
+                                        <h6 class="d-flex align-items-center mb-0">
+                                            {{pedido.descricao}}
+                                        </h6>
+                                    </div>                                    
+                                </div>
+                                <div data-height="50" style="height: 18px;">
+                                    <div>
+                                      <button class="btn l-bg-green-dark" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                      </div>
+                    </form>
+                    </div>
+            </div>
+          {% endif %}
+          {% if pedido.categoria_fk.categoria in 'Beleza' %}
+            <div class="row ">
+                <div class="col-xl-6 col-lg-8 ">
+                    <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
+                      <div class="card l-bg-cherry">
+                          <div class="card-statistic-3 p-4">
+                              <div class="card-icon card-icon-large"><i class="fas fa fa-star"></i></div>
+                              <div class="mb-3">
+                                <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                              </div>
+                              <div class="row align-items-center mb-2 d-flex">
+                                  <div class="col-8">
+                                      <h4 class="d-flex align-items-center mb-0">
+                                          {{pedido.titulo}}
+                                      </h4>
+                                  </div>
+                                  <div class="col-8">
+                                      <h6 class="d-flex align-items-center mb-0">
+                                          {{pedido.descricao}}
+                                      </h6>
+                                  </div>                                    
+                              </div>
+                              <div data-height="50" style="height: 18px;">
+                                  <div>
+                                    <button class="btn l-bg-cyan" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
+                                  </div>
+                              </div>
+
+>>>>>>> ef2055163b326bae0baf3e034954c7d6476dd1e2
                           </div>
                       </div>
                     </form>
                 </div>
+<<<<<<< HEAD
             </div>
           {% endif %}
           {% if pedido.categoria_fk.categoria in 'Serviços e reparos' %}
@@ -135,6 +215,48 @@
                             </div>
                         </div>
                     </form>
+||||||| 9ab9331
+                  <div class="card-body">
+                    <h5 class="card-title">{{pedido.titulo}}</h5>
+                    <p class="card-text">{{pedido.descricao}}</p>
+                    <button href="#" class="btn btn-primary">Enviar Proposta</button>
+=======
+            </div>
+          {% endif %}
+          {% if pedido.categoria_fk.categoria in 'Serviços e reparos' %}
+              <div class="row ">
+                  <div class="col-xl-6 col-lg-8 ">
+                        <div class="card l-bg-green-dark">
+                          <form method="POST" action="{% url 'detalhesPedidos' %}">
+                            {% csrf_token %}
+                            <div class="card-statistic-3 p-4">
+                                <div class="card-icon card-icon-large"><i class="fas fa fa-wrench"></i></div>
+                                <div class="mb-3">
+                                  <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h4 class="d-flex align-items-center mb-0">
+                                            {{pedido.titulo}}
+                                        </h4>
+                                    </div>
+                                    <div class="col-8">
+                                        <h6 class="d-flex align-items-center mb-0">
+                                            {{pedido.descricao}}
+                                        </h6>
+                                    </div>                                    
+                                </div>
+                                <div data-height="50" style="height: 18px;">
+                                    <div>
+                                      <button class="btn l-bg-orange-dark" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+>>>>>>> ef2055163b326bae0baf3e034954c7d6476dd1e2
                   </div>
               </div>
           {% endif %}           

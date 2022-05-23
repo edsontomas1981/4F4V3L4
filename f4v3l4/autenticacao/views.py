@@ -15,7 +15,13 @@ def cadastro(request):
      imagens=models.Imagem.objects.all()
      if request.method == "GET" :
           if request.user.is_authenticated:
+<<<<<<< HEAD
                return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
+||||||| 9ab9331
+               return render(request,'./base.html')
+=======
+               return render(request,'./home.html')
+>>>>>>> ef2055163b326bae0baf3e034954c7d6476dd1e2
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
