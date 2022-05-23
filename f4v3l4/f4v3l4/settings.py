@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-)3byk)izeu#7v4ptg4r4l_-x)*2v6z571in4d04+qppt%1iapo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.113',
+                 '127.0.0.1',
+    ]
 
 
 # Application definition
@@ -156,8 +158,8 @@ AUTHENTICATION_BACKENDS = [
 SOCIAL_AUTH_FACEBOOK_KEY='560576048655436'
 SOCIAL_AUTH_FACEBOOK_SECRET='11185381e83a1ae1bfa70044b81aa715'
 #Credenciais Google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='846833514720-roo3m42olbh21vn30lm4m9l18ioeur5r.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='846833514720-96a7lvasn2mn2pf3kf4k406smt92j5cm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 # Mensagens Django
@@ -171,6 +173,11 @@ MESSAGE_TAGS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'sair'
+LOGOUT_REDIRECT_URL = 'login'
 
 #Django debug toolbar
 INTERNAL_IPS = [

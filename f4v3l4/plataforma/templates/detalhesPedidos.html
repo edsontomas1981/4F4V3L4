@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'usuario' %}
+<span>{{ user }}</span>
+{% endblock 'usuario' %}
+{% block 'blankPage' %}
+        <!-- inicio pedidos -->
+        {% for pedido in pedidos %}
+            <div class="row ">
+                    <div class="col-xl-6 col-lg-8 ">
+                      <form method="POST" action="{% url 'enviarProposta' %}">
+                        {% csrf_token %}
+                        <div class="card l-bg-gray">
+                            <div class="card-statistic-3 p-4">
+                                <div class="card-icon card-icon-large"><i class="fas fa fa-car"></i></div>
+                                <div class="mb-3">
+                                  <!-- Inicio Carrossel -->
+                                  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                      {% for imagem in imagens %}
+                                      <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                        <img class="d-block w-100" src="{{MEDIA_URL}}{{imagem.imagem}}">
+                                      </div>
+                                      {% endfor %}
+                                    </div>
+                                  </div>
+                                  <!-- Fim Carrossel -->
+                                </div>
+                                <div class="mb-3">
+                                  <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                    <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h4 class="d-flex align-items-center mb-0">
+                                            {{pedido.titulo}}
+                                        </h4>
+                                    </div>
+                                    <div class="col-8">
+                                      <hr>
+                                      <h5 class="d-flex align-items-center mb-0">
+                                        Endereço:
+                                      </h5>
+                                    </div>                                    
+                                    <div class="col-8">
+                                      <h6 class="d-flex align-items-center mb-0">
+                                          {{pedido.endereco_fk.logradouro}},{{pedido.endereco_fk.numero}}
+                                      </h6>
+                                    </div>
+                                    <div class="col-8">
+                                      <h6 class="d-flex align-items-center mb-0">
+                                          {{pedido.endereco_fk.cep}},{{pedido.endereco_fk.bairro}}{{pedido.endereco_fk.complemento}}
+                                      </h6>
+                                    </div>
+                                    <div class="col-8">
+                                    <h6 class="d-flex align-items-center mb-0">
+                                      {{pedido.endereco_fk.cidade}}-{{pedido.endereco_fk.uf}}
+                                    </h6>
+                                  </div>
+                                </div>                                    
+                                </div>
+                                <div data-height="50" style="height: 18px;">
+                                    <div>
+                                      <button class="btn l-bg-blue-dark" style="width:100%;height:35px;" >Enviar Proposta <i class="fa fa-eye"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                      </div>
+                    </form>
+                    </div>
+            </div>
+        {%endfor%}
+        <!-- final pedidos -->
+      </div>
+    </div>
+{% endblock 'blankPage' %}
+{%  block 'css' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+{% endblock %}
