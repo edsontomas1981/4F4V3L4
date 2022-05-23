@@ -69,6 +69,9 @@
                           <div class="card-statistic-3 p-4">
                               <div class="card-icon card-icon-large"><i class="fas fa fa-star"></i></div>
                               <div class="mb-3">
+                                <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
+                              </div>
+                              <div class="mb-3">
                                 <input name="pedido" value={{pedido.id}} type="hidden"></input>
                                   <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
                               </div>
@@ -105,6 +108,9 @@
                             <div class="card-statistic-3 p-4">
                                 <div class="card-icon card-icon-large"><i class="fas fa fa-wrench"></i></div>
                                 <div class="mb-3">
+                                  <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
+                                </div>
+                                <div class="mb-3">
                                   <input name="pedido" value={{pedido.id}} type="hidden"></input>
                                   <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
                                 </div>
@@ -140,3 +146,6 @@
       <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">Profissionais</div>
     </div>
 {% endblock 'blankPage' %}
+{%  block 'css' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+{% endblock %}

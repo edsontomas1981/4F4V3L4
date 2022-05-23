@@ -4,15 +4,18 @@ from usuario.models import Usuarios
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib import auth
+from plataforma import models
 
 def sair(request):
      auth.logout(request)
      return redirect('/auth/login')
 
 def cadastro(request):
+     pedidos=models.Pedidos.objects.all()
+     imagens=models.Imagem.objects.all()
      if request.method == "GET" :
           if request.user.is_authenticated:
-               return render(request,'./home.html')
+               return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
           else: 
                return render(request,'./cadastrar.html')
      elif request.method == 'POST':
@@ -47,9 +50,11 @@ def cadastro(request):
                     redirect('/auth/cadastro/')
 
 def login(request):
+     pedidos=models.Pedidos.objects.all()
+     imagens=models.Imagem.objects.all()
      if request.method == "GET" : 
           if request.user.is_authenticated:
-               return render(request,'./home.html')
+               return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
           else:
                return render(request,'./logar.html')
      elif request.method == 'POST':
@@ -61,10 +66,12 @@ def login(request):
                return render(request,'./logar.html')
           else:
                auth.login(request, usuario)
-               return render(request,'./home.html')
+               return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
 
 def recup_senha(request):
+     pedidos=models.Pedidos.objects.all()
+     imagens=models.Imagem.objects.all()
      if request.user.is_authenticated:
-          return render(request,'./home.html')
+          return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
      else:
           return render(request,'./recuperarSenha.html')
