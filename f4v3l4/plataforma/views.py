@@ -4,10 +4,10 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
+from f4v3l4.forms import FormCadPed,ContatoForm
 from f4v3l4 import forms
 from . import models
 from Classes.salvarPedidos import Pedido
-from f4v3l4.forms import FormCadPed,ContatoForm
 
 @login_required(login_url='/auth/login/')
 def home(request):

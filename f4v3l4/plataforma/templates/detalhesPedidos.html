@@ -61,19 +61,40 @@
                                 </div>
                                 <div data-height="50" style="height: 18px;">
                                     <div>
-                                      <button class="btn l-bg-blue-dark" style="width:100%;height:35px;" >Enviar Proposta <i class="fa fa-eye"></i></button>
+                                      <button type="button" class="btn l-bg-blue-dark" data-toggle="modal" data-target="#myModal" style="width:100%;height:35px;" >Enviar Proposta <i class="fa fa-eye"></i></button>
                                     </div>
                                 </div>
-
                             </div>
                       </div>
                     </form>
                     </div>
             </div>
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" >
+                  <div class="modal-header" aria-labelledby="exampleModalCenterTitle">
+                    <h5 class="modal-title">{{pedido.titulo}}</h5>
+                    <h6 class="modal-title">Pedido Nº {{pedido.id}}</h6>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar proposta</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         {%endfor%}
         <!-- final pedidos -->
       </div>
     </div>
+
 {% endblock 'blankPage' %}
 {%  block 'css' %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
