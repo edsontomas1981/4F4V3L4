@@ -46,5 +46,21 @@ class Pedido():
         pedido=Pedidos.object.all()
         print(pedido)
     
-        
+class Home():
+    def gerarHome():
+        pedidos=Pedidos.objects.all()
+        imagens=Imagem.objects.all()
+        return pedidos , imagens
+class Propostas():
     
+    def __init__(self,pedido,valor,prevInicio,prazoTermino
+                 ,observacao):
+        self.pedido=pedido
+        self.valor=valor
+        self.prevInicio=prevInicio
+        self.prazoTermino=prazoTermino
+        self.observacao=observacao
+        
+    def __repr__(self):
+        return "Propostas "        
+        

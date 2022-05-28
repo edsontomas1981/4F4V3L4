@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block 'usuario' %}
-<span>{{ user }}</span>
+<span>{{ user.email }}</span>
 {% endblock 'usuario' %}
+{% block 'js'%}
+
+{% endblock %}
+
 {% block 'blankPage' %}
         <!-- inicio pedidos -->
         {% for pedido in pedidos %}
@@ -41,7 +45,7 @@
                                       <h5 class="d-flex align-items-center mb-0">
                                         Endereço:
                                       </h5>
-                                    </div>                                    
+                                    </div>
                                     <div class="col-8">
                                       <h6 class="d-flex align-items-center mb-0">
                                           {{pedido.endereco_fk.logradouro}},{{pedido.endereco_fk.numero}}
@@ -57,7 +61,7 @@
                                       {{pedido.endereco_fk.cidade}}-{{pedido.endereco_fk.uf}}
                                     </h6>
                                   </div>
-                                </div>                                    
+                                </div>
                                 </div>
                                 <div data-height="50" style="height: 18px;">
                                     <div>
@@ -65,9 +69,9 @@
                                     </div>
                                 </div>
                             </div>
-                      </div>
-                    </form>
+                          </div>
                     </div>
+                </form>
             </div>
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
@@ -75,20 +79,46 @@
 
                 <!-- Modal content-->
                 <div class="modal-content" >
+
                   <div class="modal-header" aria-labelledby="exampleModalCenterTitle">
                     <h5 class="modal-title">{{pedido.titulo}}</h5>
-                    <h6 class="modal-title">Pedido Nº {{pedido.id}}</h6>
+                    <h6 class="modal-title" name="pedido">{{pedido.id}}</h6>
+                    <h6 class="modal-title" name="usuarioPedido">{{pedido.usuario_fk.username}}</h6>
                   </div>
-                  
-                  <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                <form method="POST" action="{% url 'enviarProposta'%}">
+                    {% csrf_token %}
+                    <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                    <input name="usuarioPedido" value={{pedido.usuario_fk.id}} type="hidden"></input>
+                    <input name="usuarioProposta" value={{user}} type="hidden"></input>
+                    <div class="modal-body">
+                      <div class="col-sm-4 form-group" >
+                        <label for="valor">Valor</label>
+                        <input type="text" id="valor" name="valor" class="form-control col-sm-12" onkeyup="formatarMoeda();"/>
+                      </div>
+                    <div class="col-sm-12 form-group" >
+                      <label for="valor">Observações</label>
+                      <textarea class="form-control col-sm-12 name="observacao"" >
+                      </textarea>
+                    </div>
+                    <div class="col-sm-12 form-group" >
+                      <label for="valor">Prev.Inicio</label>
+                      <input type="date" name="prevInicio" class="form-control  col-sm-12">
+                      <label for="valor">Prazo Término</label>
+                      <input type="number" name="prazoTermino" class="form-control  col-sm-12">
+                    </div>
+                    <div class="col-sm-4 form-group" >
+                    </div>
                   </div>
+
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar proposta</button>
+
+                    <button type="submit" class="btn btn-primary">Enviar proposta</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                   </div>
-                </div>
+                </form>
               </div>
+              </div>
+
             </div>
         {%endfor%}
         <!-- final pedidos -->
@@ -98,4 +128,5 @@
 {% endblock 'blankPage' %}
 {%  block 'css' %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+<script src="{% static 'js/funcoesJavascript.js' %}"></script>
 {% endblock %}

@@ -7,12 +7,12 @@ from django.views.generic.edit import FormView
 from f4v3l4.forms import FormCadPed,ContatoForm
 from f4v3l4 import forms
 from . import models
-from Classes.salvarPedidos import Pedido
+from Classes.classes import Pedido,Home,Propostas
+from usuario.models import Usuarios
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedidos=models.Pedidos.objects.all()
-    imagens=models.Imagem.objects.all()
+    pedidos,imagens = Home.gerarHome()
     if request.method == "GET" :
         return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
     elif request.method == "POST" :
@@ -21,8 +21,17 @@ def home(request):
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
     if request.method == "GET" :
-        return render(request,'./enviaProposta.html')
+        return render(request,'./erro.html')    
     elif request.method == "POST" :
+        valor= request.POST.get('valor')
+        observacao= request.POST.get('observacao')
+        prevInicio =request.POST.get('prevInicio')
+        prazoTermino =request.POST.get('prazoTermino')
+        idPedido=request.POST.get('pedido')
+        pedido=models.Pedidos.objects.filter(id=idPedido)
+        proposta=Propostas(pedido,valor,prevInicio,prazoTermino,observacao)
+        
+        print('********************'+Usuarios.user+'****************************')
         return render(request,'./enviaProposta.html')
 
 @login_required(login_url='/auth/login/')
@@ -69,11 +78,14 @@ def cPedidos(request):
 
 @login_required
 def detalhesPedidos(request):
-    idPedido=request.POST.get('pedido')
-    pedidos=models.Pedidos.objects.filter(id=idPedido)
-    imagens=models.Imagem.objects.filter(pedido_fk=idPedido)
-    return render (request,'detalhesPedidos.html',{'pedidos':pedidos , 'imagens':imagens})
-
+    pedidos,imagens = Home.gerarHome()
+    if request.method == "GET" :
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
+    elif request.method == 'POST':
+        idPedido=request.POST.get('pedido')
+        pedidos=models.Pedidos.objects.filter(id=idPedido)
+        imagens=models.Imagem.objects.filter(pedido_fk=idPedido)
+        return render (request,'detalhesPedidos.html',{'pedidos':pedidos , 'imagens':imagens})
 
 def cadastrar_contato(request):
     form = ContatoForm()
