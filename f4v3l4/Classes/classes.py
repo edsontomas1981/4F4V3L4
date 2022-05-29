@@ -1,6 +1,5 @@
-from email.mime import image
-from plataforma.models import Categorias, Enderecos, Imagem, Pedidos
 from usuario.models import Usuarios
+from plataforma.models import Categorias, Enderecos, Imagem, Pedidos,Propostas as ModelPropostas
 
 class Pedido():
     def __init__ (self,categ_escolhida,cep,logradouro,bairro,
@@ -51,16 +50,29 @@ class Home():
         pedidos=Pedidos.objects.all()
         imagens=Imagem.objects.all()
         return pedidos , imagens
+
 class Propostas():
     
-    def __init__(self,pedido,valor,prevInicio,prazoTermino
+    def __init__(self,pedido:object,usuario:object,valor,prevInicio,prazo
                  ,observacao):
         self.pedido=pedido
+        self.usuario=usuario
         self.valor=valor
         self.prevInicio=prevInicio
-        self.prazoTermino=prazoTermino
+        self.prazoTermino=prazo
         self.observacao=observacao
         
     def __repr__(self):
-        return "Propostas "        
-        
+        return "Proposta" 
+
+    def salvaProposta(self):
+        proposta=ModelPropostas()
+        pedido=Pedidos.objects.filter(id=self.pedido.id).get()
+        usuario=Usuarios.objects.filter(id=self.usuario.id).get()
+        proposta.prazo=self.prazoTermino
+        proposta.valor=self.valor
+        proposta.observacao=self.observacao
+        proposta.prevInicio=self.prevInicio
+        proposta.pedido_fk=pedido
+        proposta.usuarioProposta_fk=usuario
+        proposta.save()

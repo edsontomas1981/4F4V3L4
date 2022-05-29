@@ -1,5 +1,5 @@
 from django import forms
-from plataforma.models import Contatos,Categorias
+from plataforma.models import Contatos,Categorias,Propostas
 
 class FormFaleConosco(forms.Form):
     nome = forms.CharField(required=True)

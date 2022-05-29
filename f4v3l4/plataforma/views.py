@@ -23,16 +23,16 @@ def enviarProposta(request):
     if request.method == "GET" :
         return render(request,'./erro.html')    
     elif request.method == "POST" :
-        valor= request.POST.get('valor')
+        usuario=request.user
+        valor= request.POST.get('valor').replace(',','.')
         observacao= request.POST.get('observacao')
         prevInicio =request.POST.get('prevInicio')
         prazoTermino =request.POST.get('prazoTermino')
         idPedido=request.POST.get('pedido')
-        pedido=models.Pedidos.objects.filter(id=idPedido)
-        proposta=Propostas(pedido,valor,prevInicio,prazoTermino,observacao)
-        
-        print('********************'+Usuarios.user+'****************************')
-        return render(request,'./enviaProposta.html')
+        pedido=models.Pedidos.objects.filter(id=idPedido).get()
+        proposta=Propostas(pedido,usuario,valor,prevInicio,prazoTermino,observacao)
+        proposta.salvaProposta()
+        return render(request,'./sucesso.html')
 
 @login_required(login_url='/auth/login/')
 def pedidos(request):
