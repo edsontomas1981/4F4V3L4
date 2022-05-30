@@ -1,0 +1,22 @@
+.gradient-custom {
+/* fallback for old browsers */
+background: #f6d365;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right bottom, rgba(0, 0, 255, 1), rgba(25, 140, 255, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right bottom, rgba(25, 140, 255, 1), rgba(0, 0, 255, 1))
+}
+.circle-image {
+    display: bloco embutido;
+    raio da borda: 50%;
+    estouro: oculto;
+    largura: 50 px;
+    altura: 50px;
+  }
+  .circle-image img {
+    largura: 100%;
+    altura: 100%;
+    ajuste do objeto : capa ;
+  }

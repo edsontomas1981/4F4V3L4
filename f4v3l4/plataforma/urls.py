@@ -14,10 +14,10 @@ urlpatterns = [
     path('cadastrarPedido/',views.cadastrarPedido,name='cadastrarPedido'),
     path('cadPedido/',views.ViewCadPed.as_view(),name='cadPedido'),
     path('cPedidos/',views.cPedidos,name='cPedidos'),
+    path('editarPerfil/', views.editarPerfil, name='editarPerfil'),
     path('detalhesPedidos/',views.detalhesPedidos,name='detalhesPedidos'),
     path('contato/',views.cadastrar_contato,name='contato'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
-    
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

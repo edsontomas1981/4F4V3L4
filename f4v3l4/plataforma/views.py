@@ -52,7 +52,7 @@ def cadastrarPedido(request):
         formulario = FormCadPed(request.POST)
         return HttpResponse(formulario)
 
-@login_required
+@login_required(login_url='/auth/login/')
 def cPedidos(request):
     if request.method == "GET" :
             return render(request,'./cadastropedidos.html')
@@ -76,7 +76,7 @@ def cPedidos(request):
         'Pedido cadastrado com sucesso !')
         return redirect('/cadPedido/')
 
-@login_required
+@login_required(login_url='/auth/login/')
 def detalhesPedidos(request):
     pedidos,imagens = Home.gerarHome()
     if request.method == "GET" :
@@ -86,7 +86,15 @@ def detalhesPedidos(request):
         pedidos=models.Pedidos.objects.filter(id=idPedido)
         imagens=models.Imagem.objects.filter(pedido_fk=idPedido)
         return render (request,'detalhesPedidos.html',{'pedidos':pedidos , 'imagens':imagens})
-
+    
+@login_required(login_url='/auth/login/')
+def editarPerfil(request):
+    if request.method == "GET" :
+        return render(request,'./perfil.html')
+    elif request.method == 'POST':
+        return render (request,'./perfil.html')
+    
+@login_required(login_url='/auth/login/')
 def cadastrar_contato(request):
     form = ContatoForm()
     return render(request, "form.html", {'form':form})
@@ -95,6 +103,7 @@ class ViewFaleConosco(FormView):
     template_name = 'fale.html'
     form_class = forms.FormFaleConosco
     success_url = '/'
+    
 
 class ViewCadPed(FormView):
     template_name = 'cadastropedidos.html'

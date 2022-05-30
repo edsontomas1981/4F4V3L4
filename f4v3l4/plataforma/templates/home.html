@@ -13,10 +13,10 @@
         <a class="nav-link active" id="pills-pedidos-tab" data-toggle="pill" href="#pills-pedidos" role="tab" aria-controls="pills-pedidos" aria-selected="true">Pedidos Disponíveis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-meusPedidos-tab" data-toggle="pill" href="#pills-meusPedidos" role="tab" aria-controls="pills-meusPedidos" aria-selected="false">Meus Pedidos</a>
+        <a class="nav-link" id="pills-propostasEnviadas-tab" data-toggle="pill" href="#pills-propostasEnviadas" role="tab" aria-controls="pills-meusPedidos" aria-selected="false">Propostas enviadas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-pedSolicitados-tab" data-toggle="pill" href="#pills-pedSolicitados" role="tab" aria-controls="pills-pedSolicitados" aria-selected="false">Pedidos que eu solicitei</a>
+        <a class="nav-link" id="pills-propostasEnviadas-tab" data-toggle="pill" href="#pills-propostasRecebidas" role="tab" aria-controls="pills-pedSolicitados" aria-selected="false">Propostas recebidas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-profissionais-tab" data-toggle="pill" href="#pills-profissionais" role="tab" aria-controls="pills-profissionais" aria-selected="false">Profissionais</a>
@@ -50,7 +50,7 @@
                                         <h6 class="d-flex align-items-center mb-0">
                                             {{pedido.descricao}}
                                         </h6>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div data-height="50" style="height: 18px;">
                                     <div>
@@ -88,7 +88,7 @@
                                       <h6 class="d-flex align-items-center mb-0">
                                           {{pedido.descricao}}
                                       </h6>
-                                  </div>                                    
+                                  </div>
                               </div>
                               <div data-height="50" style="height: 18px;">
                                   <div>
@@ -126,7 +126,7 @@
                                         <h6 class="d-flex align-items-center mb-0">
                                             {{pedido.descricao}}
                                         </h6>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div data-height="50" style="height: 18px;">
                                     <div>
@@ -139,15 +139,111 @@
                     </form>
                   </div>
               </div>
-          {% endif %}           
+          {% endif %}
         {%endfor%}
         <!-- final pedidos -->
       </div>
-      <div class="tab-pane fade" id="pills-meusPedidos" role="tabpanel" aria-labelledby="pills-meusPedidos-tab">Meus Pedidos</div>
-      <div class="tab-pane fade" id="pills-pedSolicitados" role="tabpanel" aria-labelledby="pills-pedSolicitados-tab">Pedidos solicitados</div>
-      <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">Profissionais</div>
+      <div class="tab-pane fade" id="pills-propostasEnviadas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
+        <div class="row">
+          <!-- inicio card Propostas recebidas -->
+          <div class="card card-custom bg-white border-white border-0 col-lg-6">
+            <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+            <div class="card-custom-avatar">
+              <img class="img-fluid" src="http://res.cloudinary.com/d3/image/upload/c_pad,g_center,h_200,q_auto:eco,w_200/bootstrap-logo_u3c8dx.jpg" alt="Avatar" />
+            </div>
+            <div class="card-body" style="overflow-y: auto">
+              <h4 class="card-title">Card title</h4>
+              <p class="card-text">Card has minimum height set but will expand if more space is needed for card body content. You can use Bootstrap <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks" target="_blank">card-decks</a> to align multiple cards nicely in a row.</p>
+            </div>
+            <div class="card-footer" style="background: inherit; border-color: inherit;">
+              <a href="#" class="btn btn-primary">Alterar</a>
+              <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+          </div>
+          <!-- fim card -->
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-propostasRecebidas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
+        <div class="row">
+          <!-- inicio card Propostas recebidas -->
+          <div class="card card-custom bg-white border-white border-0 col-lg-6">
+            <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+            <div class="card-custom-avatar">
+              <img class="img-fluid" src="http://res.cloudinary.com/d3/image/upload/c_pad,g_center,h_200,q_auto:eco,w_200/bootstrap-logo_u3c8dx.jpg" alt="Avatar" />
+            </div>
+            <div class="card-body" style="overflow-y: auto">
+              <h4 class="card-title">Card title</h4>
+              <p class="card-text">Card has minimum height set but will expand if more space is needed for card body content. You can use Bootstrap <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks" target="_blank">card-decks</a> to align multiple cards nicely in a row.</p>
+            </div>
+            <div class="card-footer" style="background: inherit; border-color: inherit;">
+              <a href="#" class="btn btn-primary">Aceitar</a>
+              <a href="#" class="btn btn-secondary">Descartar</a>
+            </div>
+          </div>
+          <!-- fim card -->
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">
+        <div class="row">
+
+          <div class="col-sm-12">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                  <div class="card mb-3" style="border-radius: .5rem;">
+                    <div class="row g-0">
+                      <div class="col-md-4 gradient-custom text-center text-white"
+                        style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                          alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                        <h5>Marie Horwitz</h5>
+                        <p>Web Designer</p>
+                        <i class="far fa-edit mb-5"></i>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body p-4">
+                          <h6>Information</h6>
+                          <hr class="mt-0 mb-4">
+                          <div class="row pt-1">
+                            <div class="col-6 mb-3">
+                              <h6>Email</h6>
+                              <p class="text-muted">info@example.com</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                              <h6>Phone</h6>
+                              <p class="text-muted">123 456 789</p>
+                            </div>
+                          </div>
+                          <h6>Projects</h6>
+                          <hr class="mt-0 mb-4">
+                          <div class="row pt-1">
+                            <div class="col-6 mb-3">
+                              <h6>Recent</h6>
+                              <p class="text-muted">Lorem ipsum</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                              <h6>Most Viewed</h6>
+                              <p class="text-muted">Dolor sit amet</p>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-start">
+                            <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                            <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                            <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 {% endblock 'blankPage' %}
 {%  block 'css' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
 {% endblock %}
