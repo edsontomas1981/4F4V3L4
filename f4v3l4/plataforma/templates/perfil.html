@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+
+<script src="{% static 'js/funcoesJavascript.js' %}"></script>
 
 {% block 'blankPage' %}
     <div class="container">
@@ -11,15 +12,24 @@
                         <div class="account-settings">
                             <div>
                                 <div>
-                                    <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" height=220 width = 220 align=left>
-                                    <img class="img-profile rounded-circle" src="/static/img/undraw_profile.svg" height=30 width=30 align=center>
+                                    <img id="imagemPerfil" class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" height=220 width = 220 align=left>
+                                    <a onclick="alterarImagem('imagemPerfil','input');"><label for="input">
+                                        <img class="img-profile rounded-circle" src="/static/img/edit.jpg" height="20" width="20" align="right"></label>
+                                    </a>
+                                    <div> 
+                                        <input type="file" class="upload" id="input" name="input" /> 
+                                    </div>
                                 </div>
+                            </div>
+                            <div>
+                                <br>
+                                <br>
                                 <h5 class="user-name">{{user.username}}</h5>
                                 <h6 class="user-email">{{user.email}}</h6>
-                            </div>
+                            </div>                            
                             <div class="about">
-                                <h5 class="mb-2 text-primary">About</h5>
-                                <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                                <h5 class="mb-2 text-primary">Sobre</h5>
+                                <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in tincidunt tellus, id aliquet lectus. Nunc eu imperdiet enim. Integer dictum mi at imperdiet fringilla. Quisque elementum varius viverra. Nam eleifend quam sapien, vel iaculis nisl dapibus nec. Nullam turpis.</textarea>
                             </div>
                         </div>
                     </div>
@@ -100,4 +110,11 @@
         </div>
         </div>    
 {% endblock %}
+{% block 'css' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+{% endblock %}
+
+
+
+
 
