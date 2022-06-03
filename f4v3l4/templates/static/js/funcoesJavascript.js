@@ -92,9 +92,12 @@ function formatarMoeda() {
     elemento.value = valor;
     }
 
-function alterarImagem(img, caminhoNovaImagem) {//Recebemos dois valores por parâmetro.
+function alterarImagem() {//Recebemos dois valores por parâmetro.
     
-    document.getElementById(img).src = document.getElementById(caminhoNovaImagem); 
+    caminho = document.getElementById('input').value;
+    console.log(caminho)
+    
+    document.getElementById('imagemPerfil').src = caminho; 
     /*
      document.getElementById: acessa um objeto na página através do atributo ID, tudo que tiver um identificador é um objeto e é através dele que vamos acessar.
      (objeto): é dentro dos parenteses que informamos qual objeto acessar, neste exemplo o objeto será passado por parâmetro.
