@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['192.168.1.113',
                  '127.0.0.1',
                  '192.168.20.24',
+                 '192.168.1.108',
     ]
 
 # Application definition
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'usuario',
     'autenticacao',
     'plataforma',
+    'endereco',
 
 ]
 

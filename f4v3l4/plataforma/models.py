@@ -1,19 +1,7 @@
 from django.db import models
 from usuario.models import Usuarios
 from datetime import datetime
-
-class Enderecos (models.Model):
-    cep=models.CharField(max_length=8,null=False)
-    logradouro=models.CharField(max_length=50,null=False)
-    numero=models.CharField(max_length=8)
-    bairro=models.CharField(max_length=30)
-    cidade=models.CharField(max_length=50)
-    uf=models.CharField(max_length=2)
-
-class Contatos (models.Model):
-    tipo=models.CharField(max_length=15)
-    contato=models.CharField(max_length=20)
-
+from endereco.models import Enderecos,Contatos
 
 class Categorias(models.Model):
     categoria=models.CharField(max_length=30)

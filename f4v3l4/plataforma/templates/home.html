@@ -64,6 +64,43 @@
                     </div>
             </div>
           {% endif %}
+          {% if pedido.categoria_fk.categoria in 'Consertos e Reparos' %}
+            <div class="row ">
+                <div class="col-xl-6 col-lg-8 ">
+                    <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
+                      <div class="card  l-bg-green-dark">
+                          <div class="card-statistic-3 p-4">
+                              <div class="card-icon card-icon-large"><i class="fas fa fa-cog"></i></div>
+                              <div class="mb-3">
+                                <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
+                              </div>
+                              <div class="mb-3">
+                                <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                              </div>
+                              <div class="row align-items-center mb-2 d-flex">
+                                  <div class="col-8">
+                                      <h4 class="d-flex align-items-center mb-0">
+                                          {{pedido.titulo}}
+                                      </h4>
+                                  </div>
+                                  <div class="col-8">
+                                      <h6 class="d-flex align-items-center mb-0">
+                                          {{pedido.descricao}}
+                                      </h6>
+                                  </div>
+                              </div>
+                              <div data-height="50" style="height: 18px;">
+                                  <div>
+                                    <button class="btn l-bg-cyan" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+          {% endif %}          
           {% if pedido.categoria_fk.categoria in 'Beleza' %}
             <div class="row ">
                 <div class="col-xl-6 col-lg-8 ">
