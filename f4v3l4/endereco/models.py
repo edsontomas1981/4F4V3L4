@@ -11,4 +11,4 @@ class Enderecos (models.Model):
 
 class Contatos (models.Model):
     tipo=models.CharField(max_length=15)
-    contato=models.CharField(max_length=20)
+    contato=models.CharField(max_length=50)

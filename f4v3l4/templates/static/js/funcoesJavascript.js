@@ -105,3 +105,51 @@ function alterarImagem() {//Recebemos dois valores por parâmetro.
      = caminhoNovaImagem: Informa o diretório da nova imagem, como: c:/window/wallpaper.jpg
      */
 }
+
+function insereNaTabela(){
+    console.log('teste')
+    var table = document.getElementById('tabela');
+    var contato = document.getElementById('contato').value;
+    var tipo = document.getElementById('tipo').value;
+    var row = table.insertRow(1);
+    row.innerHTML = "<td>"+tipo+"</td> <td>"+contato+"</td>;
+
+    }
+
+    var editarAvatar = document.querySelector(".editar-content");
+    var buttonFile = document.getElementById("file-preview-js");
+
+    editarAvatar.addEventListener("click", function(){
+      buttonFile.click();
+    });
+
+    btnClose.addEventListener("click", function(){
+      btnClose.style.display = "none";
+      output.style.backgroundImage = "url('')";
+      document.getElementById("file-preview-js").value = "";
+    });
+    }
+    var btnClose = document.querySelector('.close-preview-js');
+    var output = document.getElementById("new");
+    var loaderFile = function(event){
+    var reader = new FileReader();
+      reader.onload = function() {
+        output.style.display = "block";
+        btnClose.style.display = "block";
+        output.style.backgroundImage = "url("+reader.result+")";
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    var editarAvatar = document.querySelector(".editar-content");
+    var buttonFile = document.getElementById("file-preview-js");
+
+    editarAvatar.addEventListener("click", function(){
+      buttonFile.click();
+    });
+
+    btnClose.addEventListener("click", function(){
+      btnClose.style.display = "none";
+      output.style.backgroundImage = "url('')";
+      document.getElementById("file-preview-js").value = "";
+    });
