@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
-
 {% block 'usuario' %}
 <span>{{ user }}</span>
 {% endblock 'usuario' %}
-
 {% load bootstrap %}
-
-{% block 'js' %}
-{% endblock 'js' %}
-
 {% block 'blankPage' %}
     {% load static %}
     <form method="POST" action="{% url 'cPedidos' %}" enctype="multipart/form-data">
@@ -82,4 +76,9 @@
             </div>
         </div>
     </div>
+    {% block 'js' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+    <script src="{% static 'js/funcoesJavascript.js' %}"></script>
+    <script src="{% static 'js/cep.js' %}"></script>
+    {% endblock %}
 {% endblock 'blankPage' %}

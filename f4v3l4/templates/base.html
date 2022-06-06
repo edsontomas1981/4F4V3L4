@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin-2.css' %}">
+<script src="{% static 'js/funcoesJavascript.js' %}"></script>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,7 +14,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    {% block 'titulo' %}{% endblock  %}
+    {% block 'titulo' %}
+    {% endblock  %}
     <title>4 F4V3L4 3 N015</title>
 
     <!-- Custom fonts for this template-->
@@ -175,7 +177,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{% url 'editarPerfil' %}">
+                                <a class="dropdown-item" href="{% url 'mostraPerfil' %}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Meu Perfil
                                 </a>
@@ -248,7 +250,9 @@
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
     <!--Meus JavaScript-->
-    {% block 'css' %} {% endblock  %}
+    {% block 'js' %} 
+    
+    {% endblock  %}
     <script src="{% static 'js/funcoesJavascript.js' %}"></script>
 </body>
 </html>

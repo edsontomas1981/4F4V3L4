@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('',views.home,name='home'),
+    path('mostraPerfil/', views.mostraPerfil, name='mostraPerfil'),
     path('enviarProposta/', views.enviarProposta, name='enviarProposta'),
     path('pedido/',views.pedidos,name='pedido'),
     path('cadastrarPedido/',views.cadastrarPedido,name='cadastrarPedido'),

@@ -49,11 +49,10 @@ INSTALLED_APPS = [
     'bootstrapform',
     'sslserver',
     # Apps Locais
+    'endereco',
     'usuario',
     'autenticacao',
     'plataforma',
-    'endereco',
-
 ]
 
 MIDDLEWARE = [

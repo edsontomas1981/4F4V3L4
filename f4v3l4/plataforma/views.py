@@ -90,9 +90,16 @@ def detalhesPedidos(request):
 @login_required(login_url='/auth/login/')
 def editarPerfil(request):
     if request.method == "GET" :
-        return render(request,'./perfil.html')
+        return render(request,'./editarperfil.html')
     elif request.method == 'POST':
-        return render (request,'./perfil.html')
+        return render (request,'./editarperfil.html')
+
+@login_required(login_url='/auth/login/')
+def mostraPerfil(request):
+    if request.method == "GET" :
+        return render(request,'./meuperfil.html')
+    elif request.method == 'POST':
+        return render (request,'./meuperfil.html')
     
 @login_required(login_url='/auth/login/')
 def cadastrar_contato(request):

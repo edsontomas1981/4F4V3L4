@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="{% static 'js/funcoesJavascript.js' %}"></script>
 
 {% block 'blankPage' %}
     <div class="container">
@@ -79,8 +78,9 @@
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
                                   <label for="contato">Tipo</label>
-                                  <select class="form-control" id="website">
+                                  <select class="form-control" id="tipo">
                                     <option>Telefone</option>
+                                    <option>Celular</option>
                                     <option>Facebook</option>
                                     <option>Twitter</option>
                                     <option>Instagram</option>
@@ -91,7 +91,7 @@
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label for="contato">Contato</label>
-                                    <input type="url" class="form-control" id="contato">
+                                    <input type="url" class="form-control" id="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);">
                                 </div>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
@@ -100,9 +100,12 @@
                                   <input type="button" onclick="insereNaTabela();" class="btn btn-primary" id="btnContato" value="Adicionar">
                               </div>
                             </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                              <h6 class="mb-3 text-primary">Contatos</h6>
+                          </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-9">
                               <div class="form-group">
-                                <table class="table table-striped" id="tabela">
+                                <table class="table table-striped thead-dark" id="tabela">
                                   <thead>
                                     <tr>
                                       <th scope="col">Tipo</th>
@@ -110,45 +113,49 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Larry</td>
-                                      <td>the Bird</td>
-                                    </tr>
-                                  </tbody>
+                                </tbody>
                                 </table>
                               </div>
                             </div>
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mb-3 text-primary">Address</h6>
+                                <h6 class="mb-3 text-primary">Endereço</h6>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                              <div class="form-group">
+                                  <label for="cep">Cep</label>
+                                  <input type="name" class="form-control" onblur="pesquisacep(this.value);" id="cep">
+                              </div>
+                          </div>
+                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
                                 <div class="form-group">
-                                    <label for="Street">Street</label>
-                                    <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                                    <label for="rua">Rua</label>
+                                    <input type="name" class="form-control"id="rua">
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                              <div class="form-group">
+                                  <label for="bairro">Bairro</label>
+                                  <input type="name" class="form-control" id="bairro">
+                              </div>
+                          </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="form-group">
+                                    <label for="complemento">Complemento</label>
+                                    <input type="name" class="form-control" id="complemento">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="ciTy">City</label>
-                                    <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
-                                </div>
-                            </div>
+                              <div class="form-group">
+                                  <label for="cidade">Cidade</label>
+                                  <input type="text" class="form-control" id="cidade">
+                              </div>
+                          </div>                            
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="sTate">State</label>
-                                    <input type="text" class="form-control" id="sTate" placeholder="Enter State">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="zIp">Zip Code</label>
-                                    <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
+                                    <label for="uf">Estado</label>
+                                    <input type="text" class="form-control" id="uf">
                                 </div>
                             </div>
                         </div>
@@ -165,10 +172,13 @@
             </div>
         </div>
         </div>
-
 {% endblock %}
-{% block 'css' %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+{% block 'js' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+<script src="{% static 'js/formataCampos.js' %}"></script>
+<script src="{% static 'js/alteraImagem.js' %}"></script>
+<script src="{% static 'js/contatos.js' %}"></script>
+<script src="{% static 'js/cep.js' %}"></script>
 {% endblock %}
 
 
