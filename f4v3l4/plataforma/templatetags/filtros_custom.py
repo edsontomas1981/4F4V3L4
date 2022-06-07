@@ -3,7 +3,8 @@ from django import template
 register = template.Library()
 
 @register.filter
-def liga_active(value):
+def salvaContato(value):
+    
     value='active'
     return value
 

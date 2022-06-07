@@ -12,11 +12,13 @@ from usuario.models import Usuarios
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    pedidos,imagens = Home.gerarHome()
+    usuario=request.user
+    pedidos,imagens, propostaEnviadaPor,propostaRecebidas = Home.gerarHome(usuario.id)
+        
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'propostaEnviadaPor':propostaEnviadaPor,'propostaRecebidas':propostaRecebidas})
     elif request.method == "POST" :
-        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens})
+        return render(request,'./home.html',{'pedidos':pedidos,'imagens':imagens,'propostaEnviadaPor':propostaEnviadaPor,'propostaRecebidas':propostaRecebidas})
 
 @login_required(login_url='/auth/login/')
 def enviarProposta(request):
@@ -123,7 +125,7 @@ def salvaPerfil(request):
     if request.method == "GET" :    
         return render (request,'./meuperfil.html')
     elif request.method == 'POST':
-        tabela=request.POST.get('tipo')
+        tabela=request.POST.get('contato')
         print('**************************')
         print(tabela)
         print('**************************')

@@ -46,10 +46,14 @@ class Pedido():
         print(pedido)
     
 class Home():
-    def gerarHome():
+    def gerarHome(idUsuario):
         pedidos=Pedidos.objects.all()
         imagens=Imagem.objects.all()
-        return pedidos , imagens
+        propostaEnviadaPor=ModelPropostas.objects.filter(usuarioProposta_fk=idUsuario)
+        propostasRecebidas=ModelPropostas.objects.all()
+        
+        return pedidos , imagens , propostaEnviadaPor , propostasRecebidas
+    
 
 class Propostas():
     
