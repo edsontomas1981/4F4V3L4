@@ -1,4 +1,3 @@
-var lista = []
 function limpaCampos(){
     document.getElementById('contato').value=("");
     document.getElementById('tipo').value=("Telefone");
@@ -22,7 +21,5 @@ function insereNaTabela(){
     tr.appendChild(tdTipo);
     tr.appendChild(tdContato);
     corpoTabela.appendChild(tr);
-    lista.push(tipo)
-    console.log(lista)
     limpaCampos();
 }

@@ -24,7 +24,8 @@ def enviarProposta(request):
         return render(request,'./erro.html')    
     elif request.method == "POST" :
         usuario=request.user
-        valor= request.POST.get('valor').replace(',','.')
+        valor= request.POST.get('valor').replace('.','')
+        valor= valor.replace(',','.')
         observacao= request.POST.get('observacao')
         prevInicio =request.POST.get('prevInicio')
         prazoTermino =request.POST.get('prazoTermino')
@@ -100,7 +101,7 @@ def mostraPerfil(request):
         return render(request,'./meuperfil.html')
     elif request.method == 'POST':
         return render (request,'./meuperfil.html')
-    
+
 @login_required(login_url='/auth/login/')
 def cadastrar_contato(request):
     form = ContatoForm()
@@ -116,3 +117,16 @@ class ViewCadPed(FormView):
     template_name = 'cadastropedidos.html'
     form_class = forms.FormCadPed
     success_url = '/'
+
+@login_required(login_url='/auth/login/')
+def salvaPerfil(request):
+    if request.method == "GET" :    
+        return render (request,'./meuperfil.html')
+    elif request.method == 'POST':
+        tabela=request.POST.get('tipo')
+        print('**************************')
+        print(tabela)
+        print('**************************')
+        return render (request,'./sucesso.html')
+
+

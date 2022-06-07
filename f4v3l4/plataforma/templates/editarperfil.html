@@ -4,6 +4,7 @@
 
 {% block 'blankPage' %}
     <div class="container">
+      <form method="POST" action="{% url 'salvaPerfil' %}" enctype="multipart/form-data">{%csrf_token%}
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -12,6 +13,7 @@
                             <div>
                               <div class="">
                                 <div class="image">
+                                
                                   <div class="editar-content">
                                     <span>
                                       <i>editar</i>
@@ -78,7 +80,7 @@
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
                                   <label for="contato">Tipo</label>
-                                  <select class="form-control" id="tipo">
+                                  <select class="form-control" id="tipo" name="tipo">
                                     <option>Telefone</option>
                                     <option>Celular</option>
                                     <option>Facebook</option>
@@ -86,12 +88,18 @@
                                     <option>Instagram</option>
                                     <option>Linkedin</option>
                                 </select>
+
+                                <ul >
+                                  <li  name="ul" id="ul">teste1</li>
+                                  <li>teste2</li>
+                                  <li>teste3</li>
+                                </ul>
                               </div>
                             </div>
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label for="contato">Contato</label>
-                                    <input type="url" class="form-control" id="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);">
+                                    <input class="form-control" id="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);">
                                 </div>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
@@ -105,7 +113,7 @@
                           </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-9">
                               <div class="form-group">
-                                <table class="table table-striped thead-dark" id="tabela">
+                                <table class="table table-striped thead-dark" id="tabela" name="tabela">
                                   <thead>
                                     <tr>
                                       <th scope="col">Tipo</th>
@@ -162,8 +170,8 @@
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                    <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancelar</button>
-                                    <button type="button" id="submit" name="submit" class="btn btn-primary">Atualizar</button>
+                                    <button type="button" id="cancela" name="cancela" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" id="atualiza" name="atualiza" class="btn btn-primary">Atualizar</button>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +179,9 @@
                 </div>
             </div>
         </div>
-        </div>
+      </form>
+    </div>
+
 {% endblock %}
 {% block 'js' %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">

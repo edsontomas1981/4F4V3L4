@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+<link type="text/css" href="{% static 'css/estilo.css' %}">
 {% block 'usuario' %}
 <span>{{ user.email }}</span>
 {% endblock 'usuario' %}
-{% block 'js'%}
-
-{% endblock %}
-
 {% block 'blankPage' %}
         <!-- inicio pedidos -->
         {% for pedido in pedidos %}
@@ -109,9 +106,7 @@
                     <div class="col-sm-4 form-group" >
                     </div>
                   </div>
-
                   <div class="modal-footer">
-
                     <button type="submit" class="btn btn-primary">Enviar proposta</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
                   </div>
@@ -126,7 +121,7 @@
     </div>
 
 {% endblock 'blankPage' %}
-{%  block 'css' %}
-<link type="text/css" href="{% static 'css/estilo.css' %}">
-<script src="{% static 'js/funcoesJavascript.js' %}"></script>
+{% block 'js' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+<script src="{% static 'js/formataCampos.js' %}"></script>
 {% endblock %}
