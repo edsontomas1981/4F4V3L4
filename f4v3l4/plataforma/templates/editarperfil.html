@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 {% block 'blankPage' %}
     <div class="container">
-      <form method="POST" action="{% url 'salvaPerfil' %}" enctype="multipart/form-data">{%csrf_token%}
+      <form method="POST" id="form" action="{% url 'editarPerfil' %}" enctype="multipart/form-data">
+        {%csrf_token%}
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -13,7 +13,7 @@
                             <div>
                               <div class="">
                                 <div class="image">
-                                
+
                                   <div class="editar-content">
                                     <span>
                                       <i>editar</i>
@@ -49,7 +49,7 @@
                                 <br>
                                 <h5 class="user-name">{{user.username}}</h5>
                                 <h6 class="user-email">{{user.email}}</h6>
-                            </div>                            
+                            </div>
                             <div class="about">
                                 <h5 class="mb-2 text-primary">Sobre</h5>
                                 <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in tincidunt tellus, id aliquet lectus. Nunc eu imperdiet enim. Integer dictum mi at imperdiet fringilla. Quisque elementum varius viverra. Nam eleifend quam sapien, vel iaculis nisl dapibus nec. Nullam turpis.</textarea>
@@ -75,14 +75,16 @@
                                 <input type="text" class="form-control" id="sobrenome" value="{{user.last_name}}">
                               </div>
                           </div>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">                                
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                               <div class="form-group">
                                     <input type="email" class="form-control" id="eMail" value="{{user.email}}" placeholder="Email">
                                 </div>
                             </div>
+                            <input type="hidden" name="usuario" id="usuario" value="{{user.id}}">
+
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                               <h6 class="mb-3 text-primary">Contatos</h6>
-                            </div>                            
+                            </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
                                 <select class="form-control" id="tipo" name="tipo" value="Selecione" >
@@ -102,10 +104,10 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
-                                <input type="button" onclick="insereNaTabela();" class= "btn btn-outline-info" id="btnContato" placeholder="Insira aqui o contato" value="     +     ">
+                                <a class="btn btn-primary" href="{% url 'editarPerfil' %}" id="addContato" name="addContato" value ="Adicionar"> adicionar</a>
+                                <input type="submit" class= "btn btn-outline-info" id="incluiContato" name="incluiContato" value="     +     ">
                               </div>
                             </div>
-
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-9">
                               <div class="form-group">
                                 <table class="table table-striped thead-dark" id="tabela" name="tabela">
@@ -129,7 +131,7 @@
                               <div class="form-group">
                                 <input type="name" class="form-control" onblur="pesquisacep(this.value);" id="cep" placeholder="Cep">
                               </div>
-                          </div>
+                            </div>
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
                                 <div class="form-group">
                                   <input type="name" class="form-control"id="rua" placeholder="Rua">
@@ -149,7 +151,7 @@
                               <div class="form-group">
                                   <input type="text" class="form-control" id="cidade" placeholder="Cidade">
                               </div>
-                          </div>                            
+                          </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="uf" placeholder="Uf">
@@ -159,7 +161,7 @@
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                    <button type="button" id="cancela" name="cancela" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" id="cancela" name="cancela" class="btn btn-secondary">Cancelar</button>
                                     <button type="submit" id="atualiza" name="atualiza" class="btn btn-primary">Atualizar</button>
                                 </div>
                             </div>
@@ -173,14 +175,11 @@
 
 {% endblock %}
 {% block 'js' %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
 <script src="{% static 'js/formataCampos.js' %}"></script>
 <script src="{% static 'js/alteraImagem.js' %}"></script>
 <script src="{% static 'js/contatos.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>
+<script src="{% static 'js/apis.js' %}"></script>
 {% endblock %}
-
-
-
-
-

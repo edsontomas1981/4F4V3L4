@@ -1,7 +1,7 @@
 from django.db import models
 from usuario.models import Usuarios
 from datetime import datetime
-from endereco.models import Enderecos,Contatos
+from endereco.models import Enderecos
 
 class Categorias(models.Model):
     categoria=models.CharField(max_length=30)
@@ -31,7 +31,8 @@ class Propostas (models.Model):
                                         null=False,on_delete=models.CASCADE)
     pedido_fk=models.ForeignKey(Pedidos,default='',related_name='pedido_fk',
                                 null=False,on_delete=models.CASCADE)
-
+    propostaAceita=models.BooleanField(null=True)
+    
 class Mensagens (models.Model):
     mensagem=models.CharField(max_length=50)
     userRem_fk=models.ForeignKey(Usuarios,related_name='remetente',

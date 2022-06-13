@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('',views.home,name='home'),
     path('mostraPerfil/', views.mostraPerfil, name='mostraPerfil'),
+    path('batePapo/', views.batePapo, name='batePapo'),
+    path('aceitarProposta/', views.aceitarProposta, name='aceitarProposta'),
     path('salvaPerfil/', views.salvaPerfil, name='salvaPerfil'),
     path('enviarProposta/', views.enviarProposta, name='enviarProposta'),
     path('pedido/',views.pedidos,name='pedido'),
@@ -18,7 +20,6 @@ urlpatterns = [
     path('cPedidos/',views.cPedidos,name='cPedidos'),
     path('editarPerfil/', views.editarPerfil, name='editarPerfil'),
     path('detalhesPedidos/',views.detalhesPedidos,name='detalhesPedidos'),
-    path('contato/',views.cadastrar_contato,name='contato'),
     path('faleconosco/', views.ViewFaleConosco.as_view(),name='fale'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,5 +1,6 @@
 from usuario.models import Usuarios
 from plataforma.models import Categorias, Enderecos, Imagem, Pedidos,Propostas as ModelPropostas
+from django.core.mail import send_mail
 
 class Pedido():
     def __init__ (self,categ_escolhida,cep,logradouro,bairro,
@@ -47,12 +48,14 @@ class Pedido():
     
 class Home():
     def gerarHome(idUsuario):
+        #Seleciona todos por enquanto depois ira usar um filtro de pedidos em aberto
         pedidos=Pedidos.objects.all()
         imagens=Imagem.objects.all()
         propostaEnviadaPor=ModelPropostas.objects.filter(usuarioProposta_fk=idUsuario)
+        #Selecionar somente propostas ref a pedidos do usuario corrente
         propostasRecebidas=ModelPropostas.objects.all()
-        
-        return pedidos , imagens , propostaEnviadaPor , propostasRecebidas
+        propRec=[x for x in propostasRecebidas if x.pedido_fk.usuario_fk.id==idUsuario]
+        return pedidos , imagens , propostaEnviadaPor , propRec
     
 
 class Propostas():
@@ -80,3 +83,46 @@ class Propostas():
         proposta.pedido_fk=pedido
         proposta.usuarioProposta_fk=usuario
         proposta.save()
+    
+    def aceitaProposta(propostaId):
+        proposta=ModelPropostas.objects.filter(id=propostaId).get()
+        pedido=proposta.pedido_fk
+        proposta.propostaAceita=True
+        propostasRejeitadas=ModelPropostas.objects.filter(pedido_fk=pedido).exclude(propostaAceita=True)
+        proposta.save()
+        for proposta in propostasRejeitadas:
+            proposta.propostaAceita=False
+            proposta.save()
+        mensagem=f'''Olá {proposta.usuarioProposta_fk.first_name}!
+        O pedido de {pedido.titulo} foi aceito por {proposta.usuarioProposta_fk.first_name}
+        com o valor de R$ {proposta.valor} e o prazo de {proposta.prazo} dias.
+        '''
+        email=Email('edson.transpioneira@gmail.com','Proposta Aceita',mensagem)
+        email.enviarEmail()
+
+class Email():
+    
+    def __init__(self,destinatario,assunto,mensagem) -> None:
+        self.destinatario=destinatario
+        self.assunto=assunto
+        self.mensagem=mensagem
+        
+    def enviarEmail(self):
+        send_mail(
+        self.assunto,
+        self.mensagem,
+        self.destinatario,
+        [self.destinatario],
+        fail_silently=False,)
+
+class Mensagem ():
+    def __init__(self,remetente,destinatario,assunto,mensagem,data,hora,lido):
+        self.remetente=remetente
+        self.destinatario=destinatario
+        self.assunto=assunto
+        self.mensagem=mensagem
+        self.data=data
+        self.hora=hora
+        self.lido=lido
+        
+    

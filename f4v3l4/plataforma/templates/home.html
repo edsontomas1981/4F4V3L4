@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 {% block 'usuario' %}
 <span>{{ user }}</span>
 {% endblock 'usuario' %}
-{% block 'js' %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<link href="static/css/estilo.css" rel="stylesheet">
-{% endblock %}
 {% block 'blankPage' %}
     <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
       <li class="nav-item">
@@ -26,209 +23,128 @@
       <div class="tab-pane fade show active" id="pills-pedidos" role="tabpanel" aria-labelledby="pills-pedidos-tab">
         <!-- inicio pedidos -->
         {% for pedido in pedidos %}
-          {% if pedido.categoria_fk.categoria in 'Automóveis' %}
             <div class="row ">
                     <div class="col-xl-6 col-lg-8 ">
                       <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
                         <div class="card l-bg-blue-dark">
                             <div class="card-statistic-3 p-4">
-                                <div class="card-icon card-icon-large"><i class="fas fa fa-car"></i></div>
-                                <div class="mb-3">
-                                  <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
-                                </div>
-                                <div class="mb-3">
+                                 <div class="mb-3">
                                   <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                                    <span>Categoria :</span>
                                     <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
                                 </div>
+                                <span>Detalhes do pedido :</span>
                                 <div class="row align-items-center mb-2 d-flex">
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <h4 class="d-flex align-items-center mb-0">
                                             {{pedido.titulo}}
                                         </h4>
                                     </div>
-                                    <div class="col-8">
-                                        <h6 class="d-flex align-items-center mb-0">
-                                            {{pedido.descricao}}
-                                        </h6>
-                                    </div>
+                                    <span>Descrição :</span></br>
+                                    <div class="col-12">
+                                      <h4 class="d-flex align-items-center mb-0">
+                                        {{pedido.descricao}}
+                                      </h4>
+                                  </div>
                                 </div>
+                              </br>
+                              <div class="mb-3" align="right">
+                                <span>Solicitado por:</span>
+                                <h7 class="card-title mb-0">
+                                  {{pedido.usuario_fk.first_name}}
+                                  {{pedido.usuario_fk.last_name}}
+                                </h7>
+                              </div>
                                 <div data-height="50" style="height: 18px;">
                                     <div>
                                       <button class="btn l-bg-green-dark" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
                                     </div>
                                 </div>
-
                             </div>
                       </div>
                     </form>
                     </div>
             </div>
-          {% endif %}
-          {% if pedido.categoria_fk.categoria in 'Consertos e Reparos' %}
-            <div class="row ">
-                <div class="col-xl-6 col-lg-8 ">
-                    <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
-                      <div class="card  l-bg-green-dark">
-                          <div class="card-statistic-3 p-4">
-                              <div class="card-icon card-icon-large"><i class="fas fa fa-cog"></i></div>
-                              <div class="mb-3">
-                                <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
-                              </div>
-                              <div class="mb-3">
-                                <input name="pedido" value={{pedido.id}} type="hidden"></input>
-                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
-                              </div>
-                              <div class="row align-items-center mb-2 d-flex">
-                                  <div class="col-8">
-                                      <h4 class="d-flex align-items-center mb-0">
-                                          {{pedido.titulo}}
-                                      </h4>
-                                  </div>
-                                  <div class="col-8">
-                                      <h6 class="d-flex align-items-center mb-0">
-                                          {{pedido.descricao}}
-                                      </h6>
-                                  </div>
-                              </div>
-                              <div data-height="50" style="height: 18px;">
-                                  <div>
-                                    <button class="btn l-bg-cyan" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </form>
-                </div>
-            </div>
-          {% endif %}          
-          {% if pedido.categoria_fk.categoria in 'Beleza' %}
-            <div class="row ">
-                <div class="col-xl-6 col-lg-8 ">
-                    <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
-                      <div class="card l-bg-cherry">
-                          <div class="card-statistic-3 p-4">
-                              <div class="card-icon card-icon-large"><i class="fas fa fa-star"></i></div>
-                              <div class="mb-3">
-                                <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
-                              </div>
-                              <div class="mb-3">
-                                <input name="pedido" value={{pedido.id}} type="hidden"></input>
-                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
-                              </div>
-                              <div class="row align-items-center mb-2 d-flex">
-                                  <div class="col-8">
-                                      <h4 class="d-flex align-items-center mb-0">
-                                          {{pedido.titulo}}
-                                      </h4>
-                                  </div>
-                                  <div class="col-8">
-                                      <h6 class="d-flex align-items-center mb-0">
-                                          {{pedido.descricao}}
-                                      </h6>
-                                  </div>
-                              </div>
-                              <div data-height="50" style="height: 18px;">
-                                  <div>
-                                    <button class="btn l-bg-cyan" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </form>
-                </div>
-            </div>
-          {% endif %}
-          {% if pedido.categoria_fk.categoria in 'Serviços e reparos' %}
-              <div class="row ">
-                  <div class="col-xl-6 col-lg-8 ">
-                        <div class="card l-bg-green-dark">
-                          <form method="POST" action="{% url 'detalhesPedidos' %}">
-                            {% csrf_token %}
-                            <div class="card-statistic-3 p-4">
-                                <div class="card-icon card-icon-large"><i class="fas fa fa-wrench"></i></div>
-                                <div class="mb-3">
-                                  <h5 class="card-title mb-0">{{pedido.usuario_fk.username}}</h5>
-                                </div>
-                                <div class="mb-3">
-                                  <input name="pedido" value={{pedido.id}} type="hidden"></input>
-                                  <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
-                                </div>
-                                <div class="row align-items-center mb-2 d-flex">
-                                    <div class="col-8">
-                                        <h4 class="d-flex align-items-center mb-0">
-                                            {{pedido.titulo}}
-                                        </h4>
-                                    </div>
-                                    <div class="col-8">
-                                        <h6 class="d-flex align-items-center mb-0">
-                                            {{pedido.descricao}}
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div data-height="50" style="height: 18px;">
-                                    <div>
-                                      <button class="btn l-bg-orange-dark" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-                  </div>
-              </div>
-          {% endif %}
         {%endfor%}
-        <!-- final pedidos -->
+        <!-- final pedidos -->-
       </div>
+      <!--Propostas Enviadas -->
       <div class="tab-pane fade" id="pills-propostasEnviadas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
+        {% for p in propostaEnviadaPor %}
         <div class="row">
-          <!-- inicio card Propostas Enviadas -->
-          <div class="card card-custom bg-white border-white border-0 col-lg-6">
-            <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="http://res.cloudinary.com/d3/image/upload/c_pad,g_center,h_200,q_auto:eco,w_200/bootstrap-logo_u3c8dx.jpg" alt="Avatar" />
-            </div>
-            <div class="card-body" style="overflow-y: auto">
-              <h4 class="card-title">Card title</h4>
-              <p class="card-text">Card has minimum height set but will expand if more space is needed for card body content. You can use Bootstrap <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks" target="_blank">card-decks</a> to align multiple cards nicely in a row.</p>
-            </div>
-            <div class="card-footer" style="background: inherit; border-color: inherit;">
-              <a href="#" class="btn btn-primary">Alterar</a>
-              <a href="#" class="btn btn-danger">Excluir</a>
+          <div class="col-xl-6 col-lg-8 ">
+          <div class="card l-bg-blue-dark">
+            <div class="card-body">
+              <h7 class="card-title">Enviada para :
+                {{p.usuarioProposta_fk.first_name}}
+                {{p.usuarioProposta_fk.last_name}}
+              </h7>
+              <p class="card-text">R$ {{p.valor}}</p>
+              <p class="card-text">{{p.observacao}}</p>
+              <p class="card-text">Data de Início {{p.prevInicio}}</p>
+              <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
+              {% if p.propostaAceita %}
+                <span>Status :</span>
+                <p class="card-text">Aceita</p>
+              {% elif p.propostaAceita == False %}
+                <span>Status :</span>
+                <p class="card-text">Recusada</p>
+              {% else  %}
+              <span>Status :</span>
+                <p class="card-text">Aguardando resposta</p>
+              {% endif %}
+              <div class="card-footer" style="background: inherit;">
+                <a href="#" class="btn btn-danger">Descartar</a>
+                <a href="#" class="btn btn-secondary">Alterar</a>
+              </div>
             </div>
           </div>
-          <!-- fim card -->
+        </div>  
         </div>
+        {%endfor%}
       </div>
+      <!--Propostas Recebidas -->
       <div class="tab-pane fade" id="pills-propostasRecebidas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
         <div class="row">
-          <!-- inicio card Propostas recebidas -->
-          <div class="card card-custom bg-white border-white border-0 col-lg-6">
-            <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="http://res.cloudinary.com/d3/image/upload/c_pad,g_center,h_200,q_auto:eco,w_200/bootstrap-logo_u3c8dx.jpg" alt="Avatar" />
-            </div>
-            {% for propRec in propostasRecebidas  %}
-                <div class="card-body" style="overflow-y: auto">
-                  <h4 class="card-title">{{propRec.id}}</h4>
-                  <p class="card-text">Card has minimum height set but will expand if more space is needed for card body content. You can use Bootstrap <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks" target="_blank">card-decks</a> to align multiple cards nicely in a row.</p>
+          {% for p in propostaRecebidas  %}
+            <form method="POST" action="{% url 'aceitarProposta'%}">
+                {% csrf_token %}
+                <div class="card l-bg-blue-dark" style="width: 40rem; display :block;">
+                  <div class="card-body">
+                    <div>
+                      <div align=right>
+                      <span align="right">Proposta nº: {{p.id}}</span>
+                      </div>
+                      <input type="hidden" class="card-title" name="propostaId" id="propostaId" align="right" value="{{p.id}}"></input>
+                      <h6 class="card-title">Pedido: {{p.pedido_fk.id}}</h6>
+                      <h6 class="card-title">{{p.pedido_fk.titulo}} </h6>
+                    </div>
+                  <hr></hr>
+                    <p class="card-text">R$ {{p.valor}}</p>
+                    <p class="card-text">{{p.observacao}}</p>
+                    <p class="card-text">Data de Início {{p.prevInicio}}</p>
+                    <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
+                    <div align="right">
+                      <h7 class="card-title">Enviada por :
+                        {{p.usuarioProposta_fk.first_name}}
+                        {{p.usuarioProposta_fk.last_name}}
+                      </h7>
+                    </div>
+                    <div class="card-footer" style="background: inherit;">
+                      <input type="submit" class="btn btn-primary" value="Aceitar"></input>
+                      <input type="submit" class="btn btn-danger" value="Descartar"></input>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-footer" style="background: inherit; border-color: inherit;">
-                  <a href="#" class="btn btn-primary">Aceitar</a>
-                  <a href="#" class="btn btn-secondary">Descartar</a>
-                </div>
-            {% endfor %}
-              </div>
-          
-          <!-- fim card -->
-        </div>
+            </form>
+          {% endfor %}
       </div>
+      </div>
+      <!--Profissionais -->
       <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">
         <div class="row">
-
           <div class="col-sm-12">
-            <div class="container py-5 h-100">
-              <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="row d-flex align-items-center">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
                   <div class="card mb-3" style="border-radius: .5rem;">
                     <div class="row g-0">
@@ -277,13 +193,14 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-{% endblock 'blankPage' %}
-{%  block 'css' %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
+{% endblock 'blankPage' %}  
+{%  block 'js' %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+
 {% endblock %}

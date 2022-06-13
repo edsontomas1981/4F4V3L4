@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Enderecos (models.Model):
     cep=models.CharField(max_length=8,null=False)
     logradouro=models.CharField(max_length=50,null=False)
@@ -9,6 +8,3 @@ class Enderecos (models.Model):
     cidade=models.CharField(max_length=50)
     uf=models.CharField(max_length=2)
 
-class Contatos (models.Model):
-    tipo=models.CharField(max_length=15)
-    contato=models.CharField(max_length=50)

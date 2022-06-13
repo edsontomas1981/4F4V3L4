@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     # Apps de terceiros
     'bootstrapform',
     'sslserver',
+    'rest_framework',
+    'anymail',
+    'corsheaders',
     # Apps Locais
     'endereco',
     'usuario',
@@ -59,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -174,6 +178,13 @@ MESSAGE_TAGS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '4f4v3l4@gmail.com'
+EMAIL_HOST_PASSWORD ='itqzrnqxowgfzoeh'
+
 
 LOGIN_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
@@ -183,4 +194,12 @@ LOGOUT_REDIRECT_URL = 'login'
 #Django debug toolbar
 INTERNAL_IPS = [
      '127.0.0.1',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+    'http://127.0.0.1:8000',
 ]

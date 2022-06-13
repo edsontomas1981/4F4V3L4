@@ -1,5 +1,5 @@
 from django import forms
-from plataforma.models import Contatos,Categorias,Propostas
+from plataforma.models import Categorias,Propostas
 
 class FormFaleConosco(forms.Form):
     nome = forms.CharField(required=True)
@@ -29,7 +29,4 @@ class FormCadPed(forms.Form):
     uf = forms.CharField(widget=forms.TextInput(attrs={
     'name':'uf','id':"uf"}))
 
-class ContatoForm (forms.ModelForm):
-    class Meta:
-        model=Contatos
-        fields=['tipo','contato']
+
