@@ -1,6 +1,7 @@
 from usuario.models import Usuarios
 from plataforma.models import Categorias, Enderecos, Imagem, Pedidos,Propostas as ModelPropostas
 from django.core.mail import send_mail
+from usuario.models import Contatos as ModelContatos
 
 class Pedido():
     def __init__ (self,categ_escolhida,cep,logradouro,bairro,
@@ -124,5 +125,21 @@ class Mensagem ():
         self.data=data
         self.hora=hora
         self.lido=lido
-        
-    
+
+class Contatos():
+
+    def __init__ (self,tipo,vContato,usuario):
+        self.tipo=tipo
+        self.contato=vContato
+        self.usuario=usuario
+        self.usuario=Usuarios.objects.filter(id=self.usuario.id).get()
+
+    def salvaContato(self):
+            contato=ModelContatos()
+            contato.contato=self.contato
+            contato.tipo=self.tipo
+            contato.usuario_fk=self.usuario
+            contato.save()
+
+
+

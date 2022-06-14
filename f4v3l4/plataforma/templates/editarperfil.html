@@ -50,10 +50,6 @@
                                 <h5 class="user-name">{{user.username}}</h5>
                                 <h6 class="user-email">{{user.email}}</h6>
                             </div>
-                            <div class="about">
-                                <h5 class="mb-2 text-primary">Sobre</h5>
-                                <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in tincidunt tellus, id aliquet lectus. Nunc eu imperdiet enim. Integer dictum mi at imperdiet fringilla. Quisque elementum varius viverra. Nam eleifend quam sapien, vel iaculis nisl dapibus nec. Nullam turpis.</textarea>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,7 +100,6 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
-                                <a class="btn btn-primary" href="{% url 'editarPerfil' %}" id="addContato" name="addContato" value ="Adicionar"> adicionar</a>
                                 <input type="submit" class= "btn btn-outline-info" id="incluiContato" name="incluiContato" value="     +     ">
                               </div>
                             </div>
@@ -116,6 +111,13 @@
                                       <th scope="col">Tipo</th>
                                       <th scope="col">Contato</th>
                                     </tr>
+                                    <!-- começo montar tabela -->
+                                    {% for contato in contatos %}
+                                      <tr>
+                                        <td>{{contato.tipo}}</td>
+                                        <td>{{contato.contato}}</td>
+                                      </tr>
+                                    {% endfor %}
                                   </thead>
                                   <tbody>
                                 </tbody>
@@ -124,47 +126,14 @@
                             </div>
                         </div>
                         <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mb-3 text-primary">Endereço</h6>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                              <div class="form-group">
-                                <input type="name" class="form-control" onblur="pesquisacep(this.value);" id="cep" placeholder="Cep">
-                              </div>
-                            </div>
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
-                                <div class="form-group">
-                                  <input type="name" class="form-control"id="rua" placeholder="Rua">
-                                </div>
-                            </div>
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
-                              <div class="form-group">
-                                <input type="name" class="form-control" id="bairro" placeholder="Bairro">
-                              </div>
+                          <div class="about">
+                            <h5 class="mb-2 text-primary">Sobre</h5>
+                            <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in tincidunt tellus, id aliquet lectus. Nunc eu imperdiet enim. Integer dictum mi at imperdiet fringilla. Quisque elementum varius viverra. Nam eleifend quam sapien, vel iaculis nisl dapibus nec. Nullam turpis.</textarea>
                           </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                <div class="form-group">
-                                    <input type="name" class="form-control" id="complemento" placeholder="Complemento">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                              <div class="form-group">
-                                  <input type="text" class="form-control" id="cidade" placeholder="Cidade">
-                              </div>
+                          <div class="form-group" align="right">
+                          </br>
+                            <input type="submit" class= "btn btn-outline-info" id="incluiContato" name="incluiContato" value="Incluir">
                           </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="uf" placeholder="Uf">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-right">
-                                    <button type="submit" id="cancela" name="cancela" class="btn btn-secondary">Cancelar</button>
-                                    <button type="submit" id="atualiza" name="atualiza" class="btn btn-primary">Atualizar</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
