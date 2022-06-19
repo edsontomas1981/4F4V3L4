@@ -1,7 +1,28 @@
 from usuario.models import Usuarios
-from plataforma.models import Categorias, Enderecos, Imagem, Pedidos,Propostas as ModelPropostas
+from plataforma.models import Categorias,Imagem, Pedidos,Propostas as ModelPropostas
 from django.core.mail import send_mail
 from usuario.models import Contatos as ModelContatos
+from endereco.models import Enderecos
+from PIL import Image
+
+def redimensionaImagem(img):
+    try:
+
+        largura_desejada = 80
+        imagem = Image.open(img)
+
+        largura_imagem = imagem.size[0]
+        altura_imagem = imagem.size[1]
+        percentual_largura = float(largura_desejada) / float(largura_imagem)
+        altura_desejada = int((altura_imagem * percentual_largura))
+        imagem = imagem.resize((largura_desejada, altura_desejada), Image.ANTIALIAS)
+        imagem.save('imagem-{}x{}.jpeg'.format(imagem.size[0], imagem.size[1]))
+        # return imagem
+        # return imagem
+
+    except IndexError:
+        print('Insira o nome da imagem e 1 inteiro com a largura desejada.')
+        print('Exemplo: C:\>python proporcional_img.py imagem.png 300')
 
 class Pedido():
     def __init__ (self,categ_escolhida,cep,logradouro,bairro,
@@ -18,7 +39,7 @@ class Pedido():
         self.descricao=descricao
         self.user=usuario
         self.imagem=imagem
-
+    
     def salvaPedidos(self):
         categoria=Categorias.objects.get(categoria=self.categ_escolhida)
         endereco=Enderecos()
@@ -140,6 +161,7 @@ class Contatos():
             contato.tipo=self.tipo
             contato.usuario_fk=self.usuario
             contato.save()
+
 
 
 

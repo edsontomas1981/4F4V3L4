@@ -9,6 +9,9 @@ urlpatterns = [
     path('',views.home,
          name='home'),
     
+     path('pedDisp/',views.pedDisp,
+         name='pedDisp'),
+
     path('mostraPerfil/', 
          views.mostraPerfil, 
          name='mostraPerfil'),

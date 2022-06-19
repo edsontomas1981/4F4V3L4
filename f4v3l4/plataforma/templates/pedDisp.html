@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+{% block 'usuario' %}
+<span>{{ user }}</span>
+{% endblock 'usuario' %}
+{% block 'blankPage' %}
+<!-- inicio pedidos -->
+{% for pedido in pedidos %}
+    <div class="row ">
+            <div class="col-xl-6 col-lg-8 ">
+              <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                         <div class="mb-3">
+                          <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                            <span>Categoria :</span>
+                            <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                        </div>
+                        <span>Detalhes do pedido :</span>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-12">
+                                <h4 class="d-flex align-items-center mb-0">
+                                    {{pedido.titulo}}
+                                </h4>
+                            </div>
+                            <span>Descrição :</span></br>
+                            <div class="col-12">
+                              <h4 class="d-flex align-items-center mb-0">
+                                {{pedido.descricao}}
+                              </h4>
+                          </div>
+                        </div>
+                      </br>
+                      <div class="mb-3" align="right">
+                        <span>Solicitado por:</span>
+                        <h7 class="card-title mb-0">
+                          {{pedido.usuario_fk.first_name}}
+                          {{pedido.usuario_fk.last_name}}
+                        </h7>
+                      </div>
+                        <div data-height="50" style="height: 18px;">
+                            <div>
+                              <button class="btn l-bg-green-dark" style="width:100%;height:35px;" >Ver mais  <i class="fa fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+            </form>
+            </div>
+    </div>
+{%endfor%}
+<!-- final pedidos -->
+{% endblock 'blankPage' %}  
+{%  block 'js' %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+{% endblock %}

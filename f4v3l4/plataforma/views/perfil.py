@@ -10,7 +10,7 @@ from usuario.models import Usuarios
 @login_required(login_url='/auth/login/')
 def editarPerfil(request):
     usuario=request.user
-    
+   
     if request.method == "GET" :
         contatos=MdlContatos.objects.filter(usuario_fk=usuario)
         return render(request,'./editarperfil.html',{'contatos':contatos})

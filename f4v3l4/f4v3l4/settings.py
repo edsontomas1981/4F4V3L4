@@ -31,10 +31,9 @@ ALLOWED_HOSTS = ['192.168.1.113',
                  '127.0.0.1',
                  '192.168.20.24',
                  '192.168.1.108',
-    ]
-
+                 '192.168.1.100',
+                ]
 # Application definition
-
 INSTALLED_APPS = [
     # Apps Django
     'django.contrib.admin',
@@ -68,7 +67,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'f4v3l4.urls'
@@ -203,3 +201,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     'http://127.0.0.1:8000',
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
