@@ -1,2 +1,2 @@
 release: python3 manage.py migrate
-web: gunicorn tutorialdjango.wsgi --preload --log-file –
+web: gunicorn f4v3l4.wsgi --preload --log-file –
