@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'blankPage' %}
+<form method="POST" action="{% url 'alteraConfig' %}">
+    {% csrf_token %}
+    <input type="text" class="form-control" id="categoria" name="categoria"></input></br>
+    <input type="submit" class="btn btn-primary" value="Aceitar"></input>
+</form>
+    
+{% endblock  %}

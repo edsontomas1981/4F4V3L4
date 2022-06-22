@@ -11,8 +11,14 @@ urlpatterns = [
     
      path('pedDisp/',views.pedDisp,
          name='pedDisp'),
-
-    path('mostraPerfil/', 
+     
+     path('configuracoes/',views.alteraConfig,
+         name='alteraConfig'),
+     
+     path('privacidade/',views.privacidade,
+         name='privacidade'),
+     
+     path('mostraPerfil/', 
          views.mostraPerfil, 
          name='mostraPerfil'),
     
