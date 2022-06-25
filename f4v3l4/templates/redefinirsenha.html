@@ -47,7 +47,16 @@
                                             Nós entendemos, coisas acontecem. Basta digitar seu endereço de e-mail abaixo
                                                                                         e nós lhe enviaremos um link para redefinir sua senha!</p>
                                     </div>
-                                    {% block 'email' %}{% endblock %}
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Insira aqui seu email ...">
+                                        </div>
+                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                            Redefinir Senha
+                                        </a>
+                                    </form>
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="{% url 'cadastro' %}">

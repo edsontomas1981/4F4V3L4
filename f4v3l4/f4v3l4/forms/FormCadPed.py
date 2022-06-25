@@ -1,11 +1,5 @@
 from django import forms
-from plataforma.models import Categorias,Propostas
-
-class FormFaleConosco(forms.Form):
-    nome = forms.CharField(required=True)
-    email_origem = forms.EmailField(required=True,label='Entre com seu email')
-    mensagem = forms.CharField(required=True ,widget=forms.Textarea)
-    teste = forms.CharField(required=True)
+from plataforma.models import Categorias
 
 class FormCadPed(forms.Form):
     categ = Categorias.objects.values_list('categoria',flat=True)
@@ -28,5 +22,3 @@ class FormCadPed(forms.Form):
     'name':'cidade','id':"cidade"}))
     uf = forms.CharField(widget=forms.TextInput(attrs={
     'name':'uf','id':"uf"}))
-
-

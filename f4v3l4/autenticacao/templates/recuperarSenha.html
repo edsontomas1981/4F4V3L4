@@ -1,5 +1,15 @@
 {% extends 'recuperar.html' %}
 
+{% block 'email' %}
+    <form class="user" method="POST" action="{% url 'email_recup' %}" >{% csrf_token %}
+        <div class="form-group">
+            <input type="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp"
+                placeholder="Insira aqui seu email ...">
+        </div>
+        <input type="submit" class="btn btn-primary btn-user btn-block" value="Redefinir Senha" ></input>
+    </form>
+{% endblock %}
+
  
                 
 

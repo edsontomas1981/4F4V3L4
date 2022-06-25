@@ -5,13 +5,9 @@ from endereco.models import Enderecos
 class Usuarios(AbstractUser):
     foto_perfil=models.ImageField(upload_to='media/usuarios/',blank=True,null=True)
     endereco_fk=models.ForeignKey(Enderecos,null=True,default='',on_delete=models.CASCADE)
-
+    token = models.CharField(max_length=255, null=True, blank=True)
+    
 class Contatos (models.Model):
     tipo=models.CharField(max_length=15)
     contato=models.CharField(max_length=50)
-    usuario_fk=models.ForeignKey(Usuarios,null=True,default='' ,on_delete=models.CASCADE)
-
-
-
-
-    
+    usuario_fk=models.ForeignKey(Usuarios,null=True,default='' ,on_delete=models.CASCADE)   
