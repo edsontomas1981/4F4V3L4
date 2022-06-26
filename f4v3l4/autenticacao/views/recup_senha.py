@@ -23,28 +23,41 @@ def recup_senha(request):
 
 def envia_email_recup(usuario):# envia token para redefinição de senha
     
-     usuario.token = hashlib.sha256().hexdigest() #model com o atributo token para a alteração da senha
+     usuario.token = hashlib.sha256().hexdigest() # model com o atributo token para a alteração da senha
      usuario.save()
      assunto="Redefinição de Senha."
      mensagem=render_to_string('recuperacao.html',{'token':usuario.token})
      mensagem=strip_tags(mensagem)
-     email=classes.Email(usuario.email,assunto,mensagem)
-     email.enviarEmail()     
+     # email=classes.Email(usuario.email,assunto,mensagem)
+     # email.enviarEmail()     
+     envia_email_html(usuario)
+
+def envia_email_html(profile):
+     html_message = render_to_string('recuperacao.html', {'token':
+     profile.token})
+     message = strip_tags(html_message)
+     send_mail(subject="Recuperação de senha", message=message,
+     html_message=html_message,
+     from_email=settings.EMAIL_HOST_USER, recipient_list=
+     [profile.email], fail_silently=False,
+     )
+ 
 
 
 def email_recup(request):
+     
      if request.method == "GET" :
           return render(request,'./recuperarSenha.html')
 
      elif request.method == "POST" :
           email=request.POST.get('email')
           usuario=Usuarios.objects.filter(email=email).first()
+
           if usuario :
                envia_email_recup(usuario)
-               messages.add_message(request,constants.SUCCESS,'Email foi enviado com sucesso')
-               return render(request,'./recuperarSenha.html')
+               return render(request,'./emailenviado.html')
           else:
-               messages.add_message(request,constants.ERROR,'Email Inválido')
+               messages.add_message(request, messages.ERROR, "Email não cadastrado.")
                return render(request,'./recuperarSenha.html')
          
 

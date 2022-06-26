@@ -92,6 +92,7 @@ class Propostas():
         proposta.propostaAceita=True
         propostasRejeitadas=ModelPropostas.objects.filter(pedido_fk=pedido).exclude(propostaAceita=True)
         proposta.save()
+        # marca como rejeitadas as outras propostas
         for proposta in propostasRejeitadas:
             proposta.propostaAceita=False
             proposta.save()
@@ -114,7 +115,10 @@ class Email():
         self.mensagem,
         self.destinatario,
         [self.destinatario],
-        fail_silently=False,)
+        fail_silently=False,
+        html_message=self.mensagem,)
+
+
 
 class Mensagem ():
     def __init__(self,remetente,destinatario,assunto,mensagem,data,hora,lido):
