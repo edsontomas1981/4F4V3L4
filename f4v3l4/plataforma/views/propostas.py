@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
-from Classes.classes import Propostas
+from Classes.propostas import Propostas
 from django.contrib.auth.decorators import login_required
 from plataforma import models
 

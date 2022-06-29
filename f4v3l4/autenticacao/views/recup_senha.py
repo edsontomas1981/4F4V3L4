@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import hashlib
-from Classes import classes
+from Classes.token import Token
 
 def recup_senha(request):
      #carregamento de pedidos para a montagem da home caso esteja logado
@@ -21,28 +21,27 @@ def recup_senha(request):
      else:
           return render(request,'./recuperarSenha.html')
 
-def envia_email_recup(usuario):# envia token para redefinição de senha
-    
-     usuario.token = hashlib.sha256().hexdigest() # model com o atributo token para a alteração da senha
-     usuario.save()
-     assunto="Redefinição de Senha."
-     mensagem=render_to_string('recuperacao.html',{'token':usuario.token})
-     mensagem=strip_tags(mensagem)
-     # email=classes.Email(usuario.email,assunto,mensagem)
-     # email.enviarEmail()     
-     envia_email_html(usuario)
-
-def envia_email_html(profile):
-     html_message = render_to_string('recuperacao.html', {'token':
-     profile.token})
+def envia_email_html(usuario):
+     
+     html_message = render_to_string('emailrecuperacao.html', {'token':
+     usuario.token})
      message = strip_tags(html_message)
-     send_mail(subject="Recuperação de senha", message=message,
-     html_message=html_message,
-     from_email=settings.EMAIL_HOST_USER, recipient_list=
-     [profile.email], fail_silently=False,
-     )
- 
+     send_mail(subject="Recuperação de senha", 
+               message=message,
+               html_message=html_message,
+               from_email=settings.EMAIL_HOST_USER, 
+               recipient_list=[usuario.email], 
+               fail_silently=False,
+               )
 
+def envia_email_recup(usuario):# envia token para redefinição de senha
+     token=Token.gera_chave()
+     usuario.token=token# model com o atributo token para a alteração da senha
+     usuario.save()
+     mensagem=render_to_string('emailrecuperacao.html',{'token':usuario.token})
+     mensagem=strip_tags(mensagem)
+     
+     envia_email_html(usuario)
 
 def email_recup(request):
      
@@ -59,6 +58,9 @@ def email_recup(request):
           else:
                messages.add_message(request, messages.ERROR, "Email não cadastrado.")
                return render(request,'./recuperarSenha.html')
+          
+          
+
          
 
     

@@ -27,6 +27,7 @@
                                         Nós entendemos, coisas acontecem. Basta digitar seu endereço de e-mail abaixo
                                                                                     e nós lhe enviaremos um link para redefinir sua senha!</p>
                                 </div>
+                                
                                 <form class="user" method="POST" action="{% url 'email_recup' %}">
                                     {% csrf_token %}
                                     <div class="form-group">
@@ -35,7 +36,6 @@
                                             placeholder="Insira aqui seu email ...">
                                     </div>
                                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Redefinir Senha">
-                                        
                                 </input>
                                 </form>
                                 <hr>

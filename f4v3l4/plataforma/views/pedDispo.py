@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
-from Classes.classes import Home
+from Classes.home import Home
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 

@@ -4,7 +4,7 @@ from django.http.response import HttpResponse
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
-from Classes.classes import Contatos
+from Classes.contatos import Contatos
 from usuario.models import Usuarios
 
 @login_required(login_url='/auth/login/')
