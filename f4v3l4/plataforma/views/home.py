@@ -14,6 +14,10 @@ def home(request):
     page_obj = paginator.get_page(page_number)
     
     if request.method == "GET" :
-        return render(request,'./home.html',{'page_obj': page_obj})
+        return render(request,'./home.html',{'page_obj': page_obj,'pedido':pedido,
+                                            'imagens':imagens,'propostaEnviadaPor':propostaEnviadaPor,
+                                            'propostaRecebidas':propostaRecebidas})
     elif request.method == "POST" :
-        return render(request,'./home.html',{'page_obj': page_obj})
+        return render(request,'./home.html',{'page_obj': page_obj,'pedido':pedido,
+                                            'imagens':imagens,'propostaEnviadaPor':propostaEnviadaPor,
+                                            'propostaRecebidas':propostaRecebidas})

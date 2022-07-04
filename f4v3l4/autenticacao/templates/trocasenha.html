@@ -16,6 +16,13 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {{message.tags}}">
+                                            {{message}}
+                                        </div>
+                                    {% endfor %}
+                                    {% endif %}
                                    <form method="POST" action={% url 'salva_senha' %}>
                                     {% csrf_token %}
                                     <h1 class="h4 text-gray-900 mb-2">Redefinir Senha</h1>

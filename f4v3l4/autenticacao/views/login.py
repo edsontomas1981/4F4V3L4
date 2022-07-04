@@ -7,20 +7,18 @@ from django.contrib import auth
 from plataforma import models
 
 def login(request):
-     pedidos=models.Pedidos.objects.all()
-     imagens=models.Imagem.objects.all()
      if request.method == "GET" : 
           if request.user.is_authenticated:
-               return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
+               return redirect('/')
           else:
-               return render(request,'./logar.html')
+               return render(request,'./login.html')
      elif request.method == 'POST':
           username = request.POST.get('username')
           senha = request.POST.get('senha')
           usuario = auth.authenticate(username=username,password=senha)
           if not usuario:
                messages.add_message(request,constants.ERROR,'Usuário ou senha inválidos')
-               return render(request,'./logar.html')
+               return render(request,'./login.html')
           else:
                auth.login(request, usuario)
-               return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
+               return redirect('/')

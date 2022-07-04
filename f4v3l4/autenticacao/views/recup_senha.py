@@ -17,7 +17,7 @@ def recup_senha(request):
      pedidos=models.Pedidos.objects.all()
      imagens=models.Imagem.objects.all()
      if request.user.is_authenticated:
-          return render(request,'home.html',{'pedidos':pedidos,'imagens':imagens})
+          return redirect('/')
      else:
           return render(request,'./recuperarSenha.html')
 
@@ -58,9 +58,3 @@ def email_recup(request):
           else:
                messages.add_message(request, messages.ERROR, "Email não cadastrado.")
                return render(request,'./recuperarSenha.html')
-          
-          
-
-         
-
-    

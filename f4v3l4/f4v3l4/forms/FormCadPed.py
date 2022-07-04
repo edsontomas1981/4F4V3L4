@@ -2,7 +2,7 @@ from django import forms
 from plataforma.models import Categorias
 
 class FormCadPed(forms.Form):
-    categ = Categorias.objects.values_list('categoria',flat=True)
+    categ = Categorias.objects.values_list('categoria',flat=True).order_by('categoria')
     categoria = forms.ModelMultipleChoiceField(categ,required=True,
     widget=forms.Select(attrs={}))
     titulo = forms.CharField(required=True,label='Título')
