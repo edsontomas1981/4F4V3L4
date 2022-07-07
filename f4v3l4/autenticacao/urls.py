@@ -10,5 +10,4 @@ urlpatterns = [
     path('email_recup/',views.email_recup,name='email_recup'),
     path('alt_senha/',views.alt_senha,name='alt_senha'),
     path('salva_senha/',views.salva_senha,name='salva_senha'),
-    
 ]

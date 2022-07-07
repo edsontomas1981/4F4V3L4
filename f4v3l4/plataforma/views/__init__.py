@@ -5,3 +5,4 @@ from plataforma.views.perfil import mostraPerfil,salvaPerfil,editarPerfil
 from .pedDispo import pedDisp
 from plataforma.views.configuracoes import alteraConfig
 from plataforma.views.privacidade import privacidade
+from plataforma.views.salva_proposta import salva_proposta

@@ -51,9 +51,7 @@ def detalhesPedidos(request):
     usuario=request.user
     pedidos,imagens, propostaEnviadaPor,propostaRecebidas = Home.gerarHome(usuario.id)
     if request.method == "GET" :
-        return render(request,'./home.html',{'pedidos':pedidos,
-                        'imagens':imagens,'propostaEnviadaPor':propostaEnviadaPor,
-                        'propostaRecebidas':propostaRecebidas})
+        return redirect ('/')
     elif request.method == 'POST':
         idPedido=request.POST.get('pedido')
         pedidos=models.Pedidos.objects.filter(id=idPedido)

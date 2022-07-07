@@ -30,3 +30,4 @@ def enviarProposta(request):
         proposta=Propostas(pedido,usuario,valor,prevInicio,prazoTermino,observacao)
         proposta.salvaProposta()
         return render(request,'./sucesso.html')
+

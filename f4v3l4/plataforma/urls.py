@@ -6,7 +6,7 @@ from plataforma import views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    path('',views.home,
+     path('',views.home,
          name='home'),
     
      path('pedDisp/',views.pedDisp,
@@ -22,15 +22,19 @@ urlpatterns = [
          views.mostraPerfil, 
          name='mostraPerfil'),
     
-    path('aceitarProposta/', 
+     path('aceitarProposta/', 
          views.aceitarProposta, 
          name='aceitarProposta'),
     
-    path('salvaPerfil/', 
+     path('salva_proposta/',
+          views.salva_proposta,
+          name='salva_proposta'),
+    
+     path('salvaPerfil/', 
          views.salvaPerfil, 
          name='salvaPerfil'),
     
-    path('enviarProposta/', 
+     path('enviarProposta/', 
          views.enviarProposta, 
          name='enviarProposta'),
     

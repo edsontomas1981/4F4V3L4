@@ -1,6 +1,7 @@
 from usuario.models import Usuarios
 from plataforma.models import Pedidos,Propostas as ModelPropostas
-from .email import Email
+from django.template.loader import render_to_string
+from Classes.email import Email
 
 class Propostas():
     
@@ -38,12 +39,16 @@ class Propostas():
         for proposta in propostasRejeitadas:
             proposta.propostaAceita=False
             proposta.save()
-        mensagem=f'''Olá {proposta.usuarioProposta_fk.first_name}!
-        O pedido de {pedido.titulo} foi aceito por {proposta.usuarioProposta_fk.first_name}
-        com o valor de R$ {proposta.valor} e o prazo de {proposta.prazo} dias.
-        '''
-        destinatario=proposta.usuarioProposta_fk.email
-        print('***********************************')
-        print(destinatario)
-        email=Email('edsontomasdev@gmail.com','Proposta Aceita',mensagem)
-        email.enviarEmail()
+        # Envia email para o usuario que recebeu a proposta
+        html_message=render_to_string('batepapo.html')
+        email=Email(proposta.usuarioProposta_fk,proposta.usuarioProposta_fk.email,"Proposta aceita",html_message)
+        email.envia_email_html()
+        # mensagem=f'''Olá {proposta.usuarioProposta_fk.first_name}!
+        # O pedido de {pedido.titulo} foi aceito por {proposta.usuarioProposta_fk.first_name}
+        # com o valor de R$ {proposta.valor} e o prazo de {proposta.prazo} dias.
+        # '''
+        # destinatario=proposta.usuarioProposta_fk.email
+        # print('***********************************')
+        # print(destinatario)
+        # email=Email('edsontomasdev@gmail.com','Proposta Aceita',mensagem)
+        # email.enviarEmail()
