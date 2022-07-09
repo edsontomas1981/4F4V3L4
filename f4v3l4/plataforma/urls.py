@@ -12,6 +12,15 @@ urlpatterns = [
      path('pedDisp/',views.pedDisp,
          name='pedDisp'),
      
+     path('meus_pedidos/',views.meus_pedidos,
+         name='meus_pedidos'),
+     
+     path('prop_enviadas/',views.prop_enviadas,
+         name='prop_enviadas'),     
+     
+     path('prop_recebidas/',views.prop_recebidas,
+         name='prop_recebidas'),  
+     
      path('configuracoes/',views.alteraConfig,
          name='alteraConfig'),
      
@@ -25,10 +34,6 @@ urlpatterns = [
      path('aceitarProposta/', 
          views.aceitarProposta, 
          name='aceitarProposta'),
-    
-     path('salva_proposta/',
-          views.salva_proposta,
-          name='salva_proposta'),
     
      path('salvaPerfil/', 
          views.salvaPerfil, 

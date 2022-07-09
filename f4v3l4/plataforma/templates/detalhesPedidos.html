@@ -9,7 +9,7 @@
 {% for pedido in pedidos %}
     <div class="row ">
             <div class="col-xl-6 col-lg-12 ">
-              <form method="POST" action="{% url 'enviarProposta' %}">
+              <form method="POST" action=#>
                 {% csrf_token %}
                 <div class="card l-bg-gray">
                     <div class="card-statistic-3 p-4">
@@ -82,7 +82,7 @@
             <h6 class="modal-title" name="pedido">{{pedido.id}}</h6>
             <h6 class="modal-title" name="usuarioPedido">{{pedido.usuario_fk.username}}</h6>
           </div>
-        <form method="POST" action="{% url 'salva_proposta'%}">
+        <form method="POST" action="{% url 'enviarProposta'%}">
             {% csrf_token %}
             <input name="pedido" value={{pedido.id}} type="hidden"></input>
             <input name="usuarioPedido" value={{pedido.usuario_fk.id}} type="hidden"></input>

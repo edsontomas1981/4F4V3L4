@@ -1,0 +1,103 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'blankPage' %}
+<nav aria-label="Navegação de página exemplo">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Anterior</a>
+        </li>
+      {% endif %}
+      <li class="page-item disabled">
+        <a class="page-link" >Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. </a>
+      </li>
+    <li class="page-item">
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+        </li>
+      {%else%}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Próximo</a>
+        </li>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+    {% for pedido in page_obj %}
+        <div class="row ">
+            <div class="col-xl-6 col-lg-8 ">
+            <form method="POST" action="{% url 'detalhesPedidos' %}">{% csrf_token %}
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="mb-3">
+                        <input name="pedido" value={{pedido.id}} type="hidden"></input>
+                            <span>Categoria :</span>
+                            <h5 class="card-title mb-0">{{pedido.categoria_fk.categoria}}</h5>
+                        </div>
+                        <span>Detalhes do pedido :</span>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-12">
+                                <h4 class="d-flex align-items-center mb-0">
+                                    {{pedido.titulo}}
+                                </h4>
+                            </div>
+                            <span>Descrição :</span></br>
+                            <div class="col-12">
+                            <h4 class="d-flex align-items-center mb-0">
+                                {{pedido.descricao}}
+                            </h4>
+                        </div>
+                        </div>
+                    </br>
+                    <div class="mb-3" align="right">
+                        <span>Solicitado por:</span>
+                        <h7 class="card-title mb-0">
+                        {{pedido.usuario_fk.first_name}}
+                        {{pedido.usuario_fk.last_name}}
+                        </h7>
+                    </div>
+                        <div data-height="50" style="height: 18px;">
+                            <div>
+                            <button class="btn l-bg-green-dark" style="width:100%;height:35px;" >Ver mais<i class="fa fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    {%endfor%}
+    <nav aria-label="Navegação de página exemplo">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Anterior</a>
+            </li>
+          {% endif %}
+          <li class="page-item disabled">
+            <a class="page-link" >Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. </a>
+          </li>
+        <li class="page-item">
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+            </li>
+          {%else%}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Próximo</a>
+            </li>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+
+{% endblock %}

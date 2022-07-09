@@ -5,15 +5,14 @@ from Classes.email import Email
 
 class Propostas():
     
-    def __init__(self,pedido:object,usuario:object,valor,prevInicio,prazo
-                 ,observacao):
+    def __init__(self,pedido:object,usuario:object,valor,prevInicio,prazoTermino,observacao):
         self.pedido=pedido
         self.usuario=usuario
         self.valor=valor
         self.prevInicio=prevInicio
-        self.prazoTermino=prazo
+        self.prazoTermino=prazoTermino
         self.observacao=observacao
-        
+
     def __repr__(self):
         return "Proposta" 
 
@@ -35,7 +34,7 @@ class Propostas():
         proposta.propostaAceita=True
         propostasRejeitadas=ModelPropostas.objects.filter(pedido_fk=pedido).exclude(propostaAceita=True)
         proposta.save()
-        # marca como rejeitadas as outras propostas
+        # Rejeita as outras propostas
         for proposta in propostasRejeitadas:
             proposta.propostaAceita=False
             proposta.save()
@@ -43,12 +42,3 @@ class Propostas():
         html_message=render_to_string('batepapo.html')
         email=Email(proposta.usuarioProposta_fk,proposta.usuarioProposta_fk.email,"Proposta aceita",html_message)
         email.envia_email_html()
-        # mensagem=f'''Olá {proposta.usuarioProposta_fk.first_name}!
-        # O pedido de {pedido.titulo} foi aceito por {proposta.usuarioProposta_fk.first_name}
-        # com o valor de R$ {proposta.valor} e o prazo de {proposta.prazo} dias.
-        # '''
-        # destinatario=proposta.usuarioProposta_fk.email
-        # print('***********************************')
-        # print(destinatario)
-        # email=Email('edsontomasdev@gmail.com','Proposta Aceita',mensagem)
-        # email.enviarEmail()

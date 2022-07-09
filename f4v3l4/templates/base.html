@@ -79,8 +79,21 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{% url 'pedDisp' %}">Pedidos disponíveis</a>
-                        <a class="collapse-item" href="register.html">Meus pedidos</a>
-                        <a class="collapse-item" href="register.html">Pedidos que solicitei</a>
+                        <a class="collapse-item" href="{% url 'meus_pedidos' %}">Meus pedidos</a>
+                        <div class="collapse-divider"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#propostas" aria-expanded="true"
+                    aria-controls="propostas">
+                    <span>Propostas</span>
+                </a>
+                <div id="propostas" class="collapse " aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{% url 'prop_enviadas' %}">Proposta Enviadas</a>
+                        <a class="collapse-item" href="{% url 'prop_recebidas' %}">Propostas Recebidas</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 {% block 'usuario' %}
 <span>{{ user }}</span>
 {% endblock 'usuario' %}
@@ -122,10 +121,11 @@
           </ul>
         </nav>
       </div>
-      <!--Propostas Enviadas -->
+      <!--Propostas Enviadas -->        
       <div class="tab-pane fade" id="pills-propostasEnviadas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
         {% comment %} Propostas {% endcomment %}
-        {% for p in propostaEnviadaPor %}
+        
+        {% for p in page_obj_prop_rec %}
         <div class="row">
           <div class="col-xl-6 col-lg-8 ">
           <div class="card l-bg-blue-dark">
@@ -169,6 +169,7 @@
                   <div class="card-body">
                     <div>
                       <div align=right>
+                      <input type="hidden" name="proposta" id="proposta" value={{p.id}}></input>
                       <span align="right">Proposta nº: {{p.id}}</span>
                       </div>
                       <input type="hidden" class="card-title" name="propostaId" id="propostaId" align="right" value="{{p.id}}"></input>
