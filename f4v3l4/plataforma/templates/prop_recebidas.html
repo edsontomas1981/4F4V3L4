@@ -29,39 +29,68 @@
       </li>
     </ul>
   </nav>
-    {% for p in page_obj %}
-        <div class="row">
-        <div class="col-xl-6 col-lg-8 ">
-        <div class="card l-bg-blue-dark">
+  <div class="row">
+    {% for p in page_obj  %}
+      <form method="POST" action="{% url 'aceitarProposta'%}">
+          {% csrf_token %}
+          <div class="card l-bg-blue-dark" style="width: 40rem; display :block;">
             <div class="card-body">
-            <h7 class="card-title">Enviada para :
-                {{p.usuarioProposta_fk.first_name}}
-                {{p.usuarioProposta_fk.last_name}}
-            </h7>
-            
-            <p class="card-text">R$ {{p.valor}}</p>
-            <p class="card-text">{{p.observacao}}</p>
-            <p class="card-text">Data de Início {{p.prevInicio}}</p>
-            <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
-            {% if p.propostaAceita %}
-                <span>Status :</span>
-                <p class="card-text">Aceita</p>
-            {% elif p.propostaAceita == False %}
-                <span>Status :</span>
-                <p class="card-text">Recusada</p>
-            {% else  %}
-            <span>Status :</span>
-                <p class="card-text">Aguardando resposta</p>
-            {% endif %}
-            <div class="card-footer" style="background: inherit;">
-                <a href="#" class="btn btn-danger">Descartar</a>
-                <a href="#" class="btn btn-secondary">Alterar</a>
+              <div>
+                <div align=right>
+                <input type="hidden" name="proposta" id="proposta" value={{p.id}}></input>
+                <span align="right">Proposta nº: {{p.id}}</span>
+                </div>
+                <input type="hidden" class="card-title" name="propostaId" id="propostaId" align="right" value="{{p.id}}"></input>
+                <h6 class="card-title">Pedido: {{p.pedido_fk.id}}</h6>
+                <h6 class="card-title">{{p.pedido_fk.titulo}} </h6>
+              </div>
+            <hr></hr>
+              <p class="card-text">R$ {{p.valor}}</p>
+              <p class="card-text">{{p.observacao}}</p>
+              <p class="card-text">Data de Início {{p.prevInicio}}</p>
+              <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
+              <div align="right">
+                <h7 class="card-title">Enviada por :
+                  {{p.usuarioProposta_fk.first_name}}
+                  {{p.usuarioProposta_fk.last_name}}
+                </h7>
+              </div>
+              <div class="card-footer" style="background: inherit;">
+                <input type="submit" class="btn btn-primary" value="Aceitar"></input>
+                <input type="submit" class="btn btn-danger" value="Descartar"></input>
+              </div>
             </div>
-            </div>
-        </div>
-        </div>  
-        </div>
-    {%endfor%}
+          </div>
+      </form>
+    {% endfor %}
+</div>
+<nav aria-label="Navegação de página exemplo">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+      </li>
+    {% endif %}
+    <li class="page-item disabled">
+      <a class="page-link" >Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. </a>
+    </li>
+  <li class="page-item">
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+      </li>
+    {%else%}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Próximo</a>
+      </li>
+    {% endif %}
+  </li>
+</ul>
+</nav>
 
 {% endblock %}
 {%  block 'js' %}

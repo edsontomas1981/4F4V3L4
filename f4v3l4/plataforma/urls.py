@@ -12,6 +12,9 @@ urlpatterns = [
      path('pedDisp/',views.pedDisp,
          name='pedDisp'),
      
+    path('envia_msg/',views.envia_msg,
+        name='envia_msg'),
+
      path('meus_pedidos/',views.meus_pedidos,
          name='meus_pedidos'),
      

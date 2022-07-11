@@ -8,5 +8,7 @@ from plataforma.views.configuracoes import alteraConfig
 from plataforma.views.privacidade import privacidade
 from .prop_enviadas import prop_enviadas
 from .prop_recebidas import prop_recebidas
+from .envia_msg import envia_msg
+
 
 

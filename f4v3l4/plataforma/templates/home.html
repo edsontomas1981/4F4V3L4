@@ -161,41 +161,41 @@
       </div>
       <!--Propostas Recebidas -->
       <div class="tab-pane fade" id="pills-propostasRecebidas" role="tabpanel" aria-labelledby="pills-propostasEnviadas-tab">
-        <div class="row">
-          {% for p in propostaRecebidas  %}
-            <form method="POST" action="{% url 'aceitarProposta'%}">
-                {% csrf_token %}
-                <div class="card l-bg-blue-dark" style="width: 40rem; display :block;">
-                  <div class="card-body">
-                    <div>
-                      <div align=right>
-                      <input type="hidden" name="proposta" id="proposta" value={{p.id}}></input>
-                      <span align="right">Proposta nº: {{p.id}}</span>
+          <div class="row">
+            {% for p in propostaRecebidas  %}
+              <form method="POST" action="{% url 'aceitarProposta'%}">
+                  {% csrf_token %}
+                  <div class="card l-bg-blue-dark" style="width: 40rem; display :block;">
+                    <div class="card-body">
+                      <div>
+                        <div align=right>
+                        <input type="hidden" name="proposta" id="proposta" value={{p.id}}></input>
+                        <span align="right">Proposta nº: {{p.id}}</span>
+                        </div>
+                        <input type="hidden" class="card-title" name="propostaId" id="propostaId" align="right" value="{{p.id}}"></input>
+                        <h6 class="card-title">Pedido: {{p.pedido_fk.id}}</h6>
+                        <h6 class="card-title">{{p.pedido_fk.titulo}} </h6>
                       </div>
-                      <input type="hidden" class="card-title" name="propostaId" id="propostaId" align="right" value="{{p.id}}"></input>
-                      <h6 class="card-title">Pedido: {{p.pedido_fk.id}}</h6>
-                      <h6 class="card-title">{{p.pedido_fk.titulo}} </h6>
-                    </div>
-                  <hr></hr>
-                    <p class="card-text">R$ {{p.valor}}</p>
-                    <p class="card-text">{{p.observacao}}</p>
-                    <p class="card-text">Data de Início {{p.prevInicio}}</p>
-                    <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
-                    <div align="right">
-                      <h7 class="card-title">Enviada por :
-                        {{p.usuarioProposta_fk.first_name}}
-                        {{p.usuarioProposta_fk.last_name}}
-                      </h7>
-                    </div>
-                    <div class="card-footer" style="background: inherit;">
-                      <input type="submit" class="btn btn-primary" value="Aceitar"></input>
-                      <input type="submit" class="btn btn-danger" value="Descartar"></input>
+                    <hr></hr>
+                      <p class="card-text">R$ {{p.valor}}</p>
+                      <p class="card-text">{{p.observacao}}</p>
+                      <p class="card-text">Data de Início {{p.prevInicio}}</p>
+                      <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
+                      <div align="right">
+                        <h7 class="card-title">Enviada por :
+                          {{p.usuarioProposta_fk.first_name}}
+                          {{p.usuarioProposta_fk.last_name}}
+                        </h7>
+                      </div>
+                      <div class="card-footer" style="background: inherit;">
+                        <input type="submit" class="btn btn-primary" value="Aceitar"></input>
+                        <input type="submit" class="btn btn-danger" value="Descartar"></input>
+                      </div>
                     </div>
                   </div>
-                </div>
-            </form>
-          {% endfor %}
-      </div>
+              </form>
+            {% endfor %}
+        </div>
       </div>
       <!--Profissionais -->
       <div class="tab-pane fade" id="pills-profissionais" role="tabpanel" aria-labelledby="pills-profissionais-tab">
@@ -237,6 +237,39 @@
                             <div class="col-6 mb-3">
                               <h6>Most Viewed</h6>
                               <p class="text-muted">Dolor sit amet</p>
+                            </div>
+                          </div>
+                          {% comment %}Inicio Modal mensagem {% endcomment %}
+                          <div align="right">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Enviar Mensagem</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Nova mensagem</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form method="POST" action={% url 'envia_msg' %}>
+                                      {% csrf_token %}
+                                      <input type="hidden" class="form-control" id="recipient-name" name="remetente" value="2" >
+                                      <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Destinatário:</label>
+                                        <input type="text" class="form-control" id="recipient-name" name="destinatario" value="5" >
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Mensagem:</label>
+                                        <textarea class="form-control" id="message-text" name="mensagem" ></textarea>
+                                      </div>
+                                    
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+                                  </div>
+                                </form>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div class="d-flex justify-content-start">
