@@ -1,48 +1,52 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path
 from plataforma import views
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-     path('',views.home,
+    path('',views.home,
          name='home'),
     
-     path('pedDisp/',views.pedDisp,
+    path('pedDisp/',views.pedDisp,
          name='pedDisp'),
      
     path('envia_msg/',views.envia_msg,
         name='envia_msg'),
+    
+    path('cad_profissional/',views.cad_profissional,
+        name='cad_profissional'),    
 
-     path('meus_pedidos/',views.meus_pedidos,
+    path('meus_pedidos/',views.meus_pedidos,
          name='meus_pedidos'),
+
+    path('meus_pedidos/',views.meus_pedidos,
+         name='meus_pedidos'),     
      
-     path('prop_enviadas/',views.prop_enviadas,
+    path('prop_enviadas/',views.prop_enviadas,
          name='prop_enviadas'),     
      
-     path('prop_recebidas/',views.prop_recebidas,
+    path('prop_recebidas/',views.prop_recebidas,
          name='prop_recebidas'),  
      
-     path('configuracoes/',views.alteraConfig,
+    path('configuracoes/',views.alteraConfig,
          name='alteraConfig'),
      
-     path('privacidade/',views.privacidade,
+    path('privacidade/',views.privacidade,
          name='privacidade'),
      
-     path('mostraPerfil/', 
+    path('mostraPerfil/', 
          views.mostraPerfil, 
          name='mostraPerfil'),
     
-     path('aceitarProposta/', 
+    path('aceitarProposta/', 
          views.aceitarProposta, 
          name='aceitarProposta'),
     
-     path('salvaPerfil/', 
+    path('salvaPerfil/', 
          views.salvaPerfil, 
          name='salvaPerfil'),
     
-     path('enviarProposta/', 
+    path('enviarProposta/', 
          views.enviarProposta, 
          name='enviarProposta'),
     
@@ -53,6 +57,10 @@ urlpatterns = [
     path('cadPedido/',
          views.ViewCadPed.as_view(),
          name='cadPedido'),
+        
+    path('profissional/',
+            views.ViewCadProfissional.as_view(),
+            name='profissional'),    
     
     path('cPedidos/',
          views.cPedidos,

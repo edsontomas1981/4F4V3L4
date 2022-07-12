@@ -4,4 +4,5 @@ from .Pedidos import Pedidos
 from .Imagem import Imagem
 from .Mensagens import Mensagens
 from .Propostas import Propostas
+from .Profissional import Profissional
 

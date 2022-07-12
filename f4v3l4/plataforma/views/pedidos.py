@@ -62,3 +62,4 @@ class ViewCadPed(FormView):
     template_name = 'cadastropedidos.html'
     form_class = FormCadPed
     success_url = '/'
+

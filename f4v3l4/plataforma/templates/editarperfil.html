@@ -127,7 +127,24 @@
                         </div>
                         <div class="row gutters">
                           <div class="about">
-                            <h5 class="mb-2 text-primary">Sobre</h5>
+                            <h6 class="mb-3 text-primary">Profissional</h6>
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <select class="form-control" id="tipo" name="categoria" value="Categoria" >
+                                      <option>Automóveis</option>
+                                      <option>Outros</option>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control col-sm-5" id="profissao" value="{{user.profissao}}" placeholder="Profissão">
+                                </div>
+                              </div>
+                            <hr>
+                            </div>
+                            <h6 class="mb-2 text-primary">Sobre</h6>
                             <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in tincidunt tellus, id aliquet lectus. Nunc eu imperdiet enim. Integer dictum mi at imperdiet fringilla. Quisque elementum varius viverra. Nam eleifend quam sapien, vel iaculis nisl dapibus nec. Nullam turpis.</textarea>
                           </div>
                           <div class="form-group" align="right">

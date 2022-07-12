@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block 'usuario' %}
+<span>{{ user }}</span>
+{% endblock 'usuario' %}
+{% load bootstrap %}
+{% block 'blankPage' %}
+    {% load static %}
+    <form method="POST" action="{% url 'cad_profissional' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+          <div class="col-sm-5">
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert {{message.tags}}">
+                      {{message}}
+                  </div>
+              {% endfor %}
+          {% endif %}
+          </div>
+            <div class="row form-group">
+            <div class="col-sm-12">
+                <div class="form-group row">
+                <div class="col-sm-5 form-group">
+                    {{ form.categoria|bootstrap }}
+                </div>                     
+                <div class="col-sm-7 form-group">
+                    {{ form.titulo_profissional|bootstrap }}
+                </div>
+                <div class="col-sm-12 form-group">
+                    {{ form.sobre|bootstrap }}
+                </div>                              
+            <input type="submit" class="btn btn-primary col-sm-12 " name="enviar" values="Enviar">
+            </div>
+        </div>
+    </form>
+{% endblock %}
