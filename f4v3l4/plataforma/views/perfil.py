@@ -6,6 +6,8 @@ from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
 from Classes.contatos import Contatos
 from usuario.models import Usuarios
+from plataforma.models.Categorias import Categorias
+
 
 @login_required(login_url='/auth/login/')
 def editarPerfil(request):
@@ -13,7 +15,8 @@ def editarPerfil(request):
    
     if request.method == "GET" :
         contatos=MdlContatos.objects.filter(usuario_fk=usuario)
-        return render(request,'./editarperfil.html',{'contatos':contatos})
+        categorias=Categorias.objects.filter().order_by('categoria')
+        return render(request,'./editarperfil.html',{'contatos':contatos,'categorias':categorias})
 
     elif request.method == 'POST':
         tipo=request.POST.get('tipo')
