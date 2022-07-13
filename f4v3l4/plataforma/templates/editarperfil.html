@@ -3,6 +3,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 {% block 'blankPage' %}
     <div class="container">
+      <div class="col-sm-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
       <form method="POST" id="form" action="{% url 'editarPerfil' %}" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="row gutters">
@@ -12,15 +21,14 @@
                         <div class="account-settings">
                             <div>
                               <div class="">
-                                <div class="image">
-
+                                <div class="image" align='middle' >
                                   <div class="editar-content">
                                     <span>
                                       <i>editar</i>
                                     </span>
                                   </div>
                                   {%if user.foto_perfil %}
-                                    <div id="new">
+                                    <div id="new" >
                                       <div class="close-preview-js close-preview">x</div>
                                     </div>
                                       <div class="image">
@@ -29,18 +37,21 @@
                                     </div>
                                     <br>
                                     <label for="file-preview-js" class="custom-file-upload">
-                                      <img class="img-profile rounded-circle" src="/static/img/edit.jpg" height="20" width="20" align="right"></label>
-                                    <input id="file-preview-js" type="file" accept="image/*" onchange="loaderFile(event)">
+                                      <img class="img-profile rounded-circle" src="/static/img/edit.jpg" 
+                                      height="20" width="20" align="right" ></label>
+                                    <input id="file-preview-js" type="file" accept="image/*" onchange="loaderFile(event)" name="foto_perfil" >
                                   {% else %}
-                                      <div id="new">
+                                      <div id="new" >
                                         <div class="close-preview-js close-preview">x</div>
                                       </div>
-                                      <img src="/static/img/profile.png" alt="Sem imagem">
+                                      <img src="{% static 'img/profile.png' %}" alt="Sem imagem" name="foto_perfil" >
                                     </div>
                                     <br>
                                     <label for="file-preview-js" class="custom-file-upload">
-                                    <img class="img-profile rounded-circle" src="/static/img/edit.jpg" height="20" width="20" align="right"></label>
-                                    <input id="file-preview-js" type="file" accept="image/*" onchange="loaderFile(event)">
+                                    <img class="img-profile rounded-circle" src="/static/img/edit.jpg" 
+                                    height="20" width="20" align="right"></label>
+                                    <input id="file-preview-js" type="file" accept="image/*" 
+                                    onchange="loaderFile(event)" name="foto_perfil">
                                 {% endif %}
                               </div>
                             </div>
@@ -50,9 +61,29 @@
                                 <h5 class="user-name">{{user.username}}</h5>
                                 <h6 class="user-email">{{user.email}}</h6>
                             </div>
+                            <h6 class="mb-3 text-primary">Profissional</h6>
+                            <table class="table table-striped thead-dark" id="tabela" name="tabela">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Cat. Profissional</th>
+                                  <th scope="col">Profissão</th>
+                                </tr>
+                                <!-- começo montar tabela profissoes  -->
+                                {% for profissao in profissional %}
+                                  <tr>
+                                    <td>{{profissao.categoria_fk.categoria}}</td>
+                                    <td>{{profissao.titulo_profissional}}</td>
+                                  </tr>
+                                {% endfor %}
+                              </thead>
+                              <tbody>
+                            </tbody>
+                            </table>                                 
                         </div>
                     </div>
+                   
                 </div>
+           
             </div>
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -63,12 +94,12 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                  <input type="text" class="form-control form-control-sm" id="nome" value="{{user.first_name}}">
+                                  <input type="text" class="form-control form-control-sm" id="nome" value="{{user.first_name}}" name="nome">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                               <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" id="sobrenome" value="{{user.last_name}}">
+                                <input type="text" class="form-control form-control-sm" id="sobrenome" value="{{user.last_name}}" name="sobrenome">
                               </div>
                           </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -100,7 +131,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                               <div class="form-group">
-                                <input type="submit" class= "btn btn-outline-info" id="incluiContato" name="incluiContato" value="     +     ">
+                                <input type="submit" class= "btn btn-outline-info form-control-sm " id="incluiContato" name="incluiContato" value="   +   ">
                               </div>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-9">
@@ -129,24 +160,8 @@
                           <div class="about">
                             <h6 class="mb-3 text-primary">Profissional</h6>
                             <div class="row">
-                              <table class="table table-striped thead-dark" id="tabela" name="tabela">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Tipo</th>
-                                    <th scope="col">Contato</th>
-                                  </tr>
-                                  <!-- começo montar tabela profissoes  -->
-                                  {% for profissao in profissoes %}
-                                    <tr>
-                                      <td>{{profissao.tipo}}</td>
-                                      <td>{{profissao.contato}}</td>
-                                    </tr>
-                                  {% endfor %}
-                                </thead>
-                                <tbody>
-                              </tbody>
-                              </table>
-                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                              <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="form-group">
                                     <select class="form-select form-control-sm" id="tipo" name="categoria" value="Categoria" >
                                       {% for categoria in categorias %}
@@ -155,18 +170,24 @@
                                     </select>
                                 </div>
                               </div>
-                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                              <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm" id="profissao"  placeholder="Profissão">
+                                    <input type="text" class="form-control form-control-sm" id="profissao" name="profissao"  placeholder="Profissão">
                                 </div>
                               </div>  
+                              <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                <div class="form-group">
+                                  <input type="submit" class= "btn btn-outline-info form-control-sm " 
+                                  id="inclui_profissao" name="inclui_profissao" value="   +   ">
+                                </div>
+                              </div>
                             </div>
-                            <textarea class="form-control form-control-sm" rows="6">
+                            <textarea class="form-control form-control-sm" rows="4" name="sobre">
                               Digite aqui suas habilidades e/ou um resumo de sua experiência profissional.
                             </textarea>
                           </div>
                           <div class="form-group" align="right">
-                            <input type="submit" class= "btn btn-outline-info" id="incluiContato" name="incluiContato" value="Incluir">
+                            <input type="submit" class= "btn btn-outline-info" id="salva_perfil" name="salva_perfil" value="Incluir">
                           </div>
                           
                         </div>

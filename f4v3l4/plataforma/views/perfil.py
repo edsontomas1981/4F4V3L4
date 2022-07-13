@@ -7,16 +7,22 @@ from django.contrib.auth.decorators import login_required
 from Classes.contatos import Contatos
 from usuario.models import Usuarios
 from plataforma.models.Categorias import Categorias
+from plataforma.models.Profissional import Profissional 
 
+def carrega_perfil(request):
+    usuario=request.user
+    contatos=MdlContatos.objects.filter(usuario_fk=usuario)
+    categorias=Categorias.objects.all().order_by('categoria')
+    profissional=Profissional.objects.filter(usuario_fk=usuario)
+    return render(request,'./editarperfil.html',{'contatos':contatos,'categorias':categorias,
+                                                     'profissional':profissional})
 
 @login_required(login_url='/auth/login/')
 def editarPerfil(request):
     usuario=request.user
    
     if request.method == "GET" :
-        contatos=MdlContatos.objects.filter(usuario_fk=usuario)
-        categorias=Categorias.objects.filter().order_by('categoria')
-        return render(request,'./editarperfil.html',{'contatos':contatos,'categorias':categorias})
+        return carrega_perfil(request)
 
     elif request.method == 'POST':
         tipo=request.POST.get('tipo')
@@ -25,14 +31,30 @@ def editarPerfil(request):
         if 'incluiContato' in request.POST:
             contato=Contatos(tipo,vContato,usuario)
             contato.salvaContato()
-            contatos=MdlContatos.objects.filter(usuario_fk=usuario)
-            
-            return render (request,'./editarperfil.html',{'contatos':contatos})
+            messages.add_message(request,constants.SUCCESS,'Contato adicionado com sucesso!')
+            return carrega_perfil(request)
         
-        elif 'atualiza' in request.POST:
-            
-            contatos=MdlContatos.objects.filter(usuario_fk=usuario)
-            return render(request,'./editarperfil.html',{'contatos':contatos})        
+        elif 'inclui_profissao' in request.POST:
+            categoria=Categorias.objects.filter(categoria=request.POST.get('categoria')).get()
+            profissional=Profissional(usuario_fk=request.user,
+                                  categoria_fk=categoria,
+                                  titulo_profissional=request.POST.get('profissao'),
+                                  sobre=request.POST.get('sobre')
+                                  )
+            profissional.save()
+            messages.add_message(request,constants.SUCCESS,
+            'Perfil profissional cadastrado com sucesso !')
+                        
+            return carrega_perfil(request)
+        
+        elif 'salva_perfil' in request.POST:
+            nome=request.POST.get('nome')
+            sobrenome=request.POST.get('sobrenome')
+            usuario.first_name=request.POST.get('nome')
+            usuario.last_name=request.POST.get('sobrenome')
+            usuario.foto_perfil=request.POST.get('foto_perfil')
+            usuario.save()
+            return carrega_perfil(request)
         return render (request,'./editarperfil.html')
 
 @login_required(login_url='/auth/login/')
