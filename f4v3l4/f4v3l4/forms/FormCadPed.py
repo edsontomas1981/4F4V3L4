@@ -4,7 +4,7 @@ from plataforma.models import Categorias
 class FormCadPed(forms.Form):
     categ = Categorias.objects.values_list('categoria',flat=True).order_by('categoria')
     categoria = forms.ModelMultipleChoiceField(categ,required=True,
-    widget=forms.Select(attrs={}))
+    widget=forms.Select(attrs={'class':'form-select'}))
     titulo = forms.CharField(required=True,label='Título')
     descricao = forms.CharField(required=True,label='Descrição',
     widget=forms.Textarea(attrs={'rows':2}))

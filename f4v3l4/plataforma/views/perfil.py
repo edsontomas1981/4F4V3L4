@@ -48,11 +48,10 @@ def editarPerfil(request):
             return carrega_perfil(request)
         
         elif 'salva_perfil' in request.POST:
-            nome=request.POST.get('nome')
-            sobrenome=request.POST.get('sobrenome')
             usuario.first_name=request.POST.get('nome')
             usuario.last_name=request.POST.get('sobrenome')
-            usuario.foto_perfil=request.POST.get('foto_perfil')
+            foto=request.FILES.get('foto')
+            usuario.foto_perfil=foto
             usuario.save()
             return carrega_perfil(request)
         return render (request,'./editarperfil.html')

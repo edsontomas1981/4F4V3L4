@@ -20,6 +20,11 @@ def cad_profissional(request):
         'Perfil profissional cadastrado com sucesso !')
         return redirect('/profissional/')
 
+def lista_profissionais (request):
+    profissionais=Profissional.objects.all()
+    return render(request,'./lista_profissionais.html',{'profissionais':profissionais})
+
+
 class ViewCadProfissional(FormView):
     template_name = 'cad_profissional.html'
     form_class = FormCadProfissional

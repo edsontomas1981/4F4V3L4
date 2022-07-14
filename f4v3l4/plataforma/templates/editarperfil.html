@@ -31,27 +31,28 @@
                                     <div id="new" >
                                       <div class="close-preview-js close-preview">x</div>
                                     </div>
-                                      <div class="image">
-                                        <img src="{{user.foto_perfil}}">
-                                      </div>
+                                    <div class="new"  height="200" width="200">
+                                      <img src="{{MEDIA_URL}}{{user.foto_perfil}}" height="200" width="200">
                                     </div>
-                                    <br>
-                                    <label for="file-preview-js" class="custom-file-upload">
-                                      <img class="img-profile rounded-circle" src="/static/img/edit.jpg" 
-                                      height="20" width="20" align="right" ></label>
-                                    <input id="file-preview-js" type="file" accept="image/*" onchange="loaderFile(event)" name="foto_perfil" >
-                                  {% else %}
-                                      <div id="new" >
-                                        <div class="close-preview-js close-preview">x</div>
-                                      </div>
-                                      <img src="{% static 'img/profile.png' %}" alt="Sem imagem" name="foto_perfil" >
                                     </div>
                                     <br>
                                     <label for="file-preview-js" class="custom-file-upload">
                                     <img class="img-profile rounded-circle" src="/static/img/edit.jpg" 
-                                    height="20" width="20" align="right"></label>
+                                    height="20" width="20"></label>
                                     <input id="file-preview-js" type="file" accept="image/*" 
-                                    onchange="loaderFile(event)" name="foto_perfil">
+                                    onchange="loaderFile(event)" name="foto">
+                                  {% else %}
+                                      <div id="new">
+                                        <div class="close-preview-js close-preview">x</div>
+                                        </div>
+                                        <img src="{% static 'img/profile.png' %}" alt="Sem imagem" height="200" width="200" >
+                                      </div>
+                                    <br>
+                                    <label for="file-preview-js" class="custom-file-upload">
+                                    <img class="img-profile rounded-circle" src="/static/img/edit.jpg" 
+                                    height="20" width="20"></label>
+                                    <input id="file-preview-js" type="file" accept="image/*" 
+                                    onchange="loaderFile(event)" name="foto">
                                 {% endif %}
                               </div>
                             </div>
@@ -160,7 +161,6 @@
                           <div class="about">
                             <h6 class="mb-3 text-primary">Profissional</h6>
                             <div class="row">
-
                               <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="form-group">
                                     <select class="form-select form-control-sm" id="tipo" name="categoria" value="Categoria" >
@@ -172,7 +172,7 @@
                               </div>
                               <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm" id="profissao" name="profissao"  placeholder="Profissão">
+                                    <input type="text" class="form-control form-control-sm" id="profissao" name="profissao" onclick="teste()" placeholder="Profissão">
                                 </div>
                               </div>  
                               <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
@@ -204,7 +204,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
 <script src="{% static 'js/formataCampos.js' %}"></script>
 <script src="{% static 'js/alteraImagem.js' %}"></script>
+<script src="{% static 'js/teste.js' %}"></script>
 <script src="{% static 'js/contatos.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>
-<script src="{% static 'js/apis.js' %}"></script>
 {% endblock %}

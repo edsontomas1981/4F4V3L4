@@ -19,8 +19,8 @@ urlpatterns = [
     path('meus_pedidos/',views.meus_pedidos,
          name='meus_pedidos'),
 
-    path('meus_pedidos/',views.meus_pedidos,
-         name='meus_pedidos'),     
+    path('lista_profissionais/',views.lista_profissionais,
+         name='lista_profissionais'),     
      
     path('prop_enviadas/',views.prop_enviadas,
          name='prop_enviadas'),     
