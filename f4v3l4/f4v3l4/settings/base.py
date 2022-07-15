@@ -206,3 +206,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
