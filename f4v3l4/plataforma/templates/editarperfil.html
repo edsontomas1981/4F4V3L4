@@ -11,7 +11,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-        </div>
+      </div>
       <form method="POST" id="form" action="{% url 'editarPerfil' %}" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="row gutters">
@@ -62,30 +62,11 @@
                                 <h5 class="user-name">{{user.username}}</h5>
                                 <h6 class="user-email">{{user.email}}</h6>
                             </div>
-                            <h6 class="mb-3 text-primary">Profissional</h6>
-                            <table class="table table-striped thead-dark" id="tabela" name="tabela">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Cat. Profissional</th>
-                                  <th scope="col">Profissão</th>
-                                </tr>
-                                <!-- começo montar tabela profissoes  -->
-                                {% for profissao in profissional %}
-                                  <tr>
-                                    <td>{{profissao.categoria_fk.categoria}}</td>
-                                    <td>{{profissao.titulo_profissional}}</td>
-                                  </tr>
-                                {% endfor %}
-                              </thead>
-                              <tbody>
-                            </tbody>
-                            </table>                                 
+                               
                         </div>
                     </div>
-                   
                 </div>
-           
-            </div>
+        </div>
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
@@ -109,88 +90,270 @@
                                 </div>
                             </div>
                             <input type="hidden" name="usuario" id="usuario" value="{{user.id}}">
-
+                            <!-- Mostar Contatos -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                               <h6 class="mb-3 text-primary">Contatos</h6>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
-                              <div class="form-group">
-                                <select class="form-control form-control-sm" id="tipo" name="tipo" value="Selecione" >
-                                    <option>Telefone</option>
-                                    <option>Celular</option>
-                                    <option>Facebook</option>
-                                    <option>Twitter</option>
-                                    <option>Instagram</option>
-                                    <option>Linkedin</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                                <div class="form-group">
-                                  <input class="form-control form-control-sm" id="contato" name="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
-                              <div class="form-group">
-                                <input type="submit" class= "btn btn-outline-info form-control-sm " id="incluiContato" name="incluiContato" value="   +   ">
-                              </div>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-9">
                               <div class="form-group">
                                 <table class="table table-striped thead-dark" id="tabela" name="tabela">
                                   <thead>
                                     <tr>
+                                      <th scope="col">Id</th>
                                       <th scope="col">Tipo</th>
                                       <th scope="col">Contato</th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>                                      
                                     </tr>
                                     <!-- começo montar tabela -->
                                     {% for contato in contatos %}
                                       <tr>
-                                        <td>{{contato.tipo}}</td>
-                                        <td>{{contato.contato}}</td>
+                                        <td id="{{contato.id}}">{{contato.id}}</td>
+                                        <td id="tipo{{contato.id}}">{{contato.tipo}}</td>
+                                        <td id="contato{{contato.id}}" >{{contato.contato}}</td>
+                                        <td>
+                                          <a data-bs-toggle="modal" data-bs-target="#mdlExcluiContato"><img src="{% static 'img/iconedelete.png' %}" 
+                                          alt="Excluir contato" onclick="excContato('{{contato.id}}')" width="20" height="20"/>
+                                        </a>
+                                        </td>
+                                        <td>
+                                          <a data-bs-toggle="modal" data-bs-target="#mdlAlteraContato"><img src="{% static 'img/editaricone.png' %}" 
+                                            alt="Excluir contato" width="20" height="20" onclick="altContato('{{contato.id}}')"/></a>
+                                        </td>
                                       </tr>
                                     {% endfor %}
                                   </thead>
                                   <tbody>
                                 </tbody>
                                 </table>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                          <div class="about">
-                            <h6 class="mb-3 text-primary">Profissional</h6>
-                            <div class="row">
-                              <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
-                                <div class="form-group">
-                                    <select class="form-select form-control-sm" id="tipo" name="categoria" value="Categoria" >
-                                      {% for categoria in categorias %}
-                                        <option>{{categoria.categoria}}</option>
-                                      {% endfor %}
-                                    </select>
-                                </div>
-                              </div>
-                              <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm" id="profissao" name="profissao" onclick="teste()" placeholder="Profissão">
-                                </div>
-                              </div>  
-                              <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
-                                <div class="form-group">
-                                  <input type="submit" class= "btn btn-outline-info form-control-sm " 
-                                  id="inclui_profissao" name="inclui_profissao" value="   +   ">
+                                <div align="right">
+                                  <a class="btn btn-primary form-control-sm" data-bs-toggle="modal" 
+                                          data-bs-target="#mdlAdicionacontato" >Adicionar Contato</a>
                                 </div>
                               </div>
                             </div>
-                            <textarea class="form-control form-control-sm" rows="4" name="sobre">
-                              Digite aqui suas habilidades e/ou um resumo de sua experiência profissional.
-                            </textarea>
-                          </div>
-                          <div class="form-group" align="right">
-                            <input type="submit" class= "btn btn-outline-info" id="salva_perfil" name="salva_perfil" value="Incluir">
-                          </div>
-                          
                         </div>
+                        <!-- tabela profissionais -->
+                        <h6 class="mb-3 text-primary">Profissional</h6>
+                        <table class="table table-striped thead-dark" id="tabela" name="tabela">
+                          <thead>
+                            <tr>
+                              <th scope="col">Cat. Profissional</th>
+                              <th scope="col">Profissão</th>
+                              <th scope="col"></th>
+                              <th scope="col"></th>
+                            </tr>
+                            <!-- começo montar tabela profissoes  -->
+                            {% for profissao in profissional %}
+                              <tr>
+                                <td>{{profissao.categoria_fk.categoria}}</td>
+                                <td>{{profissao.titulo_profissional}}</td>
+                                <td>
+                                  <a target="_blank"><img src="{% static 'img/iconedelete.png' %}" 
+                                  alt="Excluir contato" width="20" height="20"/></a>
+                                </td>
+                                <td>
+                                  <a target="_blank"><img src="{% static 'img/editaricone.png' %}" 
+                                    alt="Excluir contato" width="20" height="20"/></a>
+                                </td>                                
+                              </tr>
+                            {% endfor %}
+                          </thead>
+                          <tbody>
+                        </tbody>
+                        </table> 
+                        <div align="right">
+                          <a class="btn btn-primary form-control-sm" data-bs-toggle="modal" 
+                                   data-bs-target="#mdlAdicionaProfissao">Adicionar Profissão</a>
+                        </div>
+                        <!-- modal adiciona contatos -->
+                        <div class="modal" tabindex="-1" id="mdlAdicionaContato" data-bs-backdrop="static" 
+                                           data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                                           aria-hidden="true">
+                               <div class="modal-dialog">
+                                 <div class="modal-content">
+                                   <div class="modal-header">
+                                     <h5 class="modal-title">Adicionar Contato</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <!-- adicionar Contato -->
+                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                      <h6 class="mb-3 text-primary">Contatos</h6>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                      <div class="form-group">
+                                        <select class="form-control form-control-sm" id="tipo" name="tipo" value="Selecione" >
+                                            <option>Telefone</option>
+                                            <option>Celular</option>
+                                            <option>Facebook</option>
+                                            <option>Twitter</option>
+                                            <option>Instagram</option>
+                                            <option>Linkedin</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                                        <div class="form-group">
+                                          <input class="form-control form-control-sm" id="contato" name="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                      <div class="form-group">
+                                        <input type="submit" class= "btn btn-outline-info form-control-sm " id="incluiContato" name="incluiContato" value="   +   ">
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>  
+
+                        <!-- modal adiciona profissões -->
+                          <div class="modal" tabindex="-1" id="mdlAdicionaProfissao" data-bs-backdrop="static" 
+                                           data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                                           aria-hidden="true">
+
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Adicionar Profissões</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                              <!-- adicionar profissões -->
+                                  <div class="row gutters">
+                                    <div class="about">
+                                      <h6 class="mb-3 text-primary">Profissional</h6>
+                                      <div class="row">
+                                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
+                                          <div class="form-group">
+                                              <select class="form-select form-control-sm" id="tipo" name="categoria" value="Categoria" >
+                                                {% for categoria in categorias %}
+                                                  <option>{{categoria.categoria}}</option>
+                                                {% endfor %}
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
+                                          <div class="form-group">
+                                              <input type="text" class="form-control form-control-sm" id="profissao" name="profissao" onclick="teste()" placeholder="Profissão">
+                                          </div>
+                                        </div>  
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                          <div class="form-group">
+                                            <input type="submit" class= "btn btn-outline-info form-control-sm " 
+                                            id="inclui_profissao" name="inclui_profissao" value="   +   ">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <textarea class="form-control form-control-sm" rows="4" name="sobre">
+                                        Digite aqui suas habilidades e/ou um resumo de sua experiência profissional.
+                                      </textarea>
+                                    </div>
+
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- modal altera contato -->
+                        <div class="modal" tabindex="-1" id="mdlAlteraContato" data-bs-backdrop="static" 
+                                           data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                                           aria-hidden="true">
+                               <div class="modal-dialog">
+                                 <div class="modal-content">
+                                   <div class="modal-header">
+                                     <h5 class="modal-title">Alterar Contatos</h5> <input type="hidden" name="idContato" id="idContato">
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <!-- adicionar Contato -->
+                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                      <h6 class="mb-3 text-primary">Contatos</h6>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                      <div class="form-group">
+                                        <select class="form-control form-control-sm form-select" id="alteraTipo" name="alttipo" value="Selecione" >
+                                            <option>Telefone</option>
+                                            <option>Celular</option>
+                                            <option>Facebook</option>
+                                            <option>Twitter</option>
+                                            <option>Instagram</option>
+                                            <option>Linkedin</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="form-group">
+                                          <input class="form-control form-control-sm" id="alteraContato" name="altcontato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                      <div class="form-group">
+                                        <input type="submit" class= "btn btn-outline-info form-control-sm " id="alteraContato" 
+                                                name="alteraContato" value="Alterar">
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>  
+                        <!-- Fim Altera Contatos  -->
+                        
+                        {% comment %} Modal exlcui contatos {% endcomment %}
+                          <div class="modal" tabindex="-1" id="mdlExcluiContato" data-bs-backdrop="static" 
+                                      data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                                      aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Exluir Contato</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- adicionar Contato -->
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <input type="text" name="idExcluiContato" id="idExcluiContato">
+                                    <h6 class="mb-3 text-primary">Contatos</h6>
+                                    
+                                  </div>
+
+
+                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                      <div class="form-group">
+                                        <input class="form-control form-control-sm" id="excluiTipoContato" 
+                                        name="excluiTipoContato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
+                                      </div>
+                                  </div>
+
+                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                      <input class="form-control form-control-sm" id="excluiContato" 
+                                      name="excluiContato">
+                                    </div>
+                                  </div>                                  
+
+                                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                    <div class="form-group" >
+                                      <input type="submit" class= "btn btn-outline-danger form-control-sm " 
+                                      id="excluiContato" name="excluiContato" value="Excluir" align="right" >
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>  
+                            
+
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -204,6 +367,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/profileestilo.css' %}">
 <script src="{% static 'js/formataCampos.js' %}"></script>
 <script src="{% static 'js/alteraImagem.js' %}"></script>
+<script src="{% static 'js/excluiContatos.js' %}"></script>
+<script src="{% static 'js/alteraContatos.js' %}"></script>
 <script src="{% static 'js/teste.js' %}"></script>
 <script src="{% static 'js/contatos.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>

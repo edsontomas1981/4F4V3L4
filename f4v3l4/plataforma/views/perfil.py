@@ -1,3 +1,4 @@
+import idna
 from usuario.models import Contatos as MdlContatos
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
@@ -32,6 +33,22 @@ def editarPerfil(request):
             contato=Contatos(tipo,vContato,usuario)
             contato.salvaContato()
             messages.add_message(request,constants.SUCCESS,'Contato adicionado com sucesso!')
+            return carrega_perfil(request)
+        
+        elif 'alteraContato' in request.POST:
+            contato=MdlContatos.objects.get(id=request.POST.get('idContato'))
+            contato.tipo=request.POST.get('alttipo')
+            contato.contato=request.POST.get('altcontato')
+            contato.save()
+            messages.add_message(request,constants.SUCCESS,'Contato alterado com sucesso!')
+            return carrega_perfil(request)
+        
+        elif 'excluiContato' in request.POST:
+            contato=MdlContatos.objects.get(id=request.POST.get('idExcluiContato'))
+            contato.tipo=request.POST.get('alttipo')
+            contato.contato=request.POST.get('altcontato')
+            contato.save()
+            messages.add_message(request,constants.SUCCESS,'Contato alterado com sucesso!')
             return carrega_perfil(request)
         
         elif 'inclui_profissao' in request.POST:
