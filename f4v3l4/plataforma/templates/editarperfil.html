@@ -305,7 +305,7 @@
                         </div>  
                         <!-- Fim Altera Contatos  -->
                         
-                        {% comment %} Modal exlcui contatos {% endcomment %}
+                        <!-- modal exclui contato -->
                           <div class="modal" tabindex="-1" id="mdlExcluiContato" data-bs-backdrop="static" 
                                       data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
                                       aria-hidden="true">
@@ -318,30 +318,28 @@
                                 <div class="modal-body">
                                   <!-- adicionar Contato -->
                                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <input type="text" name="idExcluiContato" id="idExcluiContato">
+                                    <input type="hidden" name="excluiId" id="excluiId">
                                     <h6 class="mb-3 text-primary">Contatos</h6>
                                     
                                   </div>
-
-
-                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                       <div class="form-group">
-                                        <input class="form-control form-control-sm" id="excluiTipoContato" 
-                                        name="excluiTipoContato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
+                                        <input class="form-control form-control-sm" id="excluiTipo" 
+                                        name="excluiTipo" disabled="">
                                       </div>
                                   </div>
 
-                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">
                                       <input class="form-control form-control-sm" id="excluiContato" 
-                                      name="excluiContato">
+                                      name="excluiContato" disabled="">
                                     </div>
                                   </div>                                  
 
-                                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
-                                    <div class="form-group" >
+                                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9" align="right">
+                                    <div class="form-group"   >
                                       <input type="submit" class= "btn btn-outline-danger form-control-sm " 
-                                      id="excluiContato" name="excluiContato" value="Excluir" align="right" >
+                                      id="excluiContato" name="excluiContato" value="Excluir" >
                                     </div>
                                   </div>
                               </div>

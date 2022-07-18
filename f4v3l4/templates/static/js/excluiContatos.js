@@ -1,13 +1,17 @@
-function excContato(id){
+function excContato(idExc){
     
-    var idContatoExc = id
-    var idContato = document.getElementById('contato'+id);
-    var idTipo = document.getElementById('tipo'+id);
+    var id = document.getElementById('excluiId');
+    var contato = document.getElementById('excluiContato');
+    var tipo = document.getElementById('excluiTipo');
 
-    idContato.value = "foi"
-    idTipo.value = "foi"
-    
+    var tdContato = document.getElementById('tdContato');
+    var tdTipo = document.getElementById('tdTipo');
 
+    id.value = idExc;
+    contato.value = document.getElementById('contato'+idExc).textContent;
+    tipo.value = document.getElementById('tipo'+idExc).textContent;
+    contato.ariaDisabled = True;
+    tipo.ariaDisabled = True;
         //var excTipo = document.getElementById(varAltTipo)
         ///var excContato = document.getElementById(varAltCont)
         //var excluiTipoContato = document.getElementById('excluiTipoContato')
@@ -16,6 +20,5 @@ function excContato(id){
         //excluiContato.value = excContato.textContent
         //excluiContato.value = excContato.textContent
         //idExcluiContato.value = id
-        console.log()
 
     }

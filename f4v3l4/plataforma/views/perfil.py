@@ -44,11 +44,9 @@ def editarPerfil(request):
             return carrega_perfil(request)
         
         elif 'excluiContato' in request.POST:
-            contato=MdlContatos.objects.get(id=request.POST.get('idExcluiContato'))
-            contato.tipo=request.POST.get('alttipo')
-            contato.contato=request.POST.get('altcontato')
-            contato.save()
-            messages.add_message(request,constants.SUCCESS,'Contato alterado com sucesso!')
+            contato=MdlContatos.objects.get(id=request.POST.get('excluiId'))
+            contato.delete()
+            messages.add_message(request,constants.SUCCESS,'Contato deletado !')
             return carrega_perfil(request)
         
         elif 'inclui_profissao' in request.POST:
