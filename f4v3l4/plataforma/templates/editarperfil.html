@@ -138,23 +138,26 @@
                         <table class="table table-striped thead-dark" id="tabela" name="tabela">
                           <thead>
                             <tr>
+                              <th scope="col">Id</th>
                               <th scope="col">Cat. Profissional</th>
                               <th scope="col">Profissão</th>
-                              <th scope="col"></th>
+                              <th scope="col">Sobre</th>
                               <th scope="col"></th>
                             </tr>
                             <!-- começo montar tabela profissoes  -->
                             {% for profissao in profissional %}
                               <tr>
-                                <td>{{profissao.categoria_fk.categoria}}</td>
-                                <td>{{profissao.titulo_profissional}}</td>
+                                <td id="p{{profissao.id}}" >{{profissao.id}}</td>
+                                <td id="categoria{{profissao.id}}">{{profissao.categoria_fk.categoria}}</td>
+                                <td id="titulo{{profissao.id}}" >{{profissao.titulo_profissional}}</td>
+                                <td id="sobre{{profissao.id}}" >{{profissao.sobre}}</td>
                                 <td>
-                                  <a target="_blank"><img src="{% static 'img/iconedelete.png' %}" 
-                                  alt="Excluir contato" width="20" height="20"/></a>
+                                  <a data-bs-toggle="modal" data-bs-target="#mdlExcluiProfissao" ><img src="{% static 'img/iconedelete.png' %}" 
+                                  alt="Excluir profissão" width="20" height="20" onclick="excluiProfissao({{profissao.id}})"/></a>
                                 </td>
                                 <td>
-                                  <a target="_blank"><img src="{% static 'img/editaricone.png' %}" 
-                                    alt="Excluir contato" width="20" height="20"/></a>
+                                  <a data-bs-toggle="modal" data-bs-target="#mdlAlteraProfissao"><img src="{% static 'img/editaricone.png' %}" 
+                                    alt="Alterar contato" width="20" height="20" onclick="altProfissao({{profissao.id}})"/></a>
                                 </td>                                
                               </tr>
                             {% endfor %}
@@ -181,9 +184,9 @@
                                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                       <h6 class="mb-3 text-primary">Contatos</h6>
                                     </div>
-                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                       <div class="form-group">
-                                        <select class="form-control form-control-sm" id="tipo" name="tipo" value="Selecione" >
+                                        <select class="form-control form-control-sm form-select " id="tipo" name="tipo" value="Selecione" >
                                             <option>Telefone</option>
                                             <option>Celular</option>
                                             <option>Facebook</option>
@@ -193,14 +196,14 @@
                                         </select>
                                       </div>
                                     </div>
-                                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group">
                                           <input class="form-control form-control-sm" id="contato" name="contato" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" value="Insira aqui o contato" >
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                                       <div class="form-group">
-                                        <input type="submit" class= "btn btn-outline-info form-control-sm " id="incluiContato" name="incluiContato" value="   +   ">
+                                        <input type="submit" class= "btn btn-outline-info form-control-sm " id="incluiContato" name="incluiContato" value="Incluir">
                                       </div>
                                     </div>
                                 </div>
@@ -212,8 +215,7 @@
                           <div class="modal" tabindex="-1" id="mdlAdicionaProfissao" data-bs-backdrop="static" 
                                            data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
                                            aria-hidden="true">
-
-                          <div class="modal-dialog">
+                            <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title">Adicionar Profissões</h5>
@@ -242,7 +244,7 @@
                                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9">
                                           <div class="form-group">
                                             <input type="submit" class= "btn btn-outline-info form-control-sm " 
-                                            id="inclui_profissao" name="inclui_profissao" value="   +   ">
+                                            id="inclui_profissao" name="inclui_profissao" value="Incluir">
                                           </div>
                                         </div>
                                       </div>
@@ -258,8 +260,8 @@
                                 <button type="button" class="btn btn-primary">Save changes</button>
                               </div>
                             </div>
+                            </div>
                           </div>
-                        </div>
                         
                         <!-- modal altera contato -->
                         <div class="modal" tabindex="-1" id="mdlAlteraContato" data-bs-backdrop="static" 
@@ -302,6 +304,7 @@
                                 </div>
                               </div>
                             </div>
+                          </div>
                         </div>  
                         <!-- Fim Altera Contatos  -->
                         
@@ -344,14 +347,141 @@
                                   </div>
                               </div>
                             </div>
+                           </div>
+                          </div>  
+                        <!-- Modal exclui profissão -->
+                          <div class="modal" tabindex="-1" id="mdlExcluiProfissao" data-bs-backdrop="static" 
+                                data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                                aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Exluir Profissão</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- mostra dados profissao -->
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <input type="hidden" name="excluiProfId" id="excluiProfId">
+                                    <h6 class="mb-3 text-primary">Profissão</h6>
+                                  </div>
+
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                      <div class="form-group">
+                                        <input class="form-control form-control-sm" id="excluiCategoria" 
+                                        name="excluiCategoria" disabled="">
+                                      </div>
+                                  </div>
+
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                      <input class="form-control form-control-sm" id="excluiTitulo" 
+                                      name="excluiTitulo" disabled="">
+                                    </div>
+                                  </div>                                  
+
+                                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-9" align="right">
+                                    <div class="form-group"   >
+                                      <input type="submit" class= "btn btn-outline-danger form-control-sm " 
+                                      id="excluiContato" name="nomeExcluiProfissao" value="Excluir" >
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                           </div>
                           </div>
-                        </div>  
-                            
+                        <!-- Modal altera profissao -->  
+                          {% comment %} <div class="modal" tabindex="-1" id="mdlAlteraProfissao" data-bs-backdrop="static" 
+                              data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" 
+                              aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Altera Profissão</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- mostra dados profissao -->
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <input type="hidden" name="alteraProfId" id="alteraProfId">
+                                    <h6 class="mb-3 text-primary">Profissão</h6>
+                                  </div>
 
+                                  <div class="form-group">
+                                      <select class="form-select form-control-sm" id="alteraCategoria" name="alteraCategoria" >
+                                        {% for categoria in categorias %}
+                                          <option>{{categoria.categoria}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
 
+                                  <div class="form-group">
+                                    <input class="form-control" id="alteraTitulo" 
+                                    name="alteraTitulo">
+                                  </div>
 
+                                  <div class="form-group">
+                                    <textarea class="form-control" id="alteraSobre" 
+                                    name="alteraTitulo" value="{{ profissao.sobre }}">
+                                  </div>
 
+                                  </div>                                  
 
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" align="right">
+                                    <div class="form-group" align="right" >
+                                      <input type="submit" class= "btn btn-outline-danger form-control-sm " 
+                                      id="btnalteraContato" name="nomeAlteraProfissao" value="Excluir" >
+                                    </div>
+                                  </div>
+
+                              </div>
+                            </div>
+
+                           </div>
+                          </div>   {% endcomment %}
+                          <div class="modal" tabindex="-1" id="mdlAlteraProfissao" data-bs-backdrop="static">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <input type="hidden" name="alteraProfId" id="alteraProfId">
+                                    <h6 class="mb-3 text-primary">Profissão</h6>
+                                  </div>
+                                 
+                                  <div class="form-group">
+                                    <select class="form-select form-control-sm" id="alteraCategoria" name="alteraCategoria" >
+                                      {% for categoria in categorias %}
+                                        <option>{{categoria.categoria}}</option>
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input class="form-control" id="alteraTitulo" 
+                                    name="alteraTitulo">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <textarea class="form-control" id="alteraSobre" 
+                                    name="alteraSobre"></textarea>
+                                  </div>
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" align="right">
+                                    <div class="form-group" align="right" >
+                                      <input type="submit" class= "btn btn-outline-secondary form-control-sm " 
+                                      id="btnalteraContato" name="nomeAlteraProfissao" value="Alterar" >
+                                    </div>
+                                  </div>                                  
+                              </div>
+                            </div>
+                          </div>    
+
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -367,6 +497,8 @@
 <script src="{% static 'js/alteraImagem.js' %}"></script>
 <script src="{% static 'js/excluiContatos.js' %}"></script>
 <script src="{% static 'js/alteraContatos.js' %}"></script>
+<script src="{% static 'js/alteraProfissoes.js' %}"></script>
+<script src="{% static 'js/excluiProfissoes.js' %}"></script>
 <script src="{% static 'js/teste.js' %}"></script>
 <script src="{% static 'js/contatos.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>
