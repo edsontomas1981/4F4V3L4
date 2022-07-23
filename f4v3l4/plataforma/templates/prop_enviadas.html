@@ -49,13 +49,13 @@
               {{p.usuarioProposta_fk.last_name}}
           </h7>
           <p class="card-text">R$ {{p.valor}} </p>
-          <input type="hidden" id="valor{{p.valor}}"value="{{p.valor}}">
+          <input type="hidden" id="valor{{p.id}}"value="{{p.valor}}">
           <p class="card-text">{{p.observacao}}</p>
-          <input type="hidden" id="valor{{p.observacao}}"value="{{p.valor}}">
+          <input type="hidden" id="obs{{p.id}}"value="{{p.observacao}}">
           <p class="card-text">Data de Início {{p.prevInicio}}</p>
-          <input type="hidden" id="datIni{{p.valor}}"value="{{p.valor}}">
+          <input type="date" id="datIni{{p.id}}"value="{{p.prevInicio}}" date="{{p.prevInicio}}">
           <p class="card-text">Prazo de conclusão {{p.prazo}} dias úteis</p>
-          <input type="hidden" id="prazo{{p.valor}}"value="{{p.valor}}">
+          <input type="hidden" id="prazo{{p.id}}"value="{{p.prazo}}">
           {% if p.propostaAceita %}
               <span>Status :</span>
               <p class="card-text">Aceita</p>
@@ -131,9 +131,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input class="page-control" type="hidden" id="excluir" value="{{p.id}}" name="id">
+          <input class="page-control" type="text" id="alterar" value="{{p.id}}" name="id">
             <input name="pedido" value="{{p.id}} "type="hidden"></input>
-              <input name="usuarioProposta" value="{{user}} "type="hidden"></input>
               <div class="modal-body">
                 <div class="col-sm-4 form-group" >
                   <label for="valor">Valor</label>
@@ -142,14 +141,14 @@
                 </div>
               <div class="col-sm-12 form-group" >
                 <label for="valor">Observações</label>
-                <textarea class="form-control col-sm-12" name="observacao" >
+                <textarea class="form-control col-sm-12" id="obs" name="observacao" >
                 </textarea>
               </div>
               <div class="col-sm-12 form-group" >
-                <label for="valor">Prev.Inicio</label>
-                <input type="date" name="prevInicio" class="form-control  col-sm-12">
-                <label for="valor">Prazo Término</label>
-                <input type="number" name="prazoTermino" class="form-control  col-sm-12">
+                <label for="prevInicio">Prev.Inicio</label>
+                <input type="date" id="prevInicio" name="prevInicio" class="form-control  col-sm-12">
+                <label for="prazo">Prazo Término</label>
+                <input type="number" name="prazo" id="prazo" class="form-control  col-sm-12">
               </div>
               <div class="col-sm-4 form-group" >
               </div>
